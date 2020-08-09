@@ -1,13 +1,14 @@
 from horario import Horario
 from datetime import date
+from diaSemana import DiaSemana
 
 
 class Dia:
 
-    fecha: date = None
+    fecha: DiaSemana  = None
     horarios = list()
 
-    def __init__(self, fecha: date):
+    def __init__(self, fecha: DiaSemana):
         self.fecha = fecha
         self.horarios = []
 
