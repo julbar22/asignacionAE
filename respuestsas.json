@@ -1,0 +1,19 @@
+{
+    "lunes": [
+        {
+            "horario":["9:00","12:00"],
+            "profesor":{"nombre":"pedro"},
+            "materia": "Matematicas",
+            "curso": "Primero A"
+
+        },
+        {
+            "horario":["9:00","12:00"],
+            "profesor":{"nombre":"pedro"},
+            "materia": "Matematicas",
+            "curso": "Primero A"
+
+        }
+    ]
+
+}
