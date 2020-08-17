@@ -3,6 +3,14 @@ from models.materia import Materia
 from models.cursada import Cursada
 from models.profesor import Profesor
 from enums.diaSemana import DiaSemana
+import json
+
+
+def json_default(value):
+    if isinstance(value, DiaSemana):
+        return value.name
+    else:
+        return value.__dict__
 
 
 class Escenario:
@@ -15,8 +23,9 @@ class Escenario:
     def __init__(self):
         self.cursos = list()
         self.createMaterias()
-        self.createCursada()
         self.createCursos()
+        self.createCursada()
+        self.createProfesores()
 
     def createCursos(self):
         self.cursos = []
@@ -56,7 +65,7 @@ class Escenario:
         self.profesores = []
         MatePrimeroA = self.getCursada("Matematicas", "Primero A")
         MatePrimeroB = self.getCursada("Matematicas", "Primero B")
-        FisicaPrimeroA = self.getCursada("Matematicas", "Primero A")
+        FisicaPrimeroA = self.getCursada("Fisica", "Primero A")
         LengPrimeroA = self.getCursada("Lengua", "Primero A")
         LengPrimeroB = self.getCursada("Lengua", "Primero B")
 
@@ -95,7 +104,48 @@ class Escenario:
             if cursada.materia.nombre == nameMateria and cursada.curso.nombre == nameCurso:
                 return cursada
 
+    def getAllCursadaByMateria(self, nameMateria: str):
+        cursadas = []
+        for cursada in self.cursada:
+            if cursada.materia.nombre == nameMateria:
+                cursadas.append(cursada)
+        return cursadas
+
     def getProfesor(self, nameProfesor: str):
         for profesor in self.profesores:
             if profesor.nombre == nameProfesor:
                 return profesor
+
+    def createPrintProfesor(self, profesor: Profesor):
+        arrayCompleto = profesor.disponibilidad
+        arrayMaterias = []
+        for cursada in profesor.materias:
+            arrayMaterias.append(
+                (cursada.curso.nombre, cursada.materia.nombre))
+        arrayCompleto["materias"] = arrayMaterias
+        return arrayCompleto
+
+    def createPrintMateria(self, materia: Materia):
+        cursadas = self.getAllCursadaByMateria(materia.nombre)
+        materiaPrint = {materia.nombre: {}}
+
+        for cursada in cursadas:
+            materiaPrint[materia.nombre][cursada.curso.nombre] = [
+                cursada.horasSemanales, cursada.horasMinimasCons, cursada.horasMaximasCons]
+
+        return materiaPrint
+
+    def printEscenario(self):
+        escenarioInicial = {"docentes": [],
+                            "materias": []}
+        for profesor in self.profesores:
+            escenarioInicial["docentes"].append(
+                {profesor.nombre: self.createPrintProfesor(profesor)})
+
+        for materia in self.materias:
+            escenarioInicial["materias"].append(
+                self.createPrintMateria(materia))
+
+        json_data = json.dumps(escenarioInicial, skipkeys=True, check_circular=True,
+                               default=lambda o: json_default(o), indent=4)
+        print(json_data)

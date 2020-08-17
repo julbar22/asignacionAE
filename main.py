@@ -25,6 +25,7 @@ def json_default(value):
 
 def run():
     escenario = Escenario()
+    escenario.printEscenario()
     cursada = escenario.cursada
     profesorPedro = escenario.getProfesor("Pedro Gonzales")
     asignacionMatPrimeroA = Asignacion(profesorPedro, cursada[0])
@@ -46,7 +47,7 @@ def run():
     # semana.solucion()
     json_data = json.dumps(semana, skipkeys=True, check_circular=False,
                            default=lambda o: json_default(o), indent=4)
-    print(json_data)
+    #print(json_data)
 
 
 if __name__ == '__main__':

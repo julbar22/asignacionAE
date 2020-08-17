@@ -10,20 +10,22 @@ class Profesor:
 
     def __init__(self, nombre):
         self.nombre = nombre
+        self.materias = []
         self.initDisponibilidad()
 
     def initDisponibilidad(self):
         self.disponibilidad = {
-            DiaSemana.lunes: [],
-            DiaSemana.martes: [],
-            DiaSemana.miercoles: [],
-            DiaSemana.jueves: [],
-            DiaSemana.viernes: [],
-            DiaSemana.sabado: [],
-            DiaSemana.domingo: []
+            DiaSemana.lunes.name: [],
+            DiaSemana.martes.name: [],
+            DiaSemana.miercoles.name: [],
+            DiaSemana.jueves.name: [],
+            DiaSemana.viernes.name: [],
+            # DiaSemana.sabado.name: [],
+            #DiaSemana.domingo.name: []
         }
 
-    def addDisponibilidad(self, dia:DiaSemana,horario:tuple):
+    def addDisponibilidad(self, dia: DiaSemana, horario: tuple):
         for key in self.disponibilidad.keys():
-            if key == dia:
-                self.disponibilidad[key].append(horario)
+            if key == dia.name:
+                self.disponibilidad[key].append(horario[0])
+                self.disponibilidad[key].append(horario[1])

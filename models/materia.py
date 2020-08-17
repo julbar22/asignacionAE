@@ -1,8 +1,8 @@
 class Materia:
 
-    nombre= ""
-    cursos = list()
+    nombre = ""
+    cursada = list()
 
-    def __init__(self, nombre):
-        self.nombre= nombre
-        self.cursos=[]
+    def __init__(self, nombre: str):
+        self.nombre = nombre
+        self.cursadas = []
