@@ -1,4 +1,4 @@
-from models.materia import Materia
+from models.cursada import Cursada
 from enums.diaSemana import DiaSemana
 
 
@@ -11,9 +11,6 @@ class Profesor:
     def __init__(self, nombre):
         self.nombre = nombre
         self.initDisponibilidad()
-
-    def addMateria(self, materia: Materia):
-        self.materias.append(materia)
 
     def initDisponibilidad(self):
         self.disponibilidad = {

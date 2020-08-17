@@ -17,6 +17,4 @@ class Cursada:
         self.horasSemanales=horasSemanales
         self.horasMaximasCons=horasMaximas
         self.horasMinimasCons=horasMinimas
-        self.curso.materias.append(self.materia)
-        self.materia.cursos.append(self.curso)
 

@@ -25,27 +25,12 @@ def json_default(value):
 
 def run():
     escenario = Escenario()
-    cursada = escenario.getCursada()
-    profesorPedro = Profesor("Pedro Gonzales")
-    profesorPedro.materias.append(cursada[0])
-    profesorPedro.materias.append(cursada[1])
-    profesorPedro.materias.append(cursada[8])
-    profesorPedro.addDisponibilidad(DiaSemana.lunes, (9,  18))
-    profesorPedro.addDisponibilidad(DiaSemana.martes, (9,  12))
-    profesorPedro.addDisponibilidad(DiaSemana.jueves, (12,  18))
-    profesorPedro.addDisponibilidad(DiaSemana.viernes, (9,  18))
+    cursada = escenario.cursada
+    profesorPedro = escenario.getProfesor("Pedro Gonzales")
     asignacionMatPrimeroA = Asignacion(profesorPedro, cursada[0])
-
-    # asignacionMatPrimeroB = Asignacion(profesorPedro, cursada[1])
-    profesorCarla = Profesor("Carla Gomez")
-    profesorCarla.materias.append(cursada[4])
-    profesorCarla.materias.append(cursada[5])
-    profesorCarla.addDisponibilidad(DiaSemana.lunes, (9,  18))
-    profesorCarla.addDisponibilidad(DiaSemana.martes, (9,  12))
-    profesorCarla.addDisponibilidad(DiaSemana.jueves, (12,  18))
-    profesorCarla.addDisponibilidad(DiaSemana.viernes, (9,  18))
-    # asignacionLenPrimeroA = Asignacion(profesorCarla, cursada[4])
+    profesorCarla = escenario.getProfesor("Carla Gomez")
     asignacionLenPrimeroB = Asignacion(profesorCarla, cursada[5])
+
     semana = SemanaEscolar(DiaSemana.lunes, DiaSemana.martes)
     lunes: Dia = semana.getDia(DiaSemana.lunes)
     horarioLunesMatPrimeroA = Horario(asignacionMatPrimeroA, (9,  12))

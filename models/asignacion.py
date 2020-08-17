@@ -10,4 +10,3 @@ class Asignacion:
     def __init__(self, profesor: Profesor, cursada: Cursada):
         self.profesor = profesor        
         self.cursada = cursada
-        self.profesor.materias.append(self.cursada.materia)
