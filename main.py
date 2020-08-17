@@ -1,19 +1,20 @@
-from semanaEscolar import SemanaEscolar
+from models.semanaEscolar import SemanaEscolar
 from datetime import date
 import datetime
-from dia import Dia
-from asignacion import Asignacion
-from curso import Curso
-from materia import Materia
-from profesor import Profesor
-from cursada import Cursada
-from horario import Horario
+from models.dia import Dia
+from models.asignacion import Asignacion
+from models.curso import Curso
+from models.materia import Materia
+from models.profesor import Profesor
+from models.cursada import Cursada
+from models.horario import Horario
 import json
-from diaSemana import DiaSemana
+from enums.diaSemana import DiaSemana
+from escenario import Escenario
 
 
 def json_default(value):
-   
+
     if isinstance(value, datetime.date):
         return dict(year=value.year, month=value.month, day=value.day)
     else:
@@ -22,37 +23,27 @@ def json_default(value):
         else:
             return value.__dict__
 
-
-def ListaCursos():
-    cursos = list()
-    cursos.append(Curso("Primero A"))
-    cursos.append(Curso("Primero B"))
-    cursos.append(Curso("Segundo A"))
-    cursos.append(Curso("Segundo A"))
-    return cursos
-
-
-def getCursada():
-    cursos = ListaCursos()
-    cursada = list()
-    matematicas = Materia("Matematicas")
-    cursada.append(Cursada(cursos[0], matematicas, 4, 2, 1))
-    cursada.append(Cursada(cursos[1], matematicas, 4, 2, 1))
-    cursada.append(Cursada(cursos[2], matematicas, 3, 3, 1))
-    cursada.append(Cursada(cursos[3], matematicas, 3, 3, 1))
-    lengua = Materia("Lengua")
-    cursada.append(Cursada(cursos[0], lengua, 4, 2, 1))
-    cursada.append(Cursada(cursos[1], lengua, 4, 2, 1))
-    cursada.append(Cursada(cursos[2], lengua, 3, 3, 1))
-    cursada.append(Cursada(cursos[3], lengua, 3, 3, 1))
-    return cursada
-
 def run():
-    cursada = getCursada()
+    escenario = Escenario()
+    cursada = escenario.getCursada()
     profesorPedro = Profesor("Pedro Gonzales")
+    profesorPedro.materias.append(cursada[0])
+    profesorPedro.materias.append(cursada[1])
+    profesorPedro.materias.append(cursada[8])
+    profesorPedro.addDisponibilidad(DiaSemana.lunes, (9,  18))
+    profesorPedro.addDisponibilidad(DiaSemana.martes, (9,  12))
+    profesorPedro.addDisponibilidad(DiaSemana.jueves, (12,  18))
+    profesorPedro.addDisponibilidad(DiaSemana.viernes, (9,  18))
     asignacionMatPrimeroA = Asignacion(profesorPedro, cursada[0])
+
     # asignacionMatPrimeroB = Asignacion(profesorPedro, cursada[1])
     profesorCarla = Profesor("Carla Gomez")
+    profesorCarla.materias.append(cursada[4])
+    profesorCarla.materias.append(cursada[5])
+    profesorCarla.addDisponibilidad(DiaSemana.lunes, (9,  18))
+    profesorCarla.addDisponibilidad(DiaSemana.martes, (9,  12))
+    profesorCarla.addDisponibilidad(DiaSemana.jueves, (12,  18))
+    profesorCarla.addDisponibilidad(DiaSemana.viernes, (9,  18))
     # asignacionLenPrimeroA = Asignacion(profesorCarla, cursada[4])
     asignacionLenPrimeroB = Asignacion(profesorCarla, cursada[5])
     semana = SemanaEscolar(DiaSemana.lunes, DiaSemana.martes)

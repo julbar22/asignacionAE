@@ -1,6 +1,6 @@
-from horario import Horario
+from models.horario import Horario
 from datetime import date
-from diaSemana import DiaSemana
+from enums.diaSemana import DiaSemana
 
 
 class Dia:

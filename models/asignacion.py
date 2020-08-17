@@ -1,5 +1,5 @@
-from profesor import Profesor
-from cursada import Cursada
+from models.profesor import Profesor
+from models.cursada import Cursada
 
 
 class Asignacion:

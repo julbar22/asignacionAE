@@ -1,10 +1,10 @@
 from datetime import date
-from dia import Dia
-from asignacion import Asignacion
-from horario import Horario
+from models.dia import Dia
+from models.asignacion import Asignacion
+from models.horario import Horario
 import datetime
 import json
-from diaSemana import DiaSemana
+from enums.diaSemana import DiaSemana
 
 
 class SemanaEscolar:

@@ -1,4 +1,4 @@
-from asignacion import Asignacion
+from models.asignacion import Asignacion
 
 
 class Horario:

@@ -1,6 +1,6 @@
 
-from materia import Materia
-from curso import Curso
+from models.materia import Materia
+from models.curso import Curso
 
 
 class Cursada:
