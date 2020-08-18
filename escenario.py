@@ -148,4 +148,6 @@ class Escenario:
 
         json_data = json.dumps(escenarioInicial, skipkeys=True, check_circular=True,
                                default=lambda o: json_default(o), indent=4)
+        print("--------------------inicio escenario --------------------------")
         print(json_data)
+        print("--------------------fin escenario --------------------------")

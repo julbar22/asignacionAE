@@ -23,6 +23,23 @@ def json_default(value):
         else:
             return value.__dict__
 
+
+def printSolucion(solucion: SemanaEscolar):
+    solucionToPrint = {}
+    for dia in solucion.dias:
+        solucionToPrint[dia.fecha.name] = []
+        for horario in dia.horarios:
+            asignacionDia = []
+            asignacionDia.append(horario.horario)
+            asignacionHorario = horario.asignacion
+            asignacionDia.append(asignacionHorario.profesor.nombre)
+            asignacionDia.append(asignacionHorario.cursada.materia.nombre)
+            asignacionDia.append(asignacionHorario.cursada.curso.nombre)
+            solucionToPrint[dia.fecha.name].append(asignacionDia)
+
+    return solucionToPrint
+
+
 def run():
     escenario = Escenario()
     escenario.printEscenario()
@@ -45,9 +62,12 @@ def run():
     horarioMartesLenPrimeroA = Horario(asignacionLenPrimeroB, (9, 11))
     martes.addHorario(horarioMartesLenPrimeroA)
     # semana.solucion()
-    json_data = json.dumps(semana, skipkeys=True, check_circular=False,
+    solucion = printSolucion(semana)
+    json_data = json.dumps(solucion, skipkeys=True, check_circular=False,
                            default=lambda o: json_default(o), indent=4)
-    #print(json_data)
+    print("--------------------inicio solucion --------------------------")
+    print(json_data)
+    print("--------------------fin solucion --------------------------")
 
 
 if __name__ == '__main__':
