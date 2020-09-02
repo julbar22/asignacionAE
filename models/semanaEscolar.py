@@ -10,11 +10,11 @@ from enums.diaSemana import DiaSemana
 class SemanaEscolar:
 
     dias = list()
-    nombre = None
+    fitness = None
 
     def __init__(self, initDate: DiaSemana, endDate: DiaSemana):
-        self.nombre = "Semana"
         self.dias = []
+        self.fitness = None
         while endDate.value >= initDate.value:
             self.dias.append(Dia(initDate))
             initDate = self.getSiguienteDia(initDate)
