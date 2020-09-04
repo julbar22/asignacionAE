@@ -14,7 +14,7 @@ class GeneticAlgorithmManager():
     finishGenerationBlock = None
     finishRunBlock = None
     individualReference: Individual=None
-    individualClass =None
+    enviroment =None
 
     def __init__(self):
         pass
