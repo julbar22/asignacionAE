@@ -22,7 +22,7 @@ class GeneticAlgorithmManager():
     def createStartingPopulation(self, populationQuantity: int, individualBase: Individual):
         population = list()
         for i in range(0, populationQuantity):
-            population.append(individualBase.createRamdomIndividual(individualBase))
+            population.append(individualBase.createRamdomIndividual(individualBase,self.enviroment))
         return population
 
     def run(self, populationQuantity: int, generations: int):
@@ -31,10 +31,10 @@ class GeneticAlgorithmManager():
             self.calcularFitnessPopulation(population,self.individualReference)
             print("generation " + str(generarionIndex))
             population=self.selectionAlgorithm.select(population).copy()
-            self.calcularFitnessPopulation(population,self.individualReference)
-            population=self.crossAlgorithm.crossPopulation(population,populationQuantity).copy()
-            self.calcularFitnessPopulation(population,self.individualReference)
-            population=self.mutationAlgorithm.mutationPopulation(population).copy()
+            #self.calcularFitnessPopulation(population,self.individualReference)
+            population=self.crossAlgorithm.crossPopulation(population,populationQuantity,self.enviroment).copy()
+            #self.calcularFitnessPopulation(population,self.individualReference)
+            #population=self.mutationAlgorithm.mutationPopulation(population).copy()
             stopGeneration =self.calcularFitnessPopulation(population,self.individualReference)
             self.imprimirPoblacion(population)
             if stopGeneration:
@@ -44,13 +44,15 @@ class GeneticAlgorithmManager():
 
     def imprimirPoblacion(self, poblacion):
         for individuo in poblacion:
-            print("".join(individuo.cromosoma)+"->"+str(individuo.fitness))
+            individuo.imprimirIndividuo()
+            print(str(individuo.fitness))
     
     def calcularFitnessPopulation(self,poblacion,individualBase):
+        terminar =False
         for individuo in poblacion:
-            individuo.calculateFitness(individualBase)
+            individuo.calculateFitness(individualBase,self.enviroment)
             if individuo.fitness== self.aptitudeThreshold:
-                return True
-        return False
+                terminar= True
+        return terminar
 
             

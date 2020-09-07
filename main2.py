@@ -26,7 +26,7 @@ def json_default(value):
 
 def printSolucion(solucion: SemanaEscolar):
     solucionToPrint = {}
-    for dia in solucion.dias:
+    for dia in solucion.cromosoma:
         solucionToPrint[dia.fecha.name] = []
         for horario in dia.horarios:
             asignacionDia = []

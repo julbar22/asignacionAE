@@ -6,30 +6,23 @@ from geneticAlgorithm.individual import Individual
 from GAPalabra.selectionRanking import SelectionRanking
 from GAPalabra.crossSinglePoint import CrossSinglePoint
 from GAPalabra.mutateRandomPoints import MutateRandomPoints
-from models.semanaEscolar import SemanaEscolar
-from enums.diaSemana import DiaSemana
-import json
-import datetime
-from escenario import Escenario
+from GAPalabra.word import Word
 
-
-def createReferenceIndividual(escenario):
-    individual:Individual = SemanaEscolar(DiaSemana.lunes,DiaSemana.viernes)
+def createReferenceIndividual():
+    individual:Individual = Word()
+    individual.cromosoma = list("bananaNaranja")
     individual.fitness=0
     return individual
 
 def run2():
-    escenario = Escenario()
-    semanaRerence= createReferenceIndividual(escenario)
     selection :SelectionAlgorithm = SelectionRanking()
     cross: CrossAlgorithm = CrossSinglePoint()
-    # mutation: MutationAlgorithm = MutateRandomPoints()
+    mutation: MutationAlgorithm = MutateRandomPoints()
     GA = GeneticAlgorithmManager()
     GA.selectionAlgorithm =selection
     GA.crossAlgorithm= cross
-    # GA.mutationAlgorithm=mutation
-    GA.enviroment=escenario
-    GA.individualReference=createReferenceIndividual(escenario)
+    GA.mutationAlgorithm=mutation
+    GA.individualReference=createReferenceIndividual()
     GA.run(20,2000)
     
 

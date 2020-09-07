@@ -5,13 +5,13 @@ import random
 
 class CrossSinglePoint(CrossAlgorithm):
     
-    def crossPopulation(self, population:List[Individual], totalPopulation:int):
+    def crossPopulation(self, population:List[Individual], totalPopulation:int,enviroment):
         offspring = []
         for _ in  range(int((totalPopulation - len(population)) / 2)):
             parent1 = random.choice(population)
             parent2 = random.choice(population)
-            child1 =  parent1.createRamdomIndividual(parent1)
-            child2 =  parent2.createRamdomIndividual(parent2)
+            child1 =  parent1.createRamdomIndividual(parent1,enviroment)
+            child2 =  parent2.createRamdomIndividual(parent2,enviroment)
             split = random.randint(0, len(parent1.cromosoma))
             child1.cromosoma = parent1.cromosoma[0:split] + parent2.cromosoma[split:len(parent1.cromosoma)]
             child2.cromosoma = parent2.cromosoma[0:split] + parent1.cromosoma[split:len(parent1.cromosoma)]

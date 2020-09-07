@@ -29,3 +29,9 @@ class Profesor:
             if key == dia.name:
                 self.disponibilidad[key].append(horario[0])
                 self.disponibilidad[key].append(horario[1])
+
+    def getCursada(self, materia:str,curso:str):
+        for cursada in self.materias:
+            if cursada.materia.nombre== materia:
+                if cursada.curso.nombre== curso:
+                    return cursada

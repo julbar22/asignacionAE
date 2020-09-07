@@ -14,7 +14,7 @@ class Word(Individual):
             if individual.cromosoma[index]!=self.cromosoma[index]:
                 self.fitness+=1
 
-    def createRamdomIndividual(self,individualBase: Individual)->Individual:
+    def createRamdomIndividual(self,individualBase: Individual,environment)->Individual:
         cromosomaString= "".join(random.choice(string.ascii_letters) for _ in range(len(individualBase.cromosoma)))
         nuevo = Word()
         nuevo.cromosoma =list(cromosomaString)
