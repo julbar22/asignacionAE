@@ -11,6 +11,8 @@ class Individual(ABC):
     def createRamdomIndividual(self, individualBase,enviroment):
         raise NotImplementedError
 
-    def mutate(self):
+    def mutate(self,index,enviroment):
         raise NotImplementedError
+
+
 

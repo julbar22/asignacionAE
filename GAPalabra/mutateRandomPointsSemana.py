@@ -5,7 +5,7 @@ import random
 import string
 
 
-class MutateRandomPoints(MutationAlgorithm):
+class MutateRandomPointsSemana(MutationAlgorithm):
 
     def mutationPopulation(self, population: List[Individual],environment):
         for individual in population:

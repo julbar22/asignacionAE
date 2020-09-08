@@ -39,7 +39,7 @@ class Dia:
             asignacion = Asignacion(profesor,cursada)
             disponibilidadDia = profesor.disponibilidad[self.fecha.name]            
             if len(disponibilidadDia)>0:
-                horaInicio = random.randint(disponibilidadDia[0],disponibilidadDia[1])
+                horaInicio = random.randint(disponibilidadDia[0],(disponibilidadDia[1]-1))
                 cantidadHoras= random.randint(cursada.horasMinimasCons,cursada.horasMaximasCons)
                 horario=Horario(asignacion, (horaInicio, (horaInicio+cantidadHoras)))
                 self.horarios.append(horario)

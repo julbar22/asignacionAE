@@ -8,7 +8,7 @@ class Word(Individual):
     def __init__(self):
         pass
 
-    def calculateFitness(self, individual: Individual):
+    def calculateFitness(self, individual: Individual,enviroment):
         self.fitness=0
         for index in range(0,len(individual.cromosoma)):
             if individual.cromosoma[index]!=self.cromosoma[index]:
@@ -20,10 +20,13 @@ class Word(Individual):
         nuevo.cromosoma =list(cromosomaString)
         return nuevo
 
-    def mutate(self, index:int):
+    def mutate(self, index:int,environment):
         cromosomaString= "".join(self.cromosoma[0:index]) + random.choice(
         string.ascii_letters) + "".join(self.cromosoma[index+1:len(self.cromosoma)])
         self.cromosoma = list(cromosomaString)
         return self
+    
+    def imprimirIndividuo(self):
+        print("".join(self.cromosoma))
 
  

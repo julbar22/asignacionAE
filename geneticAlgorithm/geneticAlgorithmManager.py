@@ -26,17 +26,31 @@ class GeneticAlgorithmManager():
         return population
 
     def run(self, populationQuantity: int, generations: int):
+        mejor = 1000
         population = self.createStartingPopulation(populationQuantity, self.individualReference)
         for generarionIndex in range(0, generations):
-            self.calcularFitnessPopulation(population,self.individualReference)
-            print("generation " + str(generarionIndex))
+            stopGeneration=self.calcularFitnessPopulation(population,self.individualReference)
+            #print("generation " + str(generarionIndex))
             population=self.selectionAlgorithm.select(population).copy()
-            #self.calcularFitnessPopulation(population,self.individualReference)
+            #stopGeneration=self.calcularFitnessPopulation(population,self.individualReference)
+            #print("select")
+            #print(stopGeneration)
+            if mejor>population[0].fitness:
+                print("generacion:"+str(generarionIndex))
+                mejor= population[0].fitness            
+                population[0].imprimirIndividuo()
+                print(population[0].fitness)
+            
             population=self.crossAlgorithm.crossPopulation(population,populationQuantity,self.enviroment).copy()
-            #self.calcularFitnessPopulation(population,self.individualReference)
-            #population=self.mutationAlgorithm.mutationPopulation(population).copy()
-            stopGeneration =self.calcularFitnessPopulation(population,self.individualReference)
-            self.imprimirPoblacion(population)
+            #stopGeneration=self.calcularFitnessPopulation(population,self.individualReference)
+            #print("cross")
+            #print(stopGeneration)
+            population=self.mutationAlgorithm.mutationPopulation(population,self.enviroment).copy()
+            #stopGeneration=self.calcularFitnessPopulation(population,self.individualReference)
+            #print("mutar")
+            #print(stopGeneration)
+            #stopGeneration =self.calcularFitnessPopulation(population,self.individualReference)
+            #self.imprimirPoblacion(population)
             if stopGeneration:
                 break
             #json_data = json.dumps(population)
@@ -44,7 +58,7 @@ class GeneticAlgorithmManager():
 
     def imprimirPoblacion(self, poblacion):
         for individuo in poblacion:
-            individuo.imprimirIndividuo()
+            #individuo.imprimirIndividuo()
             print(str(individuo.fitness))
     
     def calcularFitnessPopulation(self,poblacion,individualBase):

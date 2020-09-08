@@ -5,7 +5,8 @@ from geneticAlgorithm.mutationAlgorithm import MutationAlgorithm
 from geneticAlgorithm.individual import Individual
 from GAPalabra.selectionRanking import SelectionRanking
 from GAPalabra.crossSinglePoint import CrossSinglePoint
-from GAPalabra.mutateRandomPoints import MutateRandomPoints
+from GAPalabra.crossMultiplePoint import CrossMultiplePoint
+from GAPalabra.mutateRandomPointsSemana import MutateRandomPointsSemana
 from models.semanaEscolar import SemanaEscolar
 from enums.diaSemana import DiaSemana
 import json
@@ -22,15 +23,15 @@ def run2():
     escenario = Escenario()
     semanaRerence= createReferenceIndividual(escenario)
     selection :SelectionAlgorithm = SelectionRanking()
-    cross: CrossAlgorithm = CrossSinglePoint()
-    # mutation: MutationAlgorithm = MutateRandomPoints()
+    cross: CrossAlgorithm = CrossMultiplePoint()
+    mutation: MutationAlgorithm = MutateRandomPointsSemana()
     GA = GeneticAlgorithmManager()
     GA.selectionAlgorithm =selection
     GA.crossAlgorithm= cross
-    # GA.mutationAlgorithm=mutation
+    GA.mutationAlgorithm=mutation
     GA.enviroment=escenario
     GA.individualReference=createReferenceIndividual(escenario)
-    GA.run(20,2000)
+    GA.run(20,10000)
     
 
 
