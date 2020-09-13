@@ -1,14 +1,14 @@
-from models.horario import Horario
+from modelSemanaEscolar.horario import Horario
 from datetime import date
 from enums.diaSemana import DiaSemana
-from escenario import Escenario
+from modelSemanaEscolar.escenario import Escenario
 import random
 from typing import List
-from models.materia import Materia
-from models.profesor import Profesor
-from models.cursada import Cursada
-from models.asignacion import Asignacion
-from models.horario import Horario
+from modelSemanaEscolar.materia import Materia
+from modelSemanaEscolar.profesor import Profesor
+from modelSemanaEscolar.cursada import Cursada
+from modelSemanaEscolar.asignacion import Asignacion
+from modelSemanaEscolar.horario import Horario
 
 
 class Dia:

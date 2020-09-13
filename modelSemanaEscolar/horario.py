@@ -1,4 +1,4 @@
-from models.asignacion import Asignacion
+from modelSemanaEscolar.asignacion import Asignacion
 
 
 class Horario:

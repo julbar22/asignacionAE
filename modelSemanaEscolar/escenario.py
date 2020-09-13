@@ -1,7 +1,7 @@
-from models.curso import Curso
-from models.materia import Materia
-from models.cursada import Cursada
-from models.profesor import Profesor
+from modelSemanaEscolar.curso import Curso
+from modelSemanaEscolar.materia import Materia
+from modelSemanaEscolar.cursada import Cursada
+from modelSemanaEscolar.profesor import Profesor
 from enums.diaSemana import DiaSemana
 import json
 

@@ -1,14 +1,14 @@
 from datetime import date
-from models.dia import Dia
-from models.asignacion import Asignacion
-from models.horario import Horario
+from modelSemanaEscolar.dia import Dia
+from modelSemanaEscolar.asignacion import Asignacion
+from modelSemanaEscolar.horario import Horario
 import datetime
 import json
 from enums.diaSemana import DiaSemana
 from geneticAlgorithm.individual import Individual
 import random
-from escenario import Escenario
-from models.cursada import Cursada
+from modelSemanaEscolar.escenario import Escenario
+from modelSemanaEscolar.cursada import Cursada
 from typing import List
 
 

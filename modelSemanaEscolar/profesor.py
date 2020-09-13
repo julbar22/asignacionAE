@@ -1,4 +1,4 @@
-from models.cursada import Cursada
+from modelSemanaEscolar.cursada import Cursada
 from enums.diaSemana import DiaSemana
 
 

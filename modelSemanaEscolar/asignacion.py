@@ -1,5 +1,5 @@
-from models.profesor import Profesor
-from models.cursada import Cursada
+from modelSemanaEscolar.profesor import Profesor
+from modelSemanaEscolar.cursada import Cursada
 
 
 class Asignacion:

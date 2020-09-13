@@ -1,16 +1,16 @@
-from models.semanaEscolar import SemanaEscolar
+from modelSemanaEscolar.semanaEscolar import SemanaEscolar
 from datetime import date
 import datetime
-from models.dia import Dia
-from models.asignacion import Asignacion
-from models.curso import Curso
-from models.materia import Materia
-from models.profesor import Profesor
-from models.cursada import Cursada
-from models.horario import Horario
+from modelSemanaEscolar.dia import Dia
+from modelSemanaEscolar.asignacion import Asignacion
+from modelSemanaEscolar.curso import Curso
+from modelSemanaEscolar.materia import Materia
+from modelSemanaEscolar.profesor import Profesor
+from modelSemanaEscolar.cursada import Cursada
+from modelSemanaEscolar.horario import Horario
 import json
 from enums.diaSemana import DiaSemana
-from escenario import Escenario
+from modelSemanaEscolar.escenario import Escenario
 
 
 def json_default(value):

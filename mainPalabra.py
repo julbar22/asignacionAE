@@ -3,9 +3,9 @@ from geneticAlgorithm.selectionAlgorithm import SelectionAlgorithm
 from geneticAlgorithm.crossAlgorithm import CrossAlgorithm
 from geneticAlgorithm.mutationAlgorithm import MutationAlgorithm
 from geneticAlgorithm.individual import Individual
-from GAPalabra.selectionRanking import SelectionRanking
-from GAPalabra.crossSinglePoint import CrossSinglePoint
-from GAPalabra.mutateRandomPoints import MutateRandomPoints
+from selectionAlgorithmImpl.selectionRanking import SelectionRanking
+from crossAlgorithmImpl.crossSinglePoint import CrossSinglePoint
+from mutateAlgorithmImpl.mutateRandomPoints import MutateRandomPoints
 from GAPalabra.word import Word
 
 def createReferenceIndividual():
