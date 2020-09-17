@@ -14,7 +14,7 @@ class GeneticAlgorithmManager():
     finishGenerationBlock = None
     finishRunBlock = None
     individualReference: Individual=None
-    enviroment =None
+    environment =None
 
     def __init__(self):
         pass
@@ -22,7 +22,7 @@ class GeneticAlgorithmManager():
     def createStartingPopulation(self, populationQuantity: int, individualBase: Individual):
         population = list()
         for i in range(0, populationQuantity):
-            population.append(individualBase.createRamdomIndividual(individualBase,self.enviroment))
+            population.append(individualBase.createRamdomIndividual(individualBase,self.environment))
         return population
 
     def run(self, populationQuantity: int, generations: int):
@@ -41,11 +41,11 @@ class GeneticAlgorithmManager():
                 population[0].imprimirIndividuo()
                 print(population[0].fitness)
             
-            population=self.crossAlgorithm.crossPopulation(population,populationQuantity,self.enviroment).copy()
+            population=self.crossAlgorithm.crossPopulation(population,populationQuantity,self.environment).copy()
             #stopGeneration=self.calcularFitnessPopulation(population,self.individualReference)
             #print("cross")
             #print(stopGeneration)
-            population=self.mutationAlgorithm.mutationPopulation(population,self.enviroment).copy()
+            population=self.mutationAlgorithm.mutationPopulation(population,self.environment).copy()
             #stopGeneration=self.calcularFitnessPopulation(population,self.individualReference)
             #print("mutar")
             #print(stopGeneration)
@@ -64,7 +64,7 @@ class GeneticAlgorithmManager():
     def calcularFitnessPopulation(self,poblacion,individualBase):
         terminar =False
         for individuo in poblacion:
-            individuo.calculateFitness(individualBase,self.enviroment)
+            individuo.calculateFitness(individualBase,self.environment)
             if individuo.fitness== self.aptitudeThreshold:
                 terminar= True
         return terminar

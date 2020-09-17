@@ -17,6 +17,7 @@ class SemanaEscolar(Individual):
     def __init__(self, initDate: DiaSemana, endDate: DiaSemana):
         self.cromosoma = []
         self.fitness = 0
+        self.errores = []
         while endDate.value >= initDate.value:
             self.cromosoma.append(Dia(initDate))
             initDate = self.getSiguienteDia(initDate)
@@ -30,81 +31,120 @@ class SemanaEscolar(Individual):
         proximoDia = dia.value+1
         return DiaSemana(0) if proximoDia > 6 else DiaSemana(proximoDia)
 
-    def calculateFitness(self, individual: Individual, enviroment: Escenario):
-        # disponibilidad de los profesores diaria ya
-        # cantidad de horas semanales ya
-        # cantidad de horas por dia ya
+    def calculateFitness(self, individual: Individual, environment: Escenario):
+        self.fitness = 0
+        # print("---------evaluacion--------")
+        # cantidad de horas semanales y diarias
+        self.evaluarHorasCursada(environment)
+        # disponibilidad de los profesores diaria
+        self.evaluarDisponibilidadProfesores(environment)
         # 2 clases en el curso al mismo momento
+        self.evaluarClasesPorCurso(environment)
         # 2 clases en el mismo momento para el profesor
-        # que falten cursadas en la semana
-        self.fitness=0
-        #print("---------evaluacion--------")
-        for cursada in enviroment.cursada:
-            horasSemanales = 0            
+        self.evaluarClasesProfesor(environment)
+        # print("fitness:"+str(self.fitness))
+        #print("---------fin evaluacion---------")
+        # self.imprimirIndividuo()
+
+    def evaluarHorasCursada(self, environment: Escenario):
+        for cursada in environment.cursada:
+            horasSemanales = 0
             for dia in self.cromosoma:
-                horasDia = 0
-                for horario in dia.horarios:
-                    cursadaTemp = horario.asignacion.cursada
-                    if cursadaTemp.curso.nombre == cursada.curso.nombre and cursadaTemp.materia.nombre == cursada.materia.nombre:
-                        horasDia += (horario.horario[1]-horario.horario[0])                        
+                horasDia = dia.calcularHorasPorCursada(cursada)
                 if horasDia > cursada.horasMaximasCons:
                     self.fitness += 1
+                    self.errores.append("> horas diarias "+ cursada.materia.nombre+","+cursada.curso.nombre)
                     #print("muchas horas diarias:"+cursada.materia.nombre+" ,"+cursada.curso.nombre)
                 horasSemanales += horasDia
             if horasSemanales != cursada.horasSemanales:
                 self.fitness += 1
+                self.errores.append("> horas semanales "+ cursada.materia.nombre+","+cursada.curso.nombre)
                 #print("muchas horas semanales:"+cursada.materia.nombre+" ,"+cursada.curso.nombre)
 
-        for profesor in enviroment.profesores:
-            for dia in self.cromosoma:
-                for horario in dia.horarios:
-                    cursadaTemp = horario.asignacion.cursada
-                    if horario.asignacion.profesor.nombre == profesor.nombre:
-                        disponibilidad = profesor.disponibilidad[dia.fecha.name]   
-                        if len(disponibilidad)>0:                                              
-                            if not (disponibilidad[0] <= horario.horario[0] and horario.horario[0] <= disponibilidad[1]) or not(disponibilidad[0] <= horario.horario[1] and horario.horario[1] <= disponibilidad[1]):
-                                self.fitness += 1
-                                #print("fuera de disponibilidad"+profesor.nombre+","+dia.fecha.name)
-                        else: 
-                            self.fitness += 1
-        #print("fitness:"+str(self.fitness))
-        #print("---------fin evaluacion---------")
-        #self.imprimirIndividuo()
-        
-    
+    def evaluarDisponibilidadProfesores(self, environment: Escenario):
+        for dia in self.cromosoma:
+            for horario in dia.horarios:
+                profesor = horario.asignacion.profesor
+                disponibilidad = profesor.disponibilidad[dia.fecha.name]
+                if len(disponibilidad) > 0:
+                    if not (disponibilidad[0] <= horario.horario[0] and horario.horario[0] <= disponibilidad[1]) or not(disponibilidad[0] <= horario.horario[1] and horario.horario[1] <= disponibilidad[1]):
+                        self.fitness += 1
+                        self.errores.append("fuera de disponibilidad"+profesor.nombre+","+dia.fecha.name)
+                else:
+                    self.fitness += 1
+                    self.errores.append("fuera de disponibilidad"+profesor.nombre+","+dia.fecha.name)
 
-    def createRamdomIndividual(self, individualBase: Individual, enviroment: Escenario):
+    def evaluarClasesPorCurso(self, environment: Escenario):
+        for curso in environment.cursos:
+            for dia in self.cromosoma:
+                horariosDia = dia.getHorariosPorCurso(curso.nombre)
+                self.horariosCruzados(horariosDia,"Curso")
+               
+
+    def evaluarClasesProfesor(self, environment: Escenario):
+        for profesor in environment.profesores:
+            for dia in self.cromosoma:
+                horariosDia = dia.getHorariosByProfesor(profesor.nombre)
+                self.horariosCruzados(horariosDia,"Profesor")
+
+                
+    
+    def horariosCruzados(self,horariosDia:List[Horario],tipo:str):
+        horarios: list =list(map(
+                    lambda horarioTemp: horarioTemp.horario, horariosDia))
+        for index1 in range(0, len(horarios)-1):
+            horario1 = horarios[index1]
+            for index2 in range((index1+1), len(horarios)-1):
+                horario2 = horarios[index2]
+                isCruzado=self.sonHorariosCruzados(horario1,horario2)
+                isInterno1=self.contieneHorario(horario1,horario2)
+                isInterno2=self.contieneHorario(horario2,horario1)
+                if isCruzado or isInterno1 or isInterno2:
+                    self.fitness+=1
+                    self.errores.append("cruce de horarios tipo "+tipo)
+
+
+    def sonHorariosCruzados(self, horario1: tuple, horario2: tuple)->bool:
+        if(horario1[0] <= horario2[0] and horario1[1] >= horario2[0]) or (horario1[0] <= horario2[1] and horario1[1] >= horario2[1]):
+            return True
+        return False
+    
+    def contieneHorario(self, horario1:tuple,horario2:tuple)->bool:
+        if(horario1[0]<=horario2[0] and horario1[1]>=horario2[1]):
+            return True
+        return False
+
+    def createRamdomIndividual(self, individualBase: Individual, environment: Escenario):
         diaInicial: Dia = individualBase.cromosoma[0]
         longArray = len(individualBase.cromosoma)
         diaFinal: Dia = individualBase.cromosoma[(longArray-1)]
         nuevo = SemanaEscolar(diaInicial.fecha, diaFinal.fecha)
-        nuevo.completarCursadas(enviroment.cursada, enviroment)
-        nuevo.calculateFitness(individualBase,enviroment)
-        #nuevo.imprimirIndividuo()
+        nuevo.completarCursadas(environment.cursada, environment)
+        nuevo.calculateFitness(individualBase, environment)
+        # nuevo.imprimirIndividuo()
         return nuevo
 
-    def mutate(self, index,enviroment):
+    def mutate(self, index, environment):
         #diaCompleto:Dia= self.cromosoma[index]
-        nuevo =self.createRamdomIndividual(self,enviroment)
+        nuevo = self.createRamdomIndividual(self, environment)
         #diaCompleto2:Dia= nuevo.cromosoma[index]
-        #diaCompleto.horarios=diaCompleto2.horarios.copy()
-        self.cromosoma[index]= nuevo.cromosoma[index]
+        # diaCompleto.horarios=diaCompleto2.horarios.copy()
+        self.cromosoma[index] = nuevo.cromosoma[index]
 
         return self
 
-
-    def completarCursadas(self, cursadas: List[Cursada], enviroment: Escenario):
+    def completarCursadas(self, cursadas: List[Cursada], environment: Escenario):
         for cursada in cursadas:
             horasSemanales = cursada.horasSemanales
             horasAsignadas = 0
-            copiaCromosoma =self.cromosoma.copy()
+            copiaCromosoma = self.cromosoma.copy()
             while horasSemanales > horasAsignadas:
                 contador = 0
                 diaSeleccionado: Dia = random.choice(copiaCromosoma)
-                contador = diaSeleccionado.asignarCursada(cursada, enviroment)
+                contador = diaSeleccionado.asignarCursada(cursada, environment)
                 horasAsignadas += contador
-                if contador==0:
-                    indice=copiaCromosoma.index(diaSeleccionado)
+                if contador == 0:
+                    indice = copiaCromosoma.index(diaSeleccionado)
                     copiaCromosoma.pop(indice)
 
     def printSolucion(self):

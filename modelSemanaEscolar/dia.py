@@ -31,8 +31,8 @@ class Dia:
                 profesoresOpcionales.append(profesor) 
         return profesoresOpcionales
 
-    def asignarCursada(self,cursada: Cursada,enviroment: Escenario)->int:
-        profesoresOpcionales:List[Profesor]=self.getProfesoresByCursada(cursada, enviroment.profesores)
+    def asignarCursada(self,cursada: Cursada,environment: Escenario)->int:
+        profesoresOpcionales:List[Profesor]=self.getProfesoresByCursada(cursada, environment.profesores)
         cantidadHoras=0
         if len(profesoresOpcionales)>0:
             profesor = random.choice(profesoresOpcionales)
@@ -44,3 +44,29 @@ class Dia:
                 horario=Horario(asignacion, (horaInicio, (horaInicio+cantidadHoras)))
                 self.horarios.append(horario)
         return cantidadHoras
+
+    def calcularHorasPorCursada(self, cursada:Cursada)->int:
+        horasDia:int = 0
+        for horario in self.horarios:
+            cursadaTemp = horario.asignacion.cursada
+            if cursadaTemp.curso.nombre == cursada.curso.nombre and cursadaTemp.materia.nombre == cursada.materia.nombre:
+                    horasDia += (horario.horario[1]-horario.horario[0])
+        return horasDia
+
+    def getHorariosPorCurso(self,nombreCurso:str)->List[Horario]:
+        horarios=[]
+        for horario in self.horarios:
+            cursadaTemp:Cursada = horario.asignacion.cursada
+            if cursadaTemp.curso.nombre==nombreCurso:
+                horarios.append(horario)
+        return horarios
+
+    def getHorariosByProfesor(self, nombreProfesor:str)->List[Horario]:
+        horarios=[]
+        for horario in self.horarios:
+            profesorTemp:Profesor= horario.asignacion.profesor            
+            if profesorTemp.nombre==nombreProfesor:
+                horarios.append(horario)
+        return horarios
+            
+

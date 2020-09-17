@@ -4,9 +4,11 @@ from geneticAlgorithm.crossAlgorithm import CrossAlgorithm
 from geneticAlgorithm.mutationAlgorithm import MutationAlgorithm
 from geneticAlgorithm.individual import Individual
 from selectionAlgorithmImpl.selectionRanking import SelectionRanking
+from selectionAlgorithmImpl.selectionTorneo import SelectionTorneo
 from crossAlgorithmImpl.crossSinglePoint import CrossSinglePoint
 from crossAlgorithmImpl.crossMultiplePoint import CrossMultiplePoint
 from mutateAlgorithmImpl.mutateRandomPoints import MutateRandomPoints
+from mutateAlgorithmImpl.mutateAscendent import MutateAscendent
 from modelSemanaEscolar.semanaEscolar import SemanaEscolar
 from enums.diaSemana import DiaSemana
 import json
@@ -22,17 +24,18 @@ def createReferenceIndividual(escenario):
 def run2():
     escenario = Escenario()
     #TODO esta referencia me servira cuando tenga clases asignadas
-    semanaRerence= createReferenceIndividual(escenario)
-    selection :SelectionAlgorithm = SelectionRanking()
+    selection :SelectionAlgorithm = SelectionRanking(0.2)
+    #selection :SelectionAlgorithm = SelectionTorneo(10)
     cross: CrossAlgorithm = CrossMultiplePoint()
-    mutation: MutationAlgorithm = MutateRandomPoints()
+    #mutation: MutationAlgorithm = MutateRandomPoints()
+    mutation: MutationAlgorithm = MutateAscendent()
     GA = GeneticAlgorithmManager()
     GA.selectionAlgorithm =selection
     GA.crossAlgorithm= cross
     GA.mutationAlgorithm=mutation
-    GA.enviroment=escenario
+    GA.environment=escenario
     GA.individualReference=createReferenceIndividual(escenario)
-    GA.run(20,10000)
+    GA.run(20,5000)
     
 
 

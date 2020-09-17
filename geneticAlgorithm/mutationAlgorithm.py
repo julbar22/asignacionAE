@@ -4,6 +4,6 @@ from typing import List
 
 class MutationAlgorithm(ABC):
     
-    def mutationPopulation(self, population:List[Individual],enviroment):
+    def mutationPopulation(self, population:List[Individual],environment):
         raise NotImplementedError
 

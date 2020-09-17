@@ -5,13 +5,13 @@ class Individual(ABC):
     cromosoma = []
     fitness: int = 0
 
-    def calculateFitness(self, individual,enviroment):
+    def calculateFitness(self, individual,environment):
         raise NotImplementedError
 
-    def createRamdomIndividual(self, individualBase,enviroment):
+    def createRamdomIndividual(self, individualBase,environment):
         raise NotImplementedError
 
-    def mutate(self,index,enviroment):
+    def mutate(self,index,environment):
         raise NotImplementedError
 
 

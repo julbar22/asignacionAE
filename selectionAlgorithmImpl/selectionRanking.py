@@ -5,11 +5,13 @@ from typing import List
 
 class SelectionRanking(SelectionAlgorithm):
 
-    def __init__(self):
-        pass
+    varianza: float = 0.2
+
+    def __init__(self, varianza):
+        self.varianza=varianza
 
     def select(self, population: List[Individual]):
         population = sorted(
             population, key=lambda individual: individual.fitness)
-        population = population[:int(0.2 * len(population))]
+        population = population[:int(self.varianza * len(population))]
         return population

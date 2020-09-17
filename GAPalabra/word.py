@@ -8,7 +8,7 @@ class Word(Individual):
     def __init__(self):
         pass
 
-    def calculateFitness(self, individual: Individual,enviroment):
+    def calculateFitness(self, individual: Individual,environment):
         self.fitness=0
         for index in range(0,len(individual.cromosoma)):
             if individual.cromosoma[index]!=self.cromosoma[index]:
