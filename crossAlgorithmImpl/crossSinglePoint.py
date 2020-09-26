@@ -21,6 +21,4 @@ class CrossSinglePoint(CrossAlgorithm):
         population.extend(offspring)
         return population
 
-    def crossIndividuo(self, individuo1:Individual, individuo2:Individual):
-        raise NotImplementedError
 

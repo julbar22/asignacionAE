@@ -55,6 +55,7 @@ class GeneticAlgorithmManager():
                 break
             #json_data = json.dumps(population)
             #print(json_data)
+        print(str(mejor))
 
     def imprimirPoblacion(self, poblacion):
         for individuo in poblacion:

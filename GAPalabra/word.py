@@ -25,6 +25,10 @@ class Word(Individual):
         string.ascii_letters) + "".join(self.cromosoma[index+1:len(self.cromosoma)])
         self.cromosoma = list(cromosomaString)
         return self
+
+    
+    def cross(self, couple):
+        pass
     
     def imprimirIndividuo(self):
         print("".join(self.cromosoma))

@@ -7,6 +7,3 @@ class CrossAlgorithm(ABC):
     def crossPopulation(self, population:List[Individual], totalPopulation:int):
         raise NotImplementedError
 
-    def crossIndividuo(self, individuo1:Individual, individuo2:Individual):
-        raise NotImplementedError
-

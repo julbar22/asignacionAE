@@ -14,5 +14,8 @@ class Individual(ABC):
     def mutate(self,index,environment):
         raise NotImplementedError
 
+    def cross(self, couple)->List[ABC]:
+        raise NotImplementedError
+
 
 

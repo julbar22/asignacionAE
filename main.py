@@ -7,6 +7,7 @@ from selectionAlgorithmImpl.selectionRanking import SelectionRanking
 from selectionAlgorithmImpl.selectionTorneo import SelectionTorneo
 from crossAlgorithmImpl.crossSinglePoint import CrossSinglePoint
 from crossAlgorithmImpl.crossMultiplePoint import CrossMultiplePoint
+from crossAlgorithmImpl.crossSpecificIndividual import CrossSpecificIndividual
 from mutateAlgorithmImpl.mutateRandomPoints import MutateRandomPoints
 from mutateAlgorithmImpl.mutateAscendent import MutateAscendent
 from modelSemanaEscolar.semanaEscolar import SemanaEscolar
@@ -24,11 +25,12 @@ def createReferenceIndividual(escenario):
 def run2():
     escenario = Escenario()
     #TODO esta referencia me servira cuando tenga clases asignadas
-    selection :SelectionAlgorithm = SelectionRanking(0.2)
+    selection :SelectionAlgorithm = SelectionRanking(0.3)
     #selection :SelectionAlgorithm = SelectionTorneo(10)
-    cross: CrossAlgorithm = CrossMultiplePoint()
-    #mutation: MutationAlgorithm = MutateRandomPoints()
-    mutation: MutationAlgorithm = MutateAscendent()
+    #cross: CrossAlgorithm = CrossMultiplePoint()
+    cross: CrossAlgorithm = CrossSpecificIndividual()
+    mutation: MutationAlgorithm = MutateRandomPoints()
+    #mutation: MutationAlgorithm = MutateAscendent()
     GA = GeneticAlgorithmManager()
     GA.selectionAlgorithm =selection
     GA.crossAlgorithm= cross
