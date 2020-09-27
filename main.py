@@ -37,7 +37,7 @@ def run2():
     GA.mutationAlgorithm=mutation
     GA.environment=escenario
     GA.individualReference=createReferenceIndividual(escenario)
-    GA.run(20,5000)
+    GA.run(20,10000)
     
 
 

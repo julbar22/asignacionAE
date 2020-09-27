@@ -168,12 +168,15 @@ class SemanaEscolar(Individual):
             copiaCromosoma = self.cromosoma.copy()
             while horasSemanales > horasAsignadas:
                 contador = 0
-                diaSeleccionado: Dia = random.choice(copiaCromosoma)
-                contador = diaSeleccionado.asignarCursada(cursada, environment)
-                horasAsignadas += contador
-                if contador == 0:
-                    indice = copiaCromosoma.index(diaSeleccionado)
-                    copiaCromosoma.pop(indice)
+                if len(copiaCromosoma)>0:
+                    diaSeleccionado: Dia = random.choice(copiaCromosoma)
+                    contador = diaSeleccionado.asignarCursada(cursada, environment)
+                    horasAsignadas += contador
+                    if contador == 0:
+                        indice = copiaCromosoma.index(diaSeleccionado)
+                        copiaCromosoma.pop(indice)
+                else:
+                    break
 
     def imprimirIndividuo(self):
         MapperToSemana.mapperSemana(self.cromosoma)

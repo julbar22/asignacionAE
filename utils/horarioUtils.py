@@ -9,7 +9,7 @@ class HorarioUtils():
 
     @staticmethod
     def sonHorariosCruzados(horario1: tuple, horario2: tuple) -> bool:
-        if(horario1[0] <= horario2[0] and horario1[1] >= horario2[0]) or (horario1[0] <= horario2[1] and horario1[1] >= horario2[1]):
+        if(horario1[0] <= horario2[0] and horario1[1] > horario2[0]) or (horario1[0] < horario2[1] and horario1[1] >= horario2[1]):
             return True
         return False
 

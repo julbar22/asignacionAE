@@ -9,6 +9,7 @@ from modelSemanaEscolar.profesor import Profesor
 from modelSemanaEscolar.cursada import Cursada
 from modelSemanaEscolar.asignacion import Asignacion
 from modelSemanaEscolar.horario import Horario
+from utils.horarioUtils import HorarioUtils
 
 
 class Dia:
@@ -41,16 +42,40 @@ class Dia:
             asignacion = Asignacion(profesor, cursada)
             disponibilidadDia = profesor.disponibilidad[self.fecha.name]
             if len(disponibilidadDia) > 0:
-                horaInicio = random.randint(
-                    disponibilidadDia[0], (disponibilidadDia[1]-1))
-                horasDisponibles = disponibilidadDia[1]-horaInicio
+                horarioAsignacion: tuple = self.getPosibleHorario(
+                    cursada, disponibilidadDia)
+                cantidadHoras = horarioAsignacion[1]-horarioAsignacion[0]
+                horario = Horario(asignacion, horarioAsignacion)
+                self.horarios.append(horario)
+        return cantidadHoras
+
+    def getPosibleHorario(self, cursada: Cursada, disponibilidadProfesor: tuple) -> tuple:
+        isCross: bool = True
+        oportunidades: int = 0
+        horariosCurso: List[Horario] = self.getHorariosPorCurso(cursada.curso.nombre)
+        while isCross:            
+            horaInicio = disponibilidadProfesor[0]
+            horaInicio+=oportunidades
+            oportunidades+=1
+            horasDisponibles = disponibilidadProfesor[1]-horaInicio
+            if horasDisponibles>0:
                 horasMaximas = cursada.horasMaximasCons if cursada.horasMaximasCons <= horasDisponibles else horasDisponibles
                 cantidadHoras = random.randint(
                     cursada.horasMinimasCons, horasMaximas)
-                horario = Horario(
-                    asignacion, (horaInicio, (horaInicio+cantidadHoras)))
-                self.horarios.append(horario)
-        return cantidadHoras
+                horarioPropuesto = tuple((horaInicio, (horaInicio+cantidadHoras)))
+                if len(horariosCurso)>0:
+                    for horarioCurso in horariosCurso:
+                        isCross = HorarioUtils.isCrossPoints(
+                            horarioPropuesto, horarioCurso.horario)
+                        if isCross:
+                            break
+                else:
+                    isCross=False
+            else:
+                horarioPropuesto=tuple((0,0))
+                break
+
+        return horarioPropuesto
 
     def calcularHorasPorCursada(self, cursada: Cursada) -> int:
         horasDia: int = 0
