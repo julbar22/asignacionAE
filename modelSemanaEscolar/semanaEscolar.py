@@ -1,9 +1,6 @@
-from datetime import date
 from modelSemanaEscolar.dia import Dia
 from modelSemanaEscolar.asignacion import Asignacion
 from modelSemanaEscolar.horario import Horario
-import datetime
-import json
 from enums.diaSemana import DiaSemana
 from geneticAlgorithm.individual import Individual
 import random
@@ -11,6 +8,7 @@ from modelSemanaEscolar.escenario import Escenario
 from modelSemanaEscolar.cursada import Cursada
 from typing import List
 from utils.horarioUtils import HorarioUtils
+from modelSemanaEscolar.mapperToSemana import MapperToSemana
 
 
 class SemanaEscolar(Individual):
@@ -177,33 +175,5 @@ class SemanaEscolar(Individual):
                     indice = copiaCromosoma.index(diaSeleccionado)
                     copiaCromosoma.pop(indice)
 
-    def printSolucion(self):
-        solucionToPrint = {}
-        for dia in self.cromosoma:
-            solucionToPrint[dia.fecha.name] = []
-            for horario in dia.horarios:
-                asignacionDia = []
-                asignacionDia.append(horario.horario)
-                asignacionHorario = horario.asignacion
-                asignacionDia.append(asignacionHorario.profesor.nombre)
-                asignacionDia.append(asignacionHorario.cursada.materia.nombre)
-                asignacionDia.append(asignacionHorario.cursada.curso.nombre)
-                solucionToPrint[dia.fecha.name].append(asignacionDia)
-        return solucionToPrint
-
-    def json_default(self, value):
-        if isinstance(value, datetime.date):
-            return dict(year=value.year, month=value.month, day=value.day)
-        else:
-            if isinstance(value, DiaSemana):
-                return value.name
-            else:
-                return value.__dict__
-
     def imprimirIndividuo(self):
-        solucion = self.printSolucion()
-        json_data = json.dumps(solucion, skipkeys=True, check_circular=False,
-                               default=lambda o: self.json_default(o), indent=4)
-        print("--------------------inicio solucion --------------------------")
-        print(json_data)
-        print("--------------------fin solucion --------------------------")
+        MapperToSemana.mapperSemana(self.cromosoma)
