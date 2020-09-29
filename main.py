@@ -1,74 +1,45 @@
-from models.semanaEscolar import SemanaEscolar
-from datetime import date
-import datetime
-from models.dia import Dia
-from models.asignacion import Asignacion
-from models.curso import Curso
-from models.materia import Materia
-from models.profesor import Profesor
-from models.cursada import Cursada
-from models.horario import Horario
-import json
+from geneticAlgorithm.geneticAlgorithmManager import GeneticAlgorithmManager
+from geneticAlgorithm.selectionAlgorithm import SelectionAlgorithm
+from geneticAlgorithm.crossAlgorithm import CrossAlgorithm
+from geneticAlgorithm.mutationAlgorithm import MutationAlgorithm
+from geneticAlgorithm.individual import Individual
+from selectionAlgorithmImpl.selectionRanking import SelectionRanking
+from selectionAlgorithmImpl.selectionTorneo import SelectionTorneo
+from crossAlgorithmImpl.crossSinglePoint import CrossSinglePoint
+from crossAlgorithmImpl.crossMultiplePoint import CrossMultiplePoint
+from crossAlgorithmImpl.crossSpecificIndividual import CrossSpecificIndividual
+from mutateAlgorithmImpl.mutateRandomPoints import MutateRandomPoints
+from mutateAlgorithmImpl.mutateAscendent import MutateAscendent
+from modelSemanaEscolar.semanaEscolar import SemanaEscolar
 from enums.diaSemana import DiaSemana
-from escenario import Escenario
+import json
+import datetime
+from modelSemanaEscolar.escenario import Escenario
 
 
-def json_default(value):
+def createReferenceIndividual(escenario):
+    individual:Individual = SemanaEscolar(DiaSemana.lunes,DiaSemana.viernes)
+    individual.fitness=0
+    return individual
 
-    if isinstance(value, datetime.date):
-        return dict(year=value.year, month=value.month, day=value.day)
-    else:
-        if isinstance(value, DiaSemana):
-            return value.name
-        else:
-            return value.__dict__
-
-
-def printSolucion(solucion: SemanaEscolar):
-    solucionToPrint = {}
-    for dia in solucion.dias:
-        solucionToPrint[dia.fecha.name] = []
-        for horario in dia.horarios:
-            asignacionDia = []
-            asignacionDia.append(horario.horario)
-            asignacionHorario = horario.asignacion
-            asignacionDia.append(asignacionHorario.profesor.nombre)
-            asignacionDia.append(asignacionHorario.cursada.materia.nombre)
-            asignacionDia.append(asignacionHorario.cursada.curso.nombre)
-            solucionToPrint[dia.fecha.name].append(asignacionDia)
-
-    return solucionToPrint
-
-
-def run():
+def run2():
     escenario = Escenario()
-    escenario.printEscenario()
-    cursada = escenario.cursada
-    profesorPedro = escenario.getProfesor("Pedro Gonzales")
-    asignacionMatPrimeroA = Asignacion(profesorPedro, cursada[0])
-    profesorCarla = escenario.getProfesor("Carla Gomez")
-    asignacionLenPrimeroB = Asignacion(profesorCarla, cursada[5])
-
-    semana = SemanaEscolar(DiaSemana.lunes, DiaSemana.martes)
-    lunes: Dia = semana.getDia(DiaSemana.lunes)
-    horarioLunesMatPrimeroA = Horario(asignacionMatPrimeroA, (9,  12))
-    lunes.addHorario(horarioLunesMatPrimeroA)
-    horarioLunesLenPrimeroA = Horario(asignacionLenPrimeroB, (9,  11))
-    lunes.addHorario(horarioLunesLenPrimeroA)
-
-    martes: Dia = semana.getDia(DiaSemana.martes)
-    horarioMartesMatPrimeroA = Horario(asignacionMatPrimeroA, (9,  12))
-    martes.addHorario(horarioMartesMatPrimeroA)
-    horarioMartesLenPrimeroA = Horario(asignacionLenPrimeroB, (9, 11))
-    martes.addHorario(horarioMartesLenPrimeroA)
-    # semana.solucion()
-    solucion = printSolucion(semana)
-    json_data = json.dumps(solucion, skipkeys=True, check_circular=False,
-                           default=lambda o: json_default(o), indent=4)
-    print("--------------------inicio solucion --------------------------")
-    print(json_data)
-    print("--------------------fin solucion --------------------------")
+    #TODO esta referencia me servira cuando tenga clases asignadas
+    selection :SelectionAlgorithm = SelectionRanking(0.3)
+    #selection :SelectionAlgorithm = SelectionTorneo(10)
+    #cross: CrossAlgorithm = CrossMultiplePoint()
+    cross: CrossAlgorithm = CrossSpecificIndividual()
+    mutation: MutationAlgorithm = MutateRandomPoints()
+    #mutation: MutationAlgorithm = MutateAscendent()
+    GA = GeneticAlgorithmManager()
+    GA.selectionAlgorithm =selection
+    GA.crossAlgorithm= cross
+    GA.mutationAlgorithm=mutation
+    GA.environment=escenario
+    GA.individualReference=createReferenceIndividual(escenario)
+    GA.run(20,10000)
+    
 
 
 if __name__ == '__main__':
-    run()
+    run2()
