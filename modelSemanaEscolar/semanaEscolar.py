@@ -41,7 +41,7 @@ class SemanaEscolar(Individual):
         # 2 clases en el curso al mismo momento
         self.evaluarClasesPorCurso(environment)
         # 2 clases en el mismo momento para el profesor
-        # self.evaluarClasesProfesor(environment)
+        self.evaluarClasesProfesor(environment)
         # print("fitness:"+str(self.fitness))
         #print("---------fin evaluacion---------")
         # self.imprimirIndividuo()

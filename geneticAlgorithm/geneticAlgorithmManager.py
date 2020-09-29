@@ -27,6 +27,7 @@ class GeneticAlgorithmManager():
 
     def run(self, populationQuantity: int, generations: int):
         mejor = 1000
+        mejorIndividuo =None
         population = self.createStartingPopulation(populationQuantity, self.individualReference)
         for generarionIndex in range(0, generations):
             stopGeneration=self.calcularFitnessPopulation(population,self.individualReference)
@@ -37,7 +38,8 @@ class GeneticAlgorithmManager():
             #print(stopGeneration)
             if mejor>population[0].fitness:
                 print("generacion:"+str(generarionIndex))
-                mejor= population[0].fitness            
+                mejor= population[0].fitness    
+                mejorIndividuo = population[0].errores.copy()        
                 population[0].imprimirIndividuo()
                 print(population[0].fitness)
             
@@ -52,10 +54,11 @@ class GeneticAlgorithmManager():
             #stopGeneration =self.calcularFitnessPopulation(population,self.individualReference)
             #self.imprimirPoblacion(population)
             if stopGeneration:
+                print(str(generarionIndex))
                 break
             #json_data = json.dumps(population)
             #print(json_data)
-        print(str(mejor))
+        print(mejorIndividuo)
 
     def imprimirPoblacion(self, poblacion):
         for individuo in poblacion:
