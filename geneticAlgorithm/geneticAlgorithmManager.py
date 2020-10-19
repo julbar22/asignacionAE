@@ -33,32 +33,22 @@ class GeneticAlgorithmManager():
             stopGeneration=self.calcularFitnessPopulation(population,self.individualReference)
             #print("generation " + str(generarionIndex))
             population=self.selectionAlgorithm.select(population).copy()
-            #stopGeneration=self.calcularFitnessPopulation(population,self.individualReference)
-            #print("select")
-            #print(stopGeneration)
             if mejor>population[0].fitness:
                 print("generacion:"+str(generarionIndex))
                 mejor= population[0].fitness    
                 mejorIndividuo = population[0].errores.copy()        
                 population[0].imprimirIndividuo()
                 print(population[0].fitness)
+                population[0].imprimirErrores()
             
             population=self.crossAlgorithm.crossPopulation(population,populationQuantity,self.environment).copy()
-            #stopGeneration=self.calcularFitnessPopulation(population,self.individualReference)
-            #print("cross")
-            #print(stopGeneration)
+            stopGeneration=self.calcularFitnessPopulation(population,self.individualReference)
             population=self.mutationAlgorithm.mutationPopulation(population,self.environment).copy()
-            #stopGeneration=self.calcularFitnessPopulation(population,self.individualReference)
-            #print("mutar")
-            #print(stopGeneration)
-            #stopGeneration =self.calcularFitnessPopulation(population,self.individualReference)
-            #self.imprimirPoblacion(population)
+            stopGeneration=self.calcularFitnessPopulation(population,self.individualReference)
             if stopGeneration:
                 print(str(generarionIndex))
                 break
-            #json_data = json.dumps(population)
-            #print(json_data)
-        print(mejorIndividuo)
+        print(len(mejorIndividuo))
 
     def imprimirPoblacion(self, poblacion):
         for individuo in poblacion:

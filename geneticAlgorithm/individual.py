@@ -3,6 +3,7 @@ from typing import List
 class Individual(ABC):
 
     cromosoma = []
+    errores=[]
     fitness: int = 0
 
     def calculateFitness(self, individual,environment):
