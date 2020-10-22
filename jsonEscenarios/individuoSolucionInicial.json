@@ -3,61 +3,115 @@
         [
             [
                 7,
+                8
+            ],
+            "Juan",
+            "Danza",
+            "4"
+        ],
+        [
+            [
+                7,
+                8
+            ],
+            "Pedro",
+            "Matematicas",
+            "3"
+        ],
+        [
+            [
+                7,
+                8
+            ],
+            "Diana",
+            "Dibujo",
+            "1"
+        ],
+        [
+            [
+                7,
+                8
+            ],
+            "Nora",
+            "C. Naturales",
+            "5"
+        ],
+        [
+            [
+                7,
+                8
+            ],
+            "Lucas",
+            "Lengua",
+            "2"
+        ],
+        [
+            [
+                8,
+                9
+            ],
+            "Nora",
+            "C. Naturales",
+            "4"
+        ],
+        [
+            [
+                8,
+                9
+            ],
+            "Pedro",
+            "Matematicas",
+            "3"
+        ],
+        [
+            [
+                8,
+                9
+            ],
+            "Diana",
+            "Dibujo",
+            "1"
+        ],
+        [
+            [
+                8,
+                9
+            ],
+            "Lucas",
+            "Lengua",
+            "5"
+        ],
+        [
+            [
+                8,
                 9
             ],
             "Juan",
             "Ed. Fisica",
-            "3"
-        ],
-        [
-            [
-                7,
-                9
-            ],
-            "Pedro",
-            "Matematicas",
-            "1"
-        ],
-        [
-            [
-                9,
-                11
-            ],
-            "Pedro",
-            "Matematicas",
             "2"
         ],
         [
             [
-                11,
-                13
+                9,
+                10
             ],
             "Pedro",
             "Matematicas",
+            "4"
+        ],
+        [
+            [
+                9,
+                10
+            ],
+            "Nora",
+            "Quimica",
             "3"
         ],
         [
             [
                 9,
-                11
-            ],
-            "Diana",
-            "Dibujo",
-            "1"
-        ],
-        [
-            [
-                7,
-                9
-            ],
-            "Diana",
-            "Dibujo",
-            "2"
-        ],
-        [
-            [
-                11,
-                13
+                10
             ],
             "Juan",
             "Danza",
@@ -68,8 +122,26 @@
                 9,
                 10
             ],
-            "Juan",
-            "Danza",
+            "Lucas",
+            "Lengua",
+            "5"
+        ],
+        [
+            [
+                9,
+                10
+            ],
+            "Diana",
+            "Dibujo",
+            "2"
+        ],
+        [
+            [
+                10,
+                11
+            ],
+            "Nora",
+            "Quimica",
             "4"
         ],
         [
@@ -77,9 +149,117 @@
                 10,
                 11
             ],
+            "Lucas",
+            "Lengua",
+            "3"
+        ],
+        [
+            [
+                10,
+                11
+            ],
+            "Juan",
+            "Ed. Fisica",
+            "1"
+        ],
+        [
+            [
+                10,
+                11
+            ],
+            "Pedro",
+            "Matematicas",
+            "5"
+        ],
+        [
+            [
+                10,
+                11
+            ],
+            "Diana",
+            "Dibujo",
+            "2"
+        ],
+        [
+            [
+                11,
+                12
+            ],
+            "Juan",
+            "Ed. Fisica",
+            "4"
+        ],
+        [
+            [
+                11,
+                12
+            ],
+            "Diana",
+            "Dibujo",
+            "3"
+        ],
+        [
+            [
+                11,
+                12
+            ],
+            "Pedro",
+            "Matematicas",
+            "1"
+        ],
+        [
+            [
+                11,
+                12
+            ],
+            "Nora",
+            "C. Naturales",
+            "5"
+        ],
+        [
+            [
+                11,
+                12
+            ],
+            "Lucas",
+            "Lengua",
+            "2"
+        ],
+        [
+            [
+                12,
+                13
+            ],
+            "Diana",
+            "Dibujo",
+            "4"
+        ],
+        [
+            [
+                12,
+                13
+            ],
             "Juan",
             "Danza",
-            "5"
+            "3"
+        ],
+        [
+            [
+                12,
+                13
+            ],
+            "Pedro",
+            "Matematicas",
+            "1"
+        ],
+        [
+            [
+                12,
+                13
+            ],
+            "Lucas",
+            "Ingles",
+            "2"
         ]
     ],
     "martes": [
@@ -88,54 +268,54 @@
                 7,
                 8
             ],
+            "Lucas",
+            "Lengua",
+            "4"
+        ],
+        [
+            [
+                7,
+                8
+            ],
+            "Pedro",
+            "Matematicas",
+            "3"
+        ],
+        [
+            [
+                7,
+                8
+            ],
+            "Luis",
+            "Sistemas",
+            "5"
+        ],
+        [
+            [
+                7,
+                8
+            ],
+            "Paola",
+            "Musica",
+            "1"
+        ],
+        [
+            [
+                7,
+                8
+            ],
             "Juan",
             "Ed. Fisica",
-            "1"
+            "2"
         ],
         [
             [
                 8,
                 9
             ],
-            "Pedro",
-            "Matematicas",
-            "1"
-        ],
-        [
-            [
-                9,
-                11
-            ],
-            "Pedro",
-            "Matematicas",
-            "2"
-        ],
-        [
-            [
-                7,
-                8
-            ],
-            "Pedro",
-            "Matematicas",
+            "Lucas",
+            "Lengua",
             "4"
-        ],
-        [
-            [
-                9,
-                10
-            ],
-            "Diana",
-            "Dibujo",
-            "1"
-        ],
-        [
-            [
-                7,
-                8
-            ],
-            "Diana",
-            "Dibujo",
-            "2"
         ],
         [
             [
@@ -148,20 +328,83 @@
         ],
         [
             [
-                10,
-                11
+                8,
+                9
             ],
-            "Diana",
-            "Dibujo",
+            "Pedro",
+            "Matematicas",
+            "5"
+        ],
+        [
+            [
+                8,
+                9
+            ],
+            "Paola",
+            "Musica",
+            "1"
+        ],
+        [
+            [
+                8,
+                9
+            ],
+            "Luis",
+            "Sistemas",
+            "2"
+        ],
+        [
+            [
+                9,
+                10
+            ],
+            "Pedro",
+            "Matematicas",
             "4"
         ],
         [
             [
-                11,
-                13
+                9,
+                10
             ],
-            "Diana",
-            "Dibujo",
+            "Luis",
+            "Sistemas",
+            "3"
+        ],
+        [
+            [
+                9,
+                10
+            ],
+            "Juan",
+            "Ed. Fisica",
+            "5"
+        ],
+        [
+            [
+                9,
+                10
+            ],
+            "Paola",
+            "Canto",
+            "1"
+        ],
+        [
+            [
+                9,
+                10
+            ],
+            "Lucas",
+            "Lengua",
+            "2"
+        ],
+        [
+            [
+                10,
+                11
+            ],
+            "Pedro",
+            "Matematicas",
             "5"
         ],
         [
@@ -170,17 +413,35 @@
                 11
             ],
             "Juan",
-            "Danza",
+            "Ed. Fisica",
             "1"
         ],
         [
             [
-                8,
-                9
+                10,
+                11
             ],
-            "Juan",
-            "Danza",
+            "Paola",
+            "Musica",
             "2"
+        ],
+        [
+            [
+                10,
+                11
+            ],
+            "Lucas",
+            "Ingles",
+            "3"
+        ],
+        [
+            [
+                10,
+                11
+            ],
+            "Luis",
+            "Sistemas",
+            "4"
         ],
         [
             [
@@ -193,12 +454,84 @@
         ],
         [
             [
-                9,
-                10
+                11,
+                12
+            ],
+            "Diana",
+            "Dibujo",
+            "5"
+        ],
+        [
+            [
+                11,
+                12
+            ],
+            "Lucas",
+            "Ingles",
+            "1"
+        ],
+        [
+            [
+                11,
+                12
+            ],
+            "Pedro",
+            "Matematicas",
+            "2"
+        ],
+        [
+            [
+                11,
+                12
+            ],
+            "Luis",
+            "Sistemas",
+            "3"
+        ],
+        [
+            [
+                12,
+                13
+            ],
+            "Luis",
+            "Sistemas",
+            "4"
+        ],
+        [
+            [
+                12,
+                13
+            ],
+            "Paola",
+            "Canto",
+            "3"
+        ],
+        [
+            [
+                12,
+                13
             ],
             "Juan",
             "Danza",
             "5"
+        ],
+        [
+            [
+                12,
+                13
+            ],
+            "Lucas",
+            "Ingles",
+            "1"
+        ],
+        [
+            [
+                12,
+                13
+            ],
+            "Pedro",
+            "Matematicas",
+            "2"
         ]
     ],
     "miercoles": [
@@ -207,32 +540,14 @@
                 7,
                 8
             ],
-            "Juan",
-            "Ed. Fisica",
-            "5"
+            "Lucas",
+            "Lengua",
+            "4"
         ],
         [
             [
                 7,
                 8
-            ],
-            "Pedro",
-            "Matematicas",
-            "3"
-        ],
-        [
-            [
-                8,
-                10
-            ],
-            "Pedro",
-            "Matematicas",
-            "4"
-        ],
-        [
-            [
-                10,
-                12
             ],
             "Pedro",
             "Matematicas",
@@ -245,6 +560,24 @@
             ],
             "Diana",
             "Dibujo",
+            "1"
+        ],
+        [
+            [
+                7,
+                8
+            ],
+            "Juan",
+            "Ed. Fisica",
+            "3"
+        ],
+        [
+            [
+                7,
+                8
+            ],
+            "Paola",
+            "Canto",
             "2"
         ],
         [
@@ -252,18 +585,18 @@
                 8,
                 9
             ],
-            "Diana",
-            "Dibujo",
-            "3"
+            "Pedro",
+            "Matematicas",
+            "4"
         ],
         [
             [
-                10,
-                12
+                8,
+                9
             ],
-            "Diana",
-            "Dibujo",
-            "4"
+            "Lucas",
+            "Lengua",
+            "5"
         ],
         [
             [
@@ -276,17 +609,53 @@
         ],
         [
             [
-                9,
-                11
+                8,
+                9
             ],
-            "Juan",
-            "Danza",
+            "Diana",
+            "Dibujo",
             "2"
         ],
         [
             [
-                11,
-                13
+                8,
+                9
+            ],
+            "Paola",
+            "Canto",
+            "3"
+        ],
+        [
+            [
+                9,
+                10
+            ],
+            "Pedro",
+            "Matematicas",
+            "4"
+        ],
+        [
+            [
+                9,
+                10
+            ],
+            "Martha",
+            "Ingles",
+            "5"
+        ],
+        [
+            [
+                9,
+                10
+            ],
+            "Lucas",
+            "Lengua",
+            "1"
+        ],
+        [
+            [
+                9,
+                10
             ],
             "Juan",
             "Danza",
@@ -294,12 +663,147 @@
         ],
         [
             [
-                0,
-                0
+                9,
+                10
+            ],
+            "Diana",
+            "Dibujo",
+            "2"
+        ],
+        [
+            [
+                10,
+                11
+            ],
+            "Martha",
+            "Ingles",
+            "4"
+        ],
+        [
+            [
+                10,
+                11
             ],
             "Juan",
             "Danza",
             "5"
+        ],
+        [
+            [
+                10,
+                11
+            ],
+            "Lucas",
+            "Lengua",
+            "1"
+        ],
+        [
+            [
+                10,
+                11
+            ],
+            "Pedro",
+            "Fisica",
+            "3"
+        ],
+        [
+            [
+                10,
+                11
+            ],
+            "Paola",
+            "Musica",
+            "2"
+        ],
+        [
+            [
+                11,
+                12
+            ],
+            "Martha",
+            "Ingles",
+            "4"
+        ],
+        [
+            [
+                11,
+                12
+            ],
+            "Juan",
+            "Ed. Fisica",
+            "5"
+        ],
+        [
+            [
+                11,
+                12
+            ],
+            "Pedro",
+            "Matematicas",
+            "1"
+        ],
+        [
+            [
+                11,
+                12
+            ],
+            "Diana",
+            "Dibujo",
+            "3"
+        ],
+        [
+            [
+                11,
+                12
+            ],
+            "Paola",
+            "Musica",
+            "2"
+        ],
+        [
+            [
+                12,
+                13
+            ],
+            "Diana",
+            "Dibujo",
+            "4"
+        ],
+        [
+            [
+                12,
+                13
+            ],
+            "Martha",
+            "Ingles",
+            "5"
+        ],
+        [
+            [
+                12,
+                13
+            ],
+            "Pedro",
+            "Matematicas",
+            "1"
+        ],
+        [
+            [
+                12,
+                13
+            ],
+            "Lucas",
+            "Ingles",
+            "3"
+        ],
+        [
+            [
+                12,
+                13
+            ],
+            "Juan",
+            "Danza",
+            "2"
         ]
     ],
     "jueves": [
@@ -308,9 +812,54 @@
                 7,
                 8
             ],
+            "Lucas",
+            "Lengua",
+            "4"
+        ],
+        [
+            [
+                7,
+                8
+            ],
             "Pedro",
             "Matematicas",
+            "3"
+        ],
+        [
+            [
+                7,
+                8
+            ],
+            "Diana",
+            "Dibujo",
             "1"
+        ],
+        [
+            [
+                7,
+                8
+            ],
+            "Nora",
+            "C. Naturales",
+            "5"
+        ],
+        [
+            [
+                7,
+                8
+            ],
+            "Luis",
+            "Sistemas",
+            "2"
+        ],
+        [
+            [
+                8,
+                9
+            ],
+            "Luis",
+            "Sistemas",
+            "4"
         ],
         [
             [
@@ -319,25 +868,88 @@
             ],
             "Pedro",
             "Matematicas",
-            "4"
+            "3"
         ],
         [
             [
-                9,
-                11
+                8,
+                9
             ],
-            "Pedro",
-            "Matematicas",
+            "Diana",
+            "Dibujo",
+            "1"
+        ],
+        [
+            [
+                8,
+                9
+            ],
+            "Lucas",
+            "Lengua",
             "5"
         ],
         [
             [
                 8,
+                9
+            ],
+            "Nora",
+            "C. Naturales",
+            "2"
+        ],
+        [
+            [
+                9,
+                10
+            ],
+            "Pedro",
+            "Matematicas",
+            "4"
+        ],
+        [
+            [
+                9,
+                10
+            ],
+            "Nora",
+            "C. Naturales",
+            "3"
+        ],
+        [
+            [
+                9,
+                10
+            ],
+            "Lucas",
+            "Lengua",
+            "1"
+        ],
+        [
+            [
+                9,
+                10
+            ],
+            "Luis",
+            "Sistemas",
+            "5"
+        ],
+        [
+            [
+                9,
                 10
             ],
             "Diana",
             "Dibujo",
-            "1"
+            "2"
+        ],
+        [
+            [
+                10,
+                11
+            ],
+            "Lucas",
+            "Lengua",
+            "4"
         ],
         [
             [
@@ -346,16 +958,106 @@
             ],
             "Diana",
             "Dibujo",
+            "3"
+        ],
+        [
+            [
+                10,
+                11
+            ],
+            "Nora",
+            "C. Naturales",
+            "1"
+        ],
+        [
+            [
+                10,
+                11
+            ],
+            "Luis",
+            "Sistemas",
+            "5"
+        ],
+        [
+            [
+                10,
+                11
+            ],
+            "Pedro",
+            "Matematicas",
             "2"
         ],
         [
             [
                 11,
+                12
+            ],
+            "Luis",
+            "Sistemas",
+            "3"
+        ],
+        [
+            [
+                11,
+                12
+            ],
+            "Nora",
+            "C. Naturales",
+            "1"
+        ],
+        [
+            [
+                11,
+                12
+            ],
+            "Pedro",
+            "Matematicas",
+            "2"
+        ],
+        [
+            [
+                12,
+                13
+            ],
+            "Pedro",
+            "Fisica",
+            "4"
+        ],
+        [
+            [
+                12,
+                13
+            ],
+            "Lucas",
+            "Lengua",
+            "3"
+        ],
+        [
+            [
+                12,
+                13
+            ],
+            "Luis",
+            "Sistemas",
+            "1"
+        ],
+        [
+            [
+                12,
                 13
             ],
             "Diana",
             "Dibujo",
-            "3"
+            "5"
+        ],
+        [
+            [
+                12,
+                13
+            ],
+            "Nora",
+            "C. Naturales",
+            "2"
         ]
     ],
     "viernes": [
@@ -364,68 +1066,50 @@
                 7,
                 8
             ],
-            "Juan",
-            "Ed. Fisica",
-            "1"
-        ],
-        [
-            [
-                8,
-                10
-            ],
-            "Juan",
-            "Ed. Fisica",
-            "2"
-        ],
-        [
-            [
-                10,
-                12
-            ],
-            "Juan",
-            "Ed. Fisica",
+            "Lucas",
+            "Lengua",
             "4"
         ],
         [
             [
-                12,
-                13
+                7,
+                8
             ],
             "Juan",
-            "Ed. Fisica",
+            "Danza",
+            "1"
+        ],
+        [
+            [
+                7,
+                8
+            ],
+            "Nora",
+            "C. Naturales",
+            "3"
+        ],
+        [
+            [
+                7,
+                8
+            ],
+            "Pedro",
+            "Matematicas",
             "5"
         ],
         [
             [
                 7,
+                8
+            ],
+            "Paola",
+            "Musica",
+            "2"
+        ],
+        [
+            [
+                8,
                 9
-            ],
-            "Pedro",
-            "Matematicas",
-            "3"
-        ],
-        [
-            [
-                12,
-                13
-            ],
-            "Pedro",
-            "Matematicas",
-            "4"
-        ],
-        [
-            [
-                9,
-                11
-            ],
-            "Pedro",
-            "Matematicas",
-            "5"
-        ],
-        [
-            [
-                0,
-                0
             ],
             "Juan",
             "Danza",
@@ -433,20 +1117,209 @@
         ],
         [
             [
-                0,
-                0
+                8,
+                9
             ],
-            "Juan",
-            "Danza",
+            "Nora",
+            "C. Naturales",
             "3"
         ],
         [
             [
-                0,
-                0
+                8,
+                9
+            ],
+            "Paola",
+            "Canto",
+            "2"
+        ],
+        [
+            [
+                8,
+                9
+            ],
+            "Lucas",
+            "Lengua",
+            "5"
+        ],
+        [
+            [
+                8,
+                9
+            ],
+            "Martha",
+            "Ingles",
+            "4"
+        ],
+        [
+            [
+                9,
+                10
+            ],
+            "Martha",
+            "Ingles",
+            "4"
+        ],
+        [
+            [
+                9,
+                10
+            ],
+            "Paola",
+            "Musica",
+            "1"
+        ],
+        [
+            [
+                9,
+                10
+            ],
+            "Lucas",
+            "Lengua",
+            "3"
+        ],
+        [
+            [
+                9,
+                10
             ],
             "Juan",
             "Danza",
+            "2"
+        ],
+        [
+            [
+                9,
+                10
+            ],
+            "Pedro",
+            "Fisica",
+            "5"
+        ],
+        [
+            [
+                10,
+                11
+            ],
+            "Nora",
+            "C. Naturales",
+            "4"
+        ],
+        [
+            [
+                10,
+                11
+            ],
+            "Paola",
+            "Canto",
+            "1"
+        ],
+        [
+            [
+                10,
+                11
+            ],
+            "Lucas",
+            "Ingles",
+            "3"
+        ],
+        [
+            [
+                10,
+                11
+            ],
+            "Juan",
+            "Danza",
+            "2"
+        ],
+        [
+            [
+                10,
+                11
+            ],
+            "Martha",
+            "Ingles",
+            "5"
+        ],
+        [
+            [
+                11,
+                12
+            ],
+            "Nora",
+            "C. Naturales",
+            "4"
+        ],
+        [
+            [
+                11,
+                12
+            ],
+            "Paola",
+            "Canto",
+            "1"
+        ],
+        [
+            [
+                11,
+                12
+            ],
+            "Juan",
+            "Ed. Fisica",
+            "3"
+        ],
+        [
+            [
+                11,
+                12
+            ],
+            "Lucas",
+            "Ingles",
+            "2"
+        ],
+        [
+            [
+                11,
+                12
+            ],
+            "Pedro",
+            "Fisica",
+            "5"
+        ],
+        [
+            [
+                12,
+                13
+            ],
+            "Juan",
+            "Ed. Fisica",
+            "4"
+        ],
+        [
+            [
+                12,
+                13
+            ],
+            "Paola",
+            "Canto",
+            "3"
+        ],
+        [
+            [
+                12,
+                13
+            ],
+            "Lucas",
+            "Ingles",
+            "2"
+        ],
+        [
+            [
+                12,
+                13
+            ],
+            "Nora",
+            "Quimica",
             "5"
         ]
     ]

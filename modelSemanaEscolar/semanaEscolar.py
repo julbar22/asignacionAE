@@ -43,11 +43,11 @@ class SemanaEscolar(Individual):
         # cantidad de horas semanales y diarias
         self.evaluarHorasCursada(environment)
         # disponibilidad de los profesores diaria
-        # self.evaluarDisponibilidadProfesores(environment)
+        self.evaluarDisponibilidadProfesores(environment)
         # 2 clases en el curso al mismo momento
-        # self.evaluarClasesPorCurso(environment)
+        self.evaluarClasesPorCurso(environment)
         # 2 clases en el mismo momento para el profesor
-        # self.evaluarClasesProfesor(environment)
+        self.evaluarClasesProfesor(environment)
         # print("fitness:"+str(self.fitness))
         # print("---------fin evaluacion---------")
         # self.imprimirIndividuo()
@@ -183,34 +183,38 @@ class SemanaEscolar(Individual):
 
     def imprimirErrores(self):
         for error in self.errores:
-            error.printError()
+            if isinstance(error,ErrorSemana):
+                error.printError()
+            else:
+                print(error)
 
     def mutacionErroresAleatorios(self, environment: Escenario):
         if len(self.errores)>0:        
             error: ErrorSemana = random.choice(self.errores)
-            if error.tipoError == 0:
-                if error.horasSemanales > error.horasAsignadas:
-                    cursada = environment.getCursada(error.materia, error.curso)
-                    profesor:Profesor = environment.getProfesoresByCursada(cursada)[0]
-                    diasPosibles:List[Dia]= list(filter(lambda dia: dia.cursadaIsPosible(cursada,profesor),self.cromosoma)) 
-                    if len(diasPosibles)>0:                                         
-                        dia: Dia = random.choice(diasPosibles)
-                        asignacionOld:Asignacion=dia.replaceCursada(cursada, profesor)
-                        if(asignacionOld!=None):
-                            for diaAsignacionOld in self.cromosoma:
-                                horasAgregadas:int=diaAsignacionOld.asignarCursada(asignacionOld.cursada,environment,1)
-                                if horasAgregadas>0:
-                                    break
-                        error.horasAsignadas += 1
-                else:
-                    if error.horasSemanales < error.horasAsignadas:
-                        cursada = environment.getCursada(
-                            error.materia, error.curso)
-                        dia: Dia = random.choice(self.cromosoma)
-                        dia.removerCursada(cursada, environment)
-                        error.horasAsignadas -= 1
-            if error.tipoError == 1:
-                self.asignacionDiaria(error,environment)
+            if isinstance(error,ErrorSemana):
+                if error.tipoError == 0:
+                    if error.horasSemanales > error.horasAsignadas:
+                        cursada = environment.getCursada(error.materia, error.curso)
+                        profesor:Profesor = environment.getProfesoresByCursada(cursada)[0]
+                        diasPosibles:List[Dia]= list(filter(lambda dia: dia.cursadaIsPosible(cursada,profesor),self.cromosoma)) 
+                        if len(diasPosibles)>0:                                         
+                            dia: Dia = random.choice(diasPosibles)
+                            asignacionOld:Asignacion=dia.replaceCursada(cursada, profesor)
+                            if(asignacionOld!=None):
+                                for diaAsignacionOld in self.cromosoma:
+                                    horasAgregadas:int=diaAsignacionOld.asignarCursada(asignacionOld.cursada,environment,1)
+                                    if horasAgregadas>0:
+                                        break
+                            error.horasAsignadas += 1
+                    else:
+                        if error.horasSemanales < error.horasAsignadas:
+                            cursada = environment.getCursada(
+                                error.materia, error.curso)
+                            dia: Dia = random.choice(self.cromosoma)
+                            dia.removerCursada(cursada, environment)
+                            error.horasAsignadas -= 1
+                if error.tipoError == 1:
+                    self.asignacionDiaria(error,environment)
 
     def asignacionDiaria(self, error:ErrorSemana, environment: Escenario):
         cursada = environment.getCursada(error.materia, error.curso)
