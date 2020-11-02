@@ -16,6 +16,7 @@ import json
 import datetime
 from modelSemanaEscolar.escenario import Escenario
 from modelSemanaEscolar.escenarioCompleto1 import EscenarioCompleto1
+from modelSemanaEscolar.escenarioCompleto2 import EscenarioCompleto2
 
 
 def createReferenceIndividual(escenario):
@@ -24,7 +25,7 @@ def createReferenceIndividual(escenario):
     return individual
 
 def run2():
-    escenario = EscenarioCompleto1()
+    escenario = EscenarioCompleto2()
     #escenario.printEscenario()
     #TODO esta referencia me servira cuando tenga clases asignadas
     selection :SelectionAlgorithm = SelectionRanking(0.3)

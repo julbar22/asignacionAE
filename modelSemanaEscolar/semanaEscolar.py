@@ -39,24 +39,29 @@ class SemanaEscolar(Individual):
     def calculateFitness(self, individual: Individual, environment: Escenario):
         self.fitness = 0
         self.errores.clear()
+        self.inicializarDias()
         # print("---------evaluacion--------")
         # cantidad de horas semanales y diarias
         self.evaluarHorasCursada(environment)
         # disponibilidad de los profesores diaria
-        self.evaluarDisponibilidadProfesores(environment)
+        #self.evaluarDisponibilidadProfesores(environment)
         # 2 clases en el curso al mismo momento
-        self.evaluarClasesPorCurso(environment)
+        #self.evaluarClasesPorCurso(environment)
         # 2 clases en el mismo momento para el profesor
-        self.evaluarClasesProfesor(environment)
+        #self.evaluarClasesProfesor(environment)
         # print("fitness:"+str(self.fitness))
         # print("---------fin evaluacion---------")
         # self.imprimirIndividuo()
+    
+    def inicializarDias(self):
+        for dia in self.cromosoma:
+            dia.calcularHorasPorCursada()
 
     def evaluarHorasCursada(self, environment: Escenario):
         for cursada in environment.cursada:
             horasSemanales = 0
             for dia in self.cromosoma:
-                horasDia = dia.calcularHorasPorCursada(cursada)
+                horasDia = dia.getHorasPorCursada(cursada)
                 if horasDia > cursada.horasMaximasCons:
                     self.fitness += 1
                     error = ErrorSemana(1)
@@ -130,14 +135,15 @@ class SemanaEscolar(Individual):
         return nuevo
 
     def mutate(self, index, environment):
-        self.mutacionErroresAleatorios(environment)
-        # nuevo = self.createRamdomIndividual(self, environment)
-        # self.cromosoma[index] = nuevo.cromosoma[index]
+        #self.mutacionErroresAleatorios(environment)
+        nuevo = self.createRamdomIndividual(self, environment)
+        self.cromosoma[index] = nuevo.cromosoma[index]
         return self
 
+    def improvement(self, environment: Escenario):
+        self.mutacionErroresAleatorios(environment)
+
     def cross(self, couple: Individual) -> List[Individual]:
-        coupleSemana: SemanaEscolar = copy.copy(couple)
-        compleSemana2: SemanaEscolar = copy.copy(self)
         initDate = self.cromosoma[0].fecha
         endDate = self.cromosoma[4].fecha
         nuevaSemana1: SemanaEscolar = SemanaEscolar(initDate, endDate)
@@ -146,7 +152,7 @@ class SemanaEscolar(Individual):
         crossSemana: CrossSemana = factoryCross.getCrossSemana(
             CrossSemanaEnum.croosDiaAndCurso)
         diasCruzados: List[List[Dia]] = crossSemana.croosRun(
-            compleSemana2.cromosoma.copy(), coupleSemana.cromosoma.copy())
+            self.cromosoma.copy(), couple.cromosoma.copy())
         nuevaSemana1.cromosoma = diasCruzados[0].copy()
         nuevaSemana2.cromosoma = diasCruzados[1].copy()
         semanas: list = []
@@ -156,7 +162,7 @@ class SemanaEscolar(Individual):
 
     def completarCursadas(self, cursadas: List[Cursada], environment: Escenario):
 
-        cursadas.sort(key=lambda cursada: cursada.horasSemanales, reverse=True)
+        #cursadas.sort(key=lambda cursada: cursada.horasSemanales, reverse=True)
         contadorCursada =0
         while(contadorCursada<len(cursadas)):            
             cursada = cursadas[contadorCursada]

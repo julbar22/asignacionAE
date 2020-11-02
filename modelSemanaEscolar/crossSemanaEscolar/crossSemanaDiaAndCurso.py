@@ -23,8 +23,8 @@ class CrossSemanaDiaAndCurso(CrossSemana):
 
     def crossDia(self, dia1: Dia, dia2: Dia) -> List[List[Dia]]:
         dias =[]
-        dia1Curso = self.diaByCurso(dia1)
-        dia2Curso = self.diaByCurso(dia2)
+        dia1Curso = dia1.getDiaByCurso()
+        dia2Curso = dia2.getDiaByCurso()
         newHorariosDia1 = list()
         newHorariosDia2 = list()
         keys = list()
@@ -49,25 +49,6 @@ class CrossSemanaDiaAndCurso(CrossSemana):
         dias.append(diaNuevo2)
         return dias
 
-    def diaByCurso(self, dia: Dia) -> dict:
-        dia.horarios = self.sortDiaByHorario(dia)
-        cursos = {}
-        for horario in dia.horarios:
-            horarioTemp: Horario = horario
-            nombreCurso: str = horarioTemp.asignacion.cursada.curso.nombre
-            if nombreCurso in cursos:
-                cursos[nombreCurso].append(horario)
-            else:
-                cursos[nombreCurso] = list()
-                cursos[nombreCurso].append(horario)
-        return cursos
-
-    def sortDiaByHorario(self, dia: Dia):
-        if len(dia.horarios)>0 and isinstance(dia.horarios[0],Horario):
-            dia.horarios.sort(key=lambda horarioAsignado: horarioAsignado.horario[0])
-            return dia.horarios.copy()
-        else:
-            return []
 
     def crossHorarios(self, horario1: List[Horario], horario2: List[Horario]) -> List[List[Horario]]:
         #TODO las horas no deben estar fijas
