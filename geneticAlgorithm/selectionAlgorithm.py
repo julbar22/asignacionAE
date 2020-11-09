@@ -4,6 +4,6 @@ from typing import List
 
 class SelectionAlgorithm(ABC):
     
-    def select(self, population:List[Individual]):
+    def select(self, population:List[Individual])-> List[Individual]:
         raise NotImplementedError
 

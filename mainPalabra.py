@@ -15,7 +15,7 @@ def createReferenceIndividual():
     return individual
 
 def run2():
-    selection :SelectionAlgorithm = SelectionRanking()
+    selection :SelectionAlgorithm = SelectionRanking(0.2)
     cross: CrossAlgorithm = CrossSinglePoint()
     mutation: MutationAlgorithm = MutateRandomPoints()
     GA = GeneticAlgorithmManager()

@@ -10,7 +10,7 @@ class SelectionRanking(SelectionAlgorithm):
     def __init__(self, varianza):
         self.varianza=varianza
 
-    def select(self, population: List[Individual]):
+    def select(self, population: List[Individual])-> List[Individual]:
         population = sorted(
             population, key=lambda individual: individual.fitness)
         population = population[:int(self.varianza * len(population))]

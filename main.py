@@ -17,6 +17,8 @@ import datetime
 from modelSemanaEscolar.escenario import Escenario
 from modelSemanaEscolar.escenarioCompleto1 import EscenarioCompleto1
 from modelSemanaEscolar.escenarioCompleto2 import EscenarioCompleto2
+from geneticAlgorithm.finishAction import FinishAction
+from finishActionImpl.finishBestIndividualImpl import FinishBestIndividualImpl
 
 
 def createReferenceIndividual(escenario):
@@ -26,21 +28,18 @@ def createReferenceIndividual(escenario):
 
 def run2():
     escenario = EscenarioCompleto2()
-    #escenario.printEscenario()
-    #TODO esta referencia me servira cuando tenga clases asignadas
     selection :SelectionAlgorithm = SelectionRanking(0.3)
-    #selection :SelectionAlgorithm = SelectionTorneo(10)
-    #cross: CrossAlgorithm = CrossMultiplePoint()
     cross: CrossAlgorithm = CrossSpecificIndividual()
     mutation: MutationAlgorithm = MutateRandomPoints()
-    #mutation: MutationAlgorithm = MutateAscendent()
+    finishAction: FinishAction = FinishBestIndividualImpl()
     GA = GeneticAlgorithmManager()
     GA.selectionAlgorithm =selection
     GA.crossAlgorithm= cross
     GA.mutationAlgorithm=mutation
     GA.environment=escenario
     GA.individualReference=createReferenceIndividual(escenario)
-    GA.run(20,2000)
+    GA.finishActions = finishAction
+    GA.run(20,1000)
     
 if __name__ == '__main__':
     run2()

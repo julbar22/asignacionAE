@@ -16,7 +16,7 @@ class MutateAscendent(MutationAlgorithm):
         self.tasaCrecimiento=0.1
         self.generacionCrecimiento=800
 
-    def mutationPopulation(self, population: List[Individual], environment):
+    def mutationPopulation(self, population: List[Individual], environment)->List[Individual]:
         self.generacion+=1
         tasaMutacion=int(self.generacion/self.generacionCrecimiento)
         for individual in population:

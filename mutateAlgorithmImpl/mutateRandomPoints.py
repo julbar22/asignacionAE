@@ -7,7 +7,7 @@ import string
 
 class MutateRandomPoints(MutationAlgorithm):
 
-    def mutationPopulation(self, population: List[Individual],environment):
+    def mutationPopulation(self, population: List[Individual],environment)->List[Individual]:
         for individual in population:
             for idx in range(0,len(individual.cromosoma)):
                 if random.uniform(0.0, 1.0) <= 0.1:

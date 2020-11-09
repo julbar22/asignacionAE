@@ -5,6 +5,8 @@ from geneticAlgorithm.crossAlgorithm import CrossAlgorithm
 from geneticAlgorithm.individual import Individual
 from typing import List
 import json
+import copy
+from geneticAlgorithm.finishAction import FinishAction
 
 
 class GeneticAlgorithmManager():
@@ -12,10 +14,11 @@ class GeneticAlgorithmManager():
     mutationAlgorithm: MutationAlgorithm = None
     crossAlgorithm: CrossAlgorithm = None
     aptitudeThreshold = 0
-    finishGenerationBlock = None
-    finishRunBlock = None
+    finishActions:FinishAction = None
     individualReference: Individual=None
     environment =None
+    mejorFitness =1000
+    mejorIndividuo:Individual=None
 
     def __init__(self):
         pass
@@ -26,39 +29,25 @@ class GeneticAlgorithmManager():
             population.append(individualBase.createRamdomIndividual(individualBase,self.environment))
         return population
 
-    def run(self, populationQuantity: int, generations: int):
-        mejor = 1000
-        mejorIndividuo =None
-        
+    def run(self, populationQuantity: int, generations: int):        
         population = self.createStartingPopulation(populationQuantity, self.individualReference)
         for generarionIndex in range(0, generations):
             self.calcularFitnessPopulation(population,self.individualReference)
-            #print("generation " + str(generarionIndex))
             population=self.selectionAlgorithm.select(population).copy()
-            if mejor>population[0].fitness:                
-                mejor= population[0].fitness    
-                mejorIndividuo = population[0].errores.copy()        
-                population[0].imprimirIndividuo()
-                print(population[0].fitness)
-                print("generacion:"+str(generarionIndex))
-                population[0].imprimirErrores()
-            
+            if self.mejorFitness>population[0].fitness:                
+                self.mejorFitness= population[0].fitness    
+                self.mejorIndividuo = copy.deepcopy(population[0])                    
             population=self.crossAlgorithm.crossPopulation(population,populationQuantity,self.environment).copy()
             population=self.mutationAlgorithm.mutationPopulation(population,self.environment).copy()
-            self.calcularFitnessPopulation(population,self.individualReference)
-            
-            if mejor==self.aptitudeThreshold:
-                print(str(generarionIndex))
+            self.calcularFitnessPopulation(population,self.individualReference)            
+            if self.mejorFitness==self.aptitudeThreshold:
+                print("termino el algoritmo")
                 break
             else:
                 self.improvementPopulation(population,self.environment)
-        print(len(mejorIndividuo))
-
-    def imprimirPoblacion(self, poblacion):
-        for individuo in poblacion:
-            #individuo.imprimirIndividuo()
-            print(str(individuo.fitness))
-    
+            self.finishActions.runFinishGenerationBlock(population,self.mejorFitness,self.mejorIndividuo)
+        self.finishActions.runFinishRunBlock(population,self.mejorFitness,self.mejorIndividuo)
+   
     def calcularFitnessPopulation(self,poblacion,individualBase):
         for individuo in poblacion:
             individuo.calculateFitness(individualBase,self.environment)
