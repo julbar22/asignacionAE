@@ -44,11 +44,11 @@ class SemanaEscolar(Individual):
         # cantidad de horas semanales y diarias
         self.evaluarHorasCursada(environment)
         # disponibilidad de los profesores diaria
-        #self.evaluarDisponibilidadProfesores(environment)
+        self.evaluarDisponibilidadProfesores(environment)
         # 2 clases en el curso al mismo momento
-        #self.evaluarClasesPorCurso(environment)
+        self.evaluarClasesPorCurso(environment)
         # 2 clases en el mismo momento para el profesor
-        #self.evaluarClasesProfesor(environment)
+        self.evaluarClasesProfesor(environment)
         # print("fitness:"+str(self.fitness))
         # print("---------fin evaluacion---------")
         # self.imprimirIndividuo()
@@ -135,13 +135,12 @@ class SemanaEscolar(Individual):
         return nuevo
 
     def mutate(self, index, environment):
-        #self.mutacionErroresAleatorios(environment)
         nuevo = self.createRamdomIndividual(self, environment)
         self.cromosoma[index] = nuevo.cromosoma[index]
         return self
 
     def improvement(self, environment: Escenario):
-        self.mutacionErroresAleatorios(environment)
+        self.correccionErroresAleatorios(environment)
 
     def cross(self, couple: Individual) -> List[Individual]:
         initDate = self.cromosoma[0].fecha
@@ -194,7 +193,7 @@ class SemanaEscolar(Individual):
             else:
                 print(error)
 
-    def mutacionErroresAleatorios(self, environment: Escenario):
+    def correccionErroresAleatorios(self, environment: Escenario):
         if len(self.errores)>0:        
             error: ErrorSemana = random.choice(self.errores)
             if isinstance(error,ErrorSemana):
