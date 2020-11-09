@@ -18,3 +18,7 @@ class HorarioUtils():
         if(horario1[0] <= horario2[0] and horario1[1] >= horario2[1]):
             return True
         return False
+
+    @staticmethod
+    def getMenorValor(value1:int,value2:int)->int:
+        return value1 if value1<value2 else value2

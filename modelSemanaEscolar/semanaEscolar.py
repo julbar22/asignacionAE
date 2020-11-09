@@ -9,6 +9,12 @@ from modelSemanaEscolar.cursada import Cursada
 from typing import List
 from utils.horarioUtils import HorarioUtils
 from modelSemanaEscolar.mapperToSemana import MapperToSemana
+from modelSemanaEscolar.crossSemanaEscolar.factoryCrossSemana import FactoryCrossSemana
+from modelSemanaEscolar.crossSemanaEscolar.crossSemanaEnum import CrossSemanaEnum
+from modelSemanaEscolar.crossSemanaEscolar.crossSemana import CrossSemana
+import copy
+from modelSemanaEscolar.errorSemana import ErrorSemana
+from modelSemanaEscolar.profesor import Profesor
 
 
 class SemanaEscolar(Individual):
@@ -33,6 +39,7 @@ class SemanaEscolar(Individual):
     def calculateFitness(self, individual: Individual, environment: Escenario):
         self.fitness = 0
         self.errores.clear()
+        self.inicializarDias()
         # print("---------evaluacion--------")
         # cantidad de horas semanales y diarias
         self.evaluarHorasCursada(environment)
@@ -43,25 +50,39 @@ class SemanaEscolar(Individual):
         # 2 clases en el mismo momento para el profesor
         self.evaluarClasesProfesor(environment)
         # print("fitness:"+str(self.fitness))
-        #print("---------fin evaluacion---------")
+        # print("---------fin evaluacion---------")
         # self.imprimirIndividuo()
+    
+    def inicializarDias(self):
+        for dia in self.cromosoma:
+            dia.calcularHorasPorCursada()
 
     def evaluarHorasCursada(self, environment: Escenario):
         for cursada in environment.cursada:
             horasSemanales = 0
             for dia in self.cromosoma:
-                horasDia = dia.calcularHorasPorCursada(cursada)
+                horasDia = dia.getHorasPorCursada(cursada)
                 if horasDia > cursada.horasMaximasCons:
                     self.fitness += 1
-                    self.errores.append(
-                        "> horas diarias " + cursada.materia.nombre+","+cursada.curso.nombre)
-                    #print("muchas horas diarias:"+cursada.materia.nombre+" ,"+cursada.curso.nombre)
+                    error = ErrorSemana(1)
+                    error.dia = dia.fecha
+                    error.horasAsignadas = horasDia
+                    error.horasSemanales = cursada.horasMaximasCons
+                    error.materia = cursada.materia.nombre
+                    error.curso = cursada.curso.nombre
+                    self.errores.append(error)
+                    # print("muchas horas diarias:"+cursada.materia.nombre+" ,"+cursada.curso.nombre)
                 horasSemanales += horasDia
             if horasSemanales != cursada.horasSemanales:
+                error = ErrorSemana(0)
+                error.dia = dia.fecha
+                error.horasAsignadas = horasSemanales
+                error.horasSemanales = cursada.horasSemanales
+                error.materia = cursada.materia.nombre
+                error.curso = cursada.curso.nombre
                 self.fitness += abs(cursada.horasSemanales-horasSemanales)
-                self.errores.append("> horas semanales " + cursada.materia.nombre+"," +
-                                    cursada.curso.nombre+" "+str(horasSemanales)+"-"+str(cursada.horasSemanales))
-                #print("muchas horas semanales:"+cursada.materia.nombre+" ,"+cursada.curso.nombre)
+                self.errores.append(error)
+                # print("muchas horas semanales:"+cursada.materia.nombre+" ,"+cursada.curso.nombre)
 
     def evaluarDisponibilidadProfesores(self, environment: Escenario):
         for dia in self.cromosoma:
@@ -82,7 +103,8 @@ class SemanaEscolar(Individual):
         for curso in environment.cursos:
             for dia in self.cromosoma:
                 horariosDia = dia.getHorariosPorCurso(curso.nombre)
-                self.horariosCruzados(horariosDia, "Curso:"+dia.fecha.name+":"+curso.nombre)
+                self.horariosCruzados(
+                    horariosDia, "Curso:"+dia.fecha.name+":"+curso.nombre)
 
     def evaluarClasesProfesor(self, environment: Escenario):
         for profesor in environment.profesores:
@@ -97,7 +119,7 @@ class SemanaEscolar(Individual):
             horario1 = horarios[index1]
             for index2 in range((index1+1), len(horarios)):
                 horario2 = horarios[index2]
-                isCruzado=HorarioUtils.isCrossPoints(horario1,horario2)
+                isCruzado = HorarioUtils.isCrossPoints(horario1, horario2)
                 if isCruzado:
                     self.fitness += 1
                     self.errores.append("cruce de horarios tipo "+tipo)
@@ -113,70 +135,101 @@ class SemanaEscolar(Individual):
         return nuevo
 
     def mutate(self, index, environment):
-        #diaCompleto:Dia= self.cromosoma[index]
         nuevo = self.createRamdomIndividual(self, environment)
-        #diaCompleto2:Dia= nuevo.cromosoma[index]
-        # diaCompleto.horarios=diaCompleto2.horarios.copy()
         self.cromosoma[index] = nuevo.cromosoma[index]
-
         return self
 
+    def improvement(self, environment: Escenario):
+        self.correccionErroresAleatorios(environment)
+
     def cross(self, couple: Individual) -> List[Individual]:
-        coupleSemana: SemanaEscolar = couple
         initDate = self.cromosoma[0].fecha
         endDate = self.cromosoma[4].fecha
         nuevaSemana1: SemanaEscolar = SemanaEscolar(initDate, endDate)
         nuevaSemana2: SemanaEscolar = SemanaEscolar(initDate, endDate)
-        for index in range(len(self.cromosoma)):
-            dia1: Dia = coupleSemana.cromosoma[index]
-            dia2: Dia = self.cromosoma[index]
-            dias: list = self.crossDia(dia1, dia2).copy()
-            nuevaSemana1.cromosoma[index] = dias[0]
-            nuevaSemana2.cromosoma[index] = dias[1]
-
+        factoryCross: FactoryCrossSemana = FactoryCrossSemana()
+        crossSemana: CrossSemana = factoryCross.getCrossSemana(
+            CrossSemanaEnum.croosDiaAndCurso)
+        diasCruzados: List[List[Dia]] = crossSemana.croosRun(
+            self.cromosoma.copy(), couple.cromosoma.copy())
+        nuevaSemana1.cromosoma = diasCruzados[0].copy()
+        nuevaSemana2.cromosoma = diasCruzados[1].copy()
         semanas: list = []
         semanas.append(nuevaSemana1)
         semanas.append(nuevaSemana2)
         return semanas
 
-    def crossDia(self, dia1: Dia, dia2: Dia) -> List[Dia]:
-        diasCruzados = []
-        lenDia1 = len(dia1.horarios)
-        lenDia2 = len(dia2.horarios)
-        diaNuevo1 = Dia(dia1.fecha)
-        diaNuevo2 = Dia(dia2.fecha)
-        maxHorarios = lenDia1 if lenDia1 >= lenDia2 else lenDia2
-        for index in range(maxHorarios):
-            if random.uniform(0, 1) >= 0.5:
-                if lenDia1 > index:
-                    diaNuevo1.addHorario(dia1.horarios[index])
-                if lenDia2 > index:
-                    diaNuevo2.addHorario(dia2.horarios[index])
-            else:
-                if lenDia2 > index:
-                    diaNuevo1.addHorario(dia2.horarios[index])
-                if lenDia1 > index:
-                    diaNuevo2.addHorario(dia1.horarios[index])
-        diasCruzados.append(diaNuevo1)
-        diasCruzados.append(diaNuevo2)
-        return diasCruzados
-
     def completarCursadas(self, cursadas: List[Cursada], environment: Escenario):
-        for cursada in cursadas:
+
+        #cursadas.sort(key=lambda cursada: cursada.horasSemanales, reverse=True)
+        contadorCursada =0
+        while(contadorCursada<len(cursadas)):            
+            cursada = cursadas[contadorCursada]
+            contadorCursada+=1
             horasSemanales = cursada.horasSemanales
             horasAsignadas = 0
             copiaCromosoma = self.cromosoma.copy()
             while horasSemanales > horasAsignadas:
                 contador = 0
-                if len(copiaCromosoma)>0:
+                if len(copiaCromosoma) > 0:
                     diaSeleccionado: Dia = random.choice(copiaCromosoma)
-                    contador = diaSeleccionado.asignarCursada(cursada, environment)
+                    contador = diaSeleccionado.asignarCursada(
+                        cursada, environment, horasSemanales-horasAsignadas)
                     horasAsignadas += contador
                     if contador == 0:
                         indice = copiaCromosoma.index(diaSeleccionado)
                         copiaCromosoma.pop(indice)
                 else:
                     break
+            #copiaCursadas.remove(cursada)
 
     def imprimirIndividuo(self):
         MapperToSemana.mapperSemana(self.cromosoma)
+
+    def imprimirErrores(self):
+        for error in self.errores:
+            if isinstance(error,ErrorSemana):
+                error.printError()
+            else:
+                print(error)
+
+    def correccionErroresAleatorios(self, environment: Escenario):
+        if len(self.errores)>0:        
+            error: ErrorSemana = random.choice(self.errores)
+            if isinstance(error,ErrorSemana):
+                if error.tipoError == 0:
+                    if error.horasSemanales > error.horasAsignadas:
+                        cursada = environment.getCursada(error.materia, error.curso)
+                        profesor:Profesor = environment.getProfesoresByCursada(cursada)[0]
+                        diasPosibles:List[Dia]= list(filter(lambda dia: dia.cursadaIsPosible(cursada,profesor),self.cromosoma)) 
+                        if len(diasPosibles)>0:                                         
+                            dia: Dia = random.choice(diasPosibles)
+                            asignacionOld:Asignacion=dia.replaceCursada(cursada, profesor)
+                            if(asignacionOld!=None):
+                                for diaAsignacionOld in self.cromosoma:
+                                    horasAgregadas:int=diaAsignacionOld.asignarCursada(asignacionOld.cursada,environment,1)
+                                    if horasAgregadas>0:
+                                        break
+                            error.horasAsignadas += 1
+                    else:
+                        if error.horasSemanales < error.horasAsignadas:
+                            cursada = environment.getCursada(
+                                error.materia, error.curso)
+                            dia: Dia = random.choice(self.cromosoma)
+                            dia.removerCursada(cursada, environment)
+                            error.horasAsignadas -= 1
+                if error.tipoError == 1:
+                    self.asignacionDiaria(error,environment)
+
+    def asignacionDiaria(self, error:ErrorSemana, environment: Escenario):
+        cursada = environment.getCursada(error.materia, error.curso)
+        profesor:Profesor = environment.getProfesoresByCursada(cursada)[0]
+        if error.horasSemanales > error.horasAsignadas:            
+            dia: Dia = self.getDia(error.dia)
+            dia.replaceAleatoriaCursada(cursada, environment)
+            error.horasAsignadas += 1
+        else:
+            if error.horasSemanales < error.horasAsignadas:
+                dia: Dia = self.getDia(error.dia)
+                dia.removerCursada(cursada, environment)
+                error.horasAsignadas -= 1

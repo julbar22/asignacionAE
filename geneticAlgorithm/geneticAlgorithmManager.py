@@ -3,6 +3,7 @@ from geneticAlgorithm.selectionAlgorithm import SelectionAlgorithm
 from geneticAlgorithm.mutationAlgorithm import MutationAlgorithm
 from geneticAlgorithm.crossAlgorithm import CrossAlgorithm
 from geneticAlgorithm.individual import Individual
+from typing import List
 import json
 
 
@@ -28,37 +29,30 @@ class GeneticAlgorithmManager():
     def run(self, populationQuantity: int, generations: int):
         mejor = 1000
         mejorIndividuo =None
+        
         population = self.createStartingPopulation(populationQuantity, self.individualReference)
         for generarionIndex in range(0, generations):
-            stopGeneration=self.calcularFitnessPopulation(population,self.individualReference)
+            self.calcularFitnessPopulation(population,self.individualReference)
             #print("generation " + str(generarionIndex))
             population=self.selectionAlgorithm.select(population).copy()
-            #stopGeneration=self.calcularFitnessPopulation(population,self.individualReference)
-            #print("select")
-            #print(stopGeneration)
-            if mejor>population[0].fitness:
-                print("generacion:"+str(generarionIndex))
+            if mejor>population[0].fitness:                
                 mejor= population[0].fitness    
                 mejorIndividuo = population[0].errores.copy()        
                 population[0].imprimirIndividuo()
                 print(population[0].fitness)
+                print("generacion:"+str(generarionIndex))
+                population[0].imprimirErrores()
             
             population=self.crossAlgorithm.crossPopulation(population,populationQuantity,self.environment).copy()
-            #stopGeneration=self.calcularFitnessPopulation(population,self.individualReference)
-            #print("cross")
-            #print(stopGeneration)
             population=self.mutationAlgorithm.mutationPopulation(population,self.environment).copy()
-            #stopGeneration=self.calcularFitnessPopulation(population,self.individualReference)
-            #print("mutar")
-            #print(stopGeneration)
-            #stopGeneration =self.calcularFitnessPopulation(population,self.individualReference)
-            #self.imprimirPoblacion(population)
-            if stopGeneration:
+            self.calcularFitnessPopulation(population,self.individualReference)
+            
+            if mejor==self.aptitudeThreshold:
                 print(str(generarionIndex))
                 break
-            #json_data = json.dumps(population)
-            #print(json_data)
-        print(mejorIndividuo)
+            else:
+                self.improvementPopulation(population,self.environment)
+        print(len(mejorIndividuo))
 
     def imprimirPoblacion(self, poblacion):
         for individuo in poblacion:
@@ -66,11 +60,11 @@ class GeneticAlgorithmManager():
             print(str(individuo.fitness))
     
     def calcularFitnessPopulation(self,poblacion,individualBase):
-        terminar =False
         for individuo in poblacion:
             individuo.calculateFitness(individualBase,self.environment)
-            if individuo.fitness== self.aptitudeThreshold:
-                terminar= True
-        return terminar
+    
+    def improvementPopulation(self, population: List[Individual], environment):
+        for individuo in population:
+            individuo.improvement(environment)
 
             

@@ -1,21 +1,24 @@
 from abc import ABC, abstractmethod
 from typing import List
+
+
 class Individual(ABC):
 
     cromosoma = []
+    errores = []
     fitness: int = 0
 
-    def calculateFitness(self, individual,environment):
+    def calculateFitness(self, individual, environment):
         raise NotImplementedError
 
-    def createRamdomIndividual(self, individualBase,environment):
+    def createRamdomIndividual(self, individualBase, environment):
         raise NotImplementedError
 
-    def mutate(self,index,environment):
+    def mutate(self, index, environment):
         raise NotImplementedError
 
-    def cross(self, couple)->List[ABC]:
+    def cross(self, couple) -> List[ABC]:
         raise NotImplementedError
 
-
-
+    def improvement(self, environment) -> List[ABC]:
+        raise NotImplementedError

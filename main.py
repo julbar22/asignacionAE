@@ -15,6 +15,8 @@ from enums.diaSemana import DiaSemana
 import json
 import datetime
 from modelSemanaEscolar.escenario import Escenario
+from modelSemanaEscolar.escenarioCompleto1 import EscenarioCompleto1
+from modelSemanaEscolar.escenarioCompleto2 import EscenarioCompleto2
 
 
 def createReferenceIndividual(escenario):
@@ -23,7 +25,8 @@ def createReferenceIndividual(escenario):
     return individual
 
 def run2():
-    escenario = Escenario()
+    escenario = EscenarioCompleto2()
+    #escenario.printEscenario()
     #TODO esta referencia me servira cuando tenga clases asignadas
     selection :SelectionAlgorithm = SelectionRanking(0.3)
     #selection :SelectionAlgorithm = SelectionTorneo(10)
@@ -37,9 +40,7 @@ def run2():
     GA.mutationAlgorithm=mutation
     GA.environment=escenario
     GA.individualReference=createReferenceIndividual(escenario)
-    GA.run(20,10000)
+    GA.run(20,2000)
     
-
-
 if __name__ == '__main__':
     run2()
