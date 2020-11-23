@@ -21,6 +21,6 @@ class ErrorSemana():
         errorCompleto+=" curso:"+self.cursada.curso.nombre
         errorCompleto+=" profesor:"+self.profesor
         errorCompleto+=" dia:"+self.dia.name
-        errorCompleto+=" horasMaximas:"+str(self.horasSemanales)
-        errorCompleto+=" horasAsignadas:"+str(self.horasAsignadas)
+        #errorCompleto+=" horasMaximas:"+str(self.horasSemanales)
+        #errorCompleto+=" horasAsignadas:"+str(self.horasAsignadas)
         print(errorCompleto)
