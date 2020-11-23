@@ -5,7 +5,7 @@ import random
 
 class CrossMultiplePoint(CrossAlgorithm):
     
-    def crossPopulation(self, population:List[Individual], totalPopulation:int,environment):
+    def crossPopulation(self, population:List[Individual], totalPopulation:int,environment)->List[Individual]:
         offspring = []
         for _ in  range(int((totalPopulation - len(population)) / 2)):
             parent1 = random.choice(population)

@@ -4,6 +4,6 @@ from typing import List
 
 class CrossAlgorithm(ABC):
     
-    def crossPopulation(self, population:List[Individual], totalPopulation:int):
+    def crossPopulation(self, population:List[Individual], totalPopulation:int)->List[Individual]:
         raise NotImplementedError
 

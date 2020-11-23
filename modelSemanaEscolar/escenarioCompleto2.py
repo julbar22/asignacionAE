@@ -264,6 +264,7 @@ class EscenarioCompleto2(EscenarioAbstract):
         profesor8.materias.append(canto1)
         profesor8.materias.append(canto2)
         profesor8.materias.append(canto3)
+        profesor8.addDisponibilidad(DiaSemana.lunes, (7,  13))
         profesor8.addDisponibilidad(DiaSemana.martes, (7,  13))
         profesor8.addDisponibilidad(DiaSemana.miercoles, (7,  13))
         profesor8.addDisponibilidad(DiaSemana.viernes, (7,  13))
