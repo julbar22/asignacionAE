@@ -61,6 +61,13 @@ class EscenarioAbstract(ABC):
             if cursada.materia.nombre == nameMateria:
                 cursadas.append(cursada)
         return cursadas
+    
+    def getAllCursadaByCurso(self, nameCurso: str):
+        cursadas = []
+        for cursada in self.cursada:
+            if cursada.curso.nombre == nameCurso:
+                cursadas.append(cursada)
+        return cursadas
 
     def getProfesor(self, nameProfesor: str):
         for profesor in self.profesores:

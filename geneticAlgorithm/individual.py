@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 from typing import List
+from marcoGenerico.Entidades import Schedule
 
 
 class Individual(ABC):
@@ -13,6 +14,9 @@ class Individual(ABC):
 
     def createRamdomIndividual(self, individualBase, environment)->ABC:
         raise NotImplementedError
+
+    def createRandomIndividual(self,environment)->ABC:
+        raise NotImplementedError 
 
     def mutate(self, index, environment)->ABC:
         raise NotImplementedError
@@ -28,3 +32,7 @@ class Individual(ABC):
 
     def imprimirErrores(self):
         raise NotImplementedError
+
+
+class IndividuoTiempo(Individual):
+    horario:Schedule
