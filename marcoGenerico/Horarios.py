@@ -6,7 +6,6 @@ from functools import reduce
 import operator
 from enum import Enum
 
-
 class TimeTable:
     _open_slots: List[TimeSlot]
 
@@ -49,6 +48,7 @@ class TimeTable:
         if len(self._open_slots) == 0:
             return None
         return random.sample(self._open_slots, 1)[0]
+
 
 
 @dataclass(frozen=True)

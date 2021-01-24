@@ -1,26 +1,29 @@
-from enums.diaSemana import DiaSemana
-from modelSemanaEscolar.cursada import Cursada
+from marcoGenerico.Entidades import Materia
+from marcoGenerico.Horarios import WeekDay
 
 class ErrorSemana():
 
     tipoError:int
     profesor:str
-    dia:DiaSemana
+    dia:WeekDay
     horasSemanales:int
     horasAsignadas:int
-    cursada:Cursada
+    cursada:Materia
 
-    def __init__(self, tipoError:int, cursada: Cursada):
+    def __init__(self, tipoError:int, cursada: Materia):
         self.tipoError = tipoError
         self.profesor=""
         self.cursada=cursada
+        self.horasSemanales=0
+        self.horasAsignadas=0
+        self.dia = WeekDay.SUN
+       
 
     def printError(self):
         errorCompleto=" tipoError:"+str(self.tipoError)
-        errorCompleto+=" materia:"+self.cursada.materia.nombre
-        errorCompleto+=" curso:"+self.cursada.curso.nombre
+        errorCompleto+=" materia:"+self.cursada.identificador
         errorCompleto+=" profesor:"+self.profesor
         errorCompleto+=" dia:"+self.dia.name
-        #errorCompleto+=" horasMaximas:"+str(self.horasSemanales)
-        #errorCompleto+=" horasAsignadas:"+str(self.horasAsignadas)
+        errorCompleto+=" horasMaximas:"+str(self.horasSemanales)
+        errorCompleto+=" horasAsignadas:"+str(self.horasAsignadas)
         print(errorCompleto)

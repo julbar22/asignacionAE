@@ -26,21 +26,22 @@ class GeneticAlgorithmManager():
     def createStartingPopulation(self, populationQuantity: int, individualBase: Individual):
         population = list()
         for i in range(0, populationQuantity):
-            population.append(individualBase.createRamdomIndividual(individualBase,self.environment))
+            population.append(individualBase.createRamdomIndividual(self.environment))
         return population
 
     def run(self, populationQuantity: int, generations: int):        
         population = self.createStartingPopulation(populationQuantity, self.individualReference)
         for generarionIndex in range(0, generations):
-            self.calcularFitnessPopulation(population,self.individualReference)
+            self.calcularFitnessPopulation(population)
             population=self.selectionAlgorithm.select(population).copy()
             if self.mejorFitness>population[0].fitness:                
                 self.mejorFitness= population[0].fitness    
                 self.mejorIndividuo = copy.deepcopy(population[0])                    
             population=self.crossAlgorithm.crossPopulation(population,populationQuantity,self.environment).copy()
             population=self.mutationAlgorithm.mutationPopulation(population,self.environment).copy()
-            self.calcularFitnessPopulation(population,self.individualReference)            
+            self.calcularFitnessPopulation(population)            
             if self.mejorFitness==self.aptitudeThreshold:
+                self.mejorIndividuo.imprimirIndividuo()
                 print("termino el algoritmo")
                 break
             else:
@@ -48,9 +49,9 @@ class GeneticAlgorithmManager():
             self.finishActions.runFinishGenerationBlock(population,self.mejorFitness,self.mejorIndividuo)
         self.finishActions.runFinishRunBlock(population,self.mejorFitness,self.mejorIndividuo)
    
-    def calcularFitnessPopulation(self,poblacion,individualBase):
+    def calcularFitnessPopulation(self,poblacion):
         for individuo in poblacion:
-            individuo.calculateFitness(individualBase,self.environment)
+            individuo.calculateFitness()
     
     def improvementPopulation(self, population: List[Individual], environment):
         for individuo in population:

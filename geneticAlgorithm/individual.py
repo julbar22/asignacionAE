@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import List
 from marcoGenerico.Entidades import Schedule
+from marcoGenerico.Ambiente import AmbienteEspecificoTiempo
 
 
 class Individual(ABC):
@@ -9,22 +10,20 @@ class Individual(ABC):
     errores = []
     fitness: int = 0
 
-    def calculateFitness(self, individual, environment):
+
+    def calculateFitness(self):
         raise NotImplementedError
 
-    def createRamdomIndividual(self, individualBase, environment)->ABC:
+    def createRamdomIndividual(self, ambienteNuevo)->ABC:
         raise NotImplementedError
 
-    def createRandomIndividual(self,environment)->ABC:
-        raise NotImplementedError 
-
-    def mutate(self, index, environment)->ABC:
+    def mutate(self, index)->ABC:
         raise NotImplementedError
 
-    def cross(self, couple) -> List[ABC]:
+    def cross(self, couple,ambienteNuevo) -> List[ABC]:
         raise NotImplementedError
 
-    def improvement(self, environment) -> List[ABC]:
+    def improvement(self) -> List[ABC]:
         raise NotImplementedError
 
     def imprimirIndividuo(self):
@@ -35,4 +34,8 @@ class Individual(ABC):
 
 
 class IndividuoTiempo(Individual):
-    horario:Schedule
+    horario:Schedule=None
+    ambiente:AmbienteEspecificoTiempo=None
+    
+    def __init__(self, ambiente:AmbienteEspecificoTiempo):
+        self.horario:Schedule = Schedule(ambiente.horario)

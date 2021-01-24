@@ -1,4 +1,5 @@
-from marcoGenerico.Ambiente import AmbienteGeneral, AdminSolucion
+from marcoGenerico.Ambiente import AmbienteGeneral
+from marcoGenerico.AdminSolucion import AdminSolucion
 from geneticAlgorithm.selectionAlgorithm import SelectionAlgorithm
 from selectionAlgorithmImpl.selectionRanking import SelectionRanking
 from geneticAlgorithm.crossAlgorithm import CrossAlgorithm

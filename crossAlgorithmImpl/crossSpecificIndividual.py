@@ -12,6 +12,6 @@ class CrossSpecificIndividual(CrossAlgorithm):
         for _ in range(int((totalPopulation - len(population)) / 2)):
             parent1 = random.choice(population)
             parent2 = random.choice(population)
-            children = parent1.cross(parent2).copy()
+            children = parent1.cross(parent2,environment).copy()
             populationCopy.extend(children)
         return populationCopy

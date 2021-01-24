@@ -2,12 +2,7 @@ from typing import List, Optional, TypeVar, Dict, Generic
 from marcoGenerico.Recurso import Recurso, RecursoTiempo
 from marcoGenerico.Horarios import WeekDay, TimeTable
 from marcoGenerico.Entidades import Materia, Asignacion
-from geneticAlgorithm.selectionAlgorithm import SelectionAlgorithm
-from geneticAlgorithm.crossAlgorithm import CrossAlgorithm
-from geneticAlgorithm.mutationAlgorithm import MutationAlgorithm
-from geneticAlgorithm.geneticAlgorithmManager import GeneticAlgorithmManager
-from geneticAlgorithm.finishAction import FinishAction
-from modelSemanaEscolar.semanaEscolar import SemanaEscolar
+
 
 
 class AmbienteEspecificoTiempo:
@@ -17,6 +12,17 @@ class AmbienteEspecificoTiempo:
 
     def __init__(self):
         self.asignaciones = list()
+
+    def getRecursoPorTipoAndID(self, typeRecursoId:str, recursoId:str):
+        for typeRecurso in self.recursos:
+            if(typeRecurso == typeRecursoId):
+                listaRecusos:List[Recurso] = self.recursos[typeRecurso]
+                for recurso in listaRecusos:
+                    if recurso.identificador== recursoId:
+                        return recurso
+         
+        
+
 
 class AmbienteGeneral:
     recursos: Dict[str, List[Recurso]]
@@ -52,9 +58,9 @@ class AmbienteGeneral:
         danza1.addRecursoVinculado("Profesor", juan)
         ciencias1 = Materia("Ciencias1", 2, 1, 2)
         ciencias1.addRecursoVinculado("Profesor", nora)
-        lengua1 = Materia("Lengua1", 4, 1, 2)
+        lengua1 = Materia("Lengua1", 3, 1, 2)
         lengua1.addRecursoVinculado("Profesor", lucas)
-        sis1 = Materia("Sistemas1", 4, 1, 2)
+        sis1 = Materia("Sistemas1", 1, 1, 1)
         sis1.addRecursoVinculado("Profesor", luis)
         musica1 = Materia("Musica1", 3, 1, 2)
         musica1.addRecursoVinculado("Profesor", paola)
@@ -103,44 +109,4 @@ def monday_to_friday_from_7_to_13() -> TimeTable:
         day_from_7_to_13(WeekDay.THU),
         day_from_7_to_13(WeekDay.FRI)
     ])
-
-
-class AdminSolucion():
-    ambientes: List[AmbienteEspecificoTiempo]
-    iteraciones: int
-    aptitudFinal: int
-    cantidadIndividuos: int
-    selectionAlgorithm: SelectionAlgorithm
-    mutationAlgorithm: MutationAlgorithm
-    crossAlgorithm: CrossAlgorithm
-    finishAlgorithm: FinishAction
-
-    def __init__(self, ambientes: List[AmbienteEspecificoTiempo],
-                 iteraciones: int,
-                 aptitudFinal: int,
-                 cantidadIndividuos: int,
-                 selectionAlgorithm: SelectionAlgorithm,
-                 mutationAlgorithm: MutationAlgorithm,
-                 crossAlgorithm: CrossAlgorithm,
-                 finishAlgorithm:FinishAction):
-        self.iteraciones = iteraciones
-        self.ambientes = ambientes
-        self.aptitudFinal = aptitudFinal
-        self.cantidadIndividuos = cantidadIndividuos
-        self.selectionAlgorithm = selectionAlgorithm
-        self.mutationAlgorithm = mutationAlgorithm
-        self.crossAlgorithm = crossAlgorithm
-        self.finishAlgorithm = finishAlgorithm
-    
-
-    def runAlgotirmo(self):
-        for ambiente in self.ambientes:
-            GA = GeneticAlgorithmManager()
-            GA.selectionAlgorithm =self.selectionAlgorithm
-            GA.crossAlgorithm= self.crossAlgorithm
-            GA.mutationAlgorithm=self.mutationAlgorithm
-            GA.environment=ambiente
-            GA.finishActions = self.finishAlgorithm
-            GA.individualReference= SemanaEscolar()
-            GA.run(self.cantidadIndividuos,self.iteraciones)
   
