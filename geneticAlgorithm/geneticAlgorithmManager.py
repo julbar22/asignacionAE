@@ -36,7 +36,8 @@ class GeneticAlgorithmManager():
             population=self.selectionAlgorithm.select(population).copy()
             if self.mejorFitness>population[0].fitness:                
                 self.mejorFitness= population[0].fitness    
-                self.mejorIndividuo = copy.deepcopy(population[0])                    
+                self.mejorIndividuo = copy.deepcopy(population[0])   
+                print(population[0].fitness)                 
             population=self.crossAlgorithm.crossPopulation(population,populationQuantity,self.environment).copy()
             population=self.mutationAlgorithm.mutationPopulation(population,self.environment).copy()
             self.calcularFitnessPopulation(population)            

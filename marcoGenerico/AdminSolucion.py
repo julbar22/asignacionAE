@@ -6,6 +6,8 @@ from geneticAlgorithm.geneticAlgorithmManager import GeneticAlgorithmManager
 from geneticAlgorithm.finishAction import FinishAction
 from modelSemanaEscolar.semanaEscolar import SemanaEscolar
 from marcoGenerico.Ambiente import AmbienteEspecificoTiempo
+from marcoGenerico.Recurso import RecursoTiempo,Recurso
+from marcoGenerico.Horarios import TimeTable
 
 class AdminSolucion():
     ambientes: List[AmbienteEspecificoTiempo]
@@ -45,3 +47,13 @@ class AdminSolucion():
             GA.finishActions = self.finishAlgorithm
             GA.individualReference= SemanaEscolar(ambiente)
             GA.run(self.cantidadIndividuos,self.iteraciones)
+            self.updateRecursos(GA.mejorIndividuo.ambiente,ambiente)
+    
+    def updateRecursos(self,ambienteNuevo:AmbienteEspecificoTiempo,ambienteOld:AmbienteEspecificoTiempo):
+        for materia in ambienteNuevo.recursos["Materia"]:
+            profesorNuevo:RecursoTiempo =materia.recursosVinculados["Profesor"][0]
+            materiaOld=ambienteOld.getRecursoPorTipoAndID("Materia",materia.identificador)
+            profesorViejo:RecursoTiempo =  materiaOld.recursosVinculados["Profesor"][0]
+            timeTableNueva=profesorViejo.disponibilidad.intersection(profesorNuevo.disponibilidad)
+            profesorViejo.disponibilidad = TimeTable(timeTableNueva._open_slots)
+

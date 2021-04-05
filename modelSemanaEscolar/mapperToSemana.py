@@ -1,5 +1,4 @@
 import datetime
-from enums.diaSemana import DiaSemana
 import json
 from modelSemanaEscolar.dia import Dia
 from typing import List

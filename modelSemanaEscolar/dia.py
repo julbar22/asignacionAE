@@ -1,7 +1,5 @@
 from modelSemanaEscolar.horario import Horario
 from datetime import date
-from enums.diaSemana import DiaSemana
-from modelSemanaEscolar.escenario import Escenario
 import random
 from typing import List
 from modelSemanaEscolar.materia import Materia
@@ -14,11 +12,9 @@ from utils.horarioUtils import HorarioUtils
 
 class Dia:
 
-    fecha: DiaSemana = None
     horarios: List[Horario] = list()
 
-    def __init__(self, fecha: DiaSemana):
-        self.fecha = fecha
+    def __init__(self):
         self.horarios = []
         self.horasByCursada = {}
         self.horariosByCurso = {}
@@ -26,7 +22,7 @@ class Dia:
     def addHorario(self, horario: Horario):
         self.horarios.append(horario)
 
-    def asignarCursada(self, cursada: Cursada, environment: Escenario, horasCursadaFaltates: int) -> int:
+    def asignarCursada(self, cursada: Cursada, environment, horasCursadaFaltates: int) -> int:
         profesoresOpcionales: List[Profesor] = environment.getProfesoresByCursada(
             cursada)
         cantidadHoras = 0
@@ -142,7 +138,7 @@ class Dia:
                     return True
         return False
 
-    def replaceAleatoriaCursada(self, cursada: Cursada, environment: Escenario) -> Cursada:
+    def replaceAleatoriaCursada(self, cursada: Cursada, environment) -> Cursada:
         horario: Horario = random.choice(self.horarios)
         profesores = environment.getProfesoresByCursada(cursada)
         newAsignacion: Asignacion = Asignacion(profesores[0], cursada)
@@ -175,7 +171,7 @@ class Dia:
                 return tuple((hora, hora+1))
         return tuple((0, 0))
 
-    def removerCursada(self, cursada: Cursada, environment: Escenario):
+    def removerCursada(self, cursada: Cursada, environment):
         horarios = self.getHorariosPorCurso(cursada.curso.nombre)
         horarioTemp: Horario = None
         for horario in horarios:
