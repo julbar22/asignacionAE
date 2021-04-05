@@ -1,15 +1,7 @@
-from modelSemanaEscolar.dia import Dia
-from modelSemanaEscolar.asignacion import Asignacion
-from modelSemanaEscolar.horario import Horario
 from geneticAlgorithm.individual import IndividuoTiempo, Individual
 import random
-from modelSemanaEscolar.cursada import Cursada
 from typing import List, Optional, TypeVar, Dict, Generic
-from utils.horarioUtils import HorarioUtils
 from modelSemanaEscolar.mapperToSemana import MapperToSemana
-from modelSemanaEscolar.crossSemanaEscolar.factoryCrossSemana import FactoryCrossSemana
-from modelSemanaEscolar.crossSemanaEscolar.crossSemanaEnum import CrossSemanaEnum
-from modelSemanaEscolar.crossSemanaEscolar.crossSemana import CrossSemana
 import copy
 from modelSemanaEscolar.errorSemana import ErrorSemana
 from modelSemanaEscolar.profesor import Profesor
@@ -69,25 +61,6 @@ class SemanaEscolar(IndividuoTiempo):
                     self.errores.append(
                         "fuera de disponibilidad"+profesor.nombre+","+dia.fecha.name)
 
-    def horariosCruzados(self, horariosDia: List[Horario], tipo: str, dia):
-        horarios: list = list(map(
-            lambda horarioTemp: horarioTemp.horario, horariosDia))
-        for index1 in range(0, len(horarios)):
-            horario1 = horarios[index1]
-            for index2 in range((index1+1), len(horarios)):
-                horario2 = horarios[index2]
-                isCruzado = HorarioUtils.isCrossPoints(horario1, horario2)
-                if isCruzado:
-                    self.fitness += 1
-                    if tipo == "Profesor":
-                        error = ErrorSemana(
-                            2, horariosDia[index1].asignacion.cursada)
-                        error.dia = dia
-                    else:
-                        error = ErrorSemana(
-                            3, horariosDia[index1].asignacion.cursada)
-                        error.dia = dia
-                    self.errores.append(error)
 
     def createRamdomIndividual(self, ambienteNuevo: AmbienteEspecificoTiempo) -> Individual:
         nuevo = SemanaEscolar(ambienteNuevo)    

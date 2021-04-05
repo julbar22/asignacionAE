@@ -1,6 +1,5 @@
 import datetime
 import json
-from modelSemanaEscolar.dia import Dia
 from typing import List
 from marcoGenerico.Entidades import Asignacion
 

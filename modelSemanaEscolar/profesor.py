@@ -1,6 +1,3 @@
-from modelSemanaEscolar.cursada import Cursada
-
-
 class Profesor:
 
     materias = list()
@@ -12,8 +9,3 @@ class Profesor:
         self.materias = []
 
 
-    def getCursada(self, materia:str,curso:str):
-        for cursada in self.materias:
-            if cursada.materia.nombre== materia:
-                if cursada.curso.nombre== curso:
-                    return cursada
