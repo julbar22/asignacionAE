@@ -1,5 +1,5 @@
-from geneticAlgorithm.finishAction import FinishAction
-from geneticAlgorithm.individual import Individual
+from frameworkAG.geneticAlgorithm.finishAction import FinishAction
+from frameworkAG.geneticAlgorithm.individual import Individual
 from typing import List
 
 

@@ -1,12 +1,12 @@
 from abc import ABC, abstractmethod
-from geneticAlgorithm.selectionAlgorithm import SelectionAlgorithm
-from geneticAlgorithm.mutationAlgorithm import MutationAlgorithm
-from geneticAlgorithm.crossAlgorithm import CrossAlgorithm
-from geneticAlgorithm.individual import Individual
+from frameworkAG.geneticAlgorithm.selectionAlgorithm import SelectionAlgorithm
+from frameworkAG.geneticAlgorithm.mutationAlgorithm import MutationAlgorithm
+from frameworkAG.geneticAlgorithm.crossAlgorithm import CrossAlgorithm
+from frameworkAG.geneticAlgorithm.individual import Individual
 from typing import List
 import json
 import copy
-from geneticAlgorithm.finishAction import FinishAction
+from frameworkAG.geneticAlgorithm.finishAction import FinishAction
 
 
 class GeneticAlgorithmManager():

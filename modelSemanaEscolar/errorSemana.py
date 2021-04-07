@@ -1,5 +1,5 @@
-from marcoGenerico.Entidades import Materia
-from marcoGenerico.Horarios import WeekDay
+from modelSemanaEscolar.resourcesSemana import Materia
+from frameworkAG.Horarios import WeekDay
 
 class ErrorSemana():
 

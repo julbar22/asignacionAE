@@ -1,7 +1,8 @@
 from typing import List, Optional, TypeVar, Dict, Generic
-from marcoGenerico.Recurso import Recurso, RecursoTiempo
-from marcoGenerico.Horarios import WeekDay, TimeTable
-from marcoGenerico.Entidades import Materia, Asignacion
+from frameworkAG.Recurso import Recurso, RecursoTiempo
+from frameworkAG.Horarios import WeekDay, TimeTable
+from frameworkAG.Entidades import Asignacion
+from modelSemanaEscolar.resourcesSemana import Materia
 
 
 

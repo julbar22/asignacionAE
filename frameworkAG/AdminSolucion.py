@@ -1,13 +1,13 @@
 from typing import List, Optional, TypeVar, Dict, Generic
-from geneticAlgorithm.selectionAlgorithm import SelectionAlgorithm
-from geneticAlgorithm.crossAlgorithm import CrossAlgorithm
-from geneticAlgorithm.mutationAlgorithm import MutationAlgorithm
-from geneticAlgorithm.geneticAlgorithmManager import GeneticAlgorithmManager
-from geneticAlgorithm.finishAction import FinishAction
+from frameworkAG.geneticAlgorithm.selectionAlgorithm import SelectionAlgorithm
+from frameworkAG.geneticAlgorithm.crossAlgorithm import CrossAlgorithm
+from frameworkAG.geneticAlgorithm.mutationAlgorithm import MutationAlgorithm
+from frameworkAG.geneticAlgorithm.geneticAlgorithmManager import GeneticAlgorithmManager
+from frameworkAG.geneticAlgorithm.finishAction import FinishAction
 from modelSemanaEscolar.semanaEscolar import SemanaEscolar
-from marcoGenerico.Ambiente import AmbienteEspecificoTiempo
-from marcoGenerico.Recurso import RecursoTiempo,Recurso
-from marcoGenerico.Horarios import TimeTable
+from frameworkAG.Ambiente import AmbienteEspecificoTiempo
+from frameworkAG.Recurso import RecursoTiempo,Recurso
+from frameworkAG.Horarios import TimeTable
 
 class AdminSolucion():
     ambientes: List[AmbienteEspecificoTiempo]
