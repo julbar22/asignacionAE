@@ -4,7 +4,7 @@ from frameworkAG.geneticAlgorithm.crossAlgorithm import CrossAlgorithm
 from frameworkAG.geneticAlgorithm.mutationAlgorithm import MutationAlgorithm
 from frameworkAG.geneticAlgorithm.geneticAlgorithmManager import GeneticAlgorithmManager
 from frameworkAG.geneticAlgorithm.finishAction import FinishAction
-from modelSemanaEscolar.semanaEscolar import SemanaEscolar
+from schoolSchedule.semanaEscolar import SemanaEscolar
 from frameworkAG.Ambiente import AmbienteEspecificoTiempo
 from frameworkAG.Recurso import RecursoTiempo,Recurso
 from frameworkAG.Horarios import TimeTable
@@ -49,6 +49,7 @@ class AdminSolucion():
             GA.run(self.cantidadIndividuos,self.iteraciones)
             self.updateRecursos(GA.mejorIndividuo.ambiente,ambiente)
     
+    #TODO: esto se debe sacar porque es especifico de cada problema
     def updateRecursos(self,ambienteNuevo:AmbienteEspecificoTiempo,ambienteOld:AmbienteEspecificoTiempo):
         for materia in ambienteNuevo.recursos["Materia"]:
             profesorNuevo:RecursoTiempo =materia.recursosVinculados["Profesor"][0]

@@ -1,4 +1,4 @@
-from modelSemanaEscolar.resourcesSemana import Materia
+from schoolSchedule.resourcesSemana import Materia
 from frameworkAG.Horarios import WeekDay
 
 class ErrorSemana():

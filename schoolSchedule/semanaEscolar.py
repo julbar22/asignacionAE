@@ -1,15 +1,15 @@
 from frameworkAG.geneticAlgorithm.individual import IndividuoTiempo, Individual
 import random
 from typing import List, Optional, TypeVar, Dict, Generic
-from modelSemanaEscolar.mapperToSemana import MapperToSemana
+from schoolSchedule.mapperToSemana import MapperToSemana
 import copy
-from modelSemanaEscolar.errorSemana import ErrorSemana
-from modelSemanaEscolar.profesor import Profesor
+from schoolSchedule.errorSemana import ErrorSemana
+from schoolSchedule.profesor import Profesor
 from frameworkAG.Ambiente import AmbienteEspecificoTiempo
 from frameworkAG.Recurso import Recurso, RecursoTiempo
 from frameworkAG.Entidades import Asignacion
 from frameworkAG.Horarios import TimeTable, TimeSlot
-from modelSemanaEscolar.resourcesSemana import Materia
+from schoolSchedule.resourcesSemana import Materia
 
 
 class SemanaEscolar(IndividuoTiempo):
