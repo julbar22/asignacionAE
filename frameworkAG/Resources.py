@@ -1,7 +1,7 @@
 from __future__ import annotations
 from dataclasses import dataclass
 from typing import List, Optional, TypeVar, Dict, Generic
-from frameworkAG.Horarios import TimeTable
+from frameworkAG.ScheduleUtils import TimeTable
 
 class Recurso():
     recursosVinculados:Dict[str,List[Recurso]]

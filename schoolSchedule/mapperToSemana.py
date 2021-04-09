@@ -1,7 +1,7 @@
 import datetime
 import json
 from typing import List
-from frameworkAG.Entidades import Asignacion
+from frameworkAG.Entities import Asignacion
 
 class MapperToSemana():
     

@@ -1,5 +1,5 @@
-from frameworkAG.Recurso import Recurso, RecursoTiempo
-from frameworkAG.Horarios import TimeSlot, TimeTable
+from frameworkAG.Resources import Recurso, RecursoTiempo
+from frameworkAG.ScheduleUtils import TimeSlot, TimeTable
 from typing import List, Optional, TypeVar, Dict, Generic
 
 class Asignacion:

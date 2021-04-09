@@ -1,5 +1,5 @@
 from schoolSchedule.resourcesSemana import Materia
-from frameworkAG.Horarios import WeekDay
+from frameworkAG.ScheduleUtils import WeekDay
 
 class ErrorSemana():
 

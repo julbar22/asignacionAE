@@ -19,5 +19,4 @@ class FinishBestIndividualImpl(FinishAction):
             print("---------------------------")
 
     def runFinishRunBlock(self, population: List[Individual], mejorFitness: int, mejorIndividuo: Individual):
-        #mejorIndividuo.imprimirIndividuo()
-        print(self.mejorFitness)
+        pass

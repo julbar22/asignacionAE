@@ -1,7 +1,7 @@
-from frameworkAG.Ambiente import AmbienteGeneral, AmbienteEspecificoTiempo
+from frameworkAG.Environments import AmbienteGeneral, AmbienteEspecificoTiempo
 from typing import List, Optional, TypeVar, Dict, Generic
-from frameworkAG.Recurso import Recurso, RecursoTiempo
-from frameworkAG.Horarios import WeekDay, TimeTable
+from frameworkAG.Resources import Recurso, RecursoTiempo
+from frameworkAG.ScheduleUtils import WeekDay, TimeTable
 from schoolSchedule.resourcesSemana import Materia
 
 class EnvironmentSchool(AmbienteGeneral):
@@ -211,6 +211,17 @@ class EnvironmentSchool(AmbienteGeneral):
             ambienteCurso.horario = monday_to_friday_from_7_to_13()
             ambientes.append(ambienteCurso)
         return ambientes
+
+    def updateEnvironment(self,newEnvironment:AmbienteGeneral):
+        for materia in newEnvironment.recursos["Materia"]:
+            profesorNuevo: RecursoTiempo = materia.recursosVinculados["Profesor"][0]
+            materiaOld = self.getRecursoPorTipoAndID(
+                "Materia", materia.identificador)
+            profesorViejo: RecursoTiempo = materiaOld.recursosVinculados["Profesor"][0]
+            timeTableNueva = profesorViejo.disponibilidad.intersection(
+                profesorNuevo.disponibilidad)
+            profesorViejo.disponibilidad = TimeTable(
+                timeTableNueva._open_slots)
 
 
 def day_from_7_to_13(week_day: WeekDay) -> TimeTable:

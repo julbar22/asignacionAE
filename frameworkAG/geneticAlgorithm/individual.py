@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import List
-from frameworkAG.Entidades import Schedule
-from frameworkAG.Ambiente import AmbienteEspecificoTiempo
+from frameworkAG.Entities import Schedule
+from frameworkAG.Environments import AmbienteEspecificoTiempo
 
 
 class Individual(ABC):

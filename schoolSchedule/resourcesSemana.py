@@ -1,4 +1,4 @@
-from frameworkAG.Recurso import Recurso, RecursoTiempo
+from frameworkAG.Resources import Recurso, RecursoTiempo
 
 class Materia(Recurso):
     horasSemanales = 0

@@ -1,4 +1,4 @@
-from frameworkAG.AdminSolucion import AdminSolucion
+from frameworkAG.StandardSolver import StandardSolver
 from frameworkAG.geneticAlgorithm.selectionAlgorithm import SelectionAlgorithm
 from frameworkAG.geneticAlgorithm.stagesGeneticAlgorithmImpl.selectionAlgorithmImpl.selectionRanking import SelectionRanking
 from frameworkAG.geneticAlgorithm.crossAlgorithm import CrossAlgorithm
@@ -8,6 +8,8 @@ from frameworkAG.geneticAlgorithm.stagesGeneticAlgorithmImpl.mutateAlgorithmImpl
 from frameworkAG.geneticAlgorithm.stagesGeneticAlgorithmImpl.finishActionImpl.finishBestIndividualImpl import FinishBestIndividualImpl
 from frameworkAG.geneticAlgorithm.finishAction import FinishAction
 from schoolSchedule.environmentSchool import EnvironmentSchool
+from frameworkAG.geneticAlgorithm.geneticAlgorithmManager import GeneticAlgorithmManager
+from schoolSchedule.semanaEscolar import SemanaEscolar
 
 
 def run2():
@@ -17,8 +19,17 @@ def run2():
     finishAction: FinishAction = FinishBestIndividualImpl()
     ambiente: EnvironmentSchool = EnvironmentSchool()
     ambientesPorCurso = ambiente.getAbientePorCurso()
-    admin: AdminSolucion = AdminSolucion(ambientes=ambientesPorCurso, iteraciones=1000, aptitudFinal=0, cantidadIndividuos=20,
-                                         selectionAlgorithm=selection, mutationAlgorithm=mutation, crossAlgorithm=cross, finishAlgorithm=finishAction)
+    GA = GeneticAlgorithmManager()
+    GA.selectionAlgorithm = selection
+    GA.crossAlgorithm = cross
+    GA.mutationAlgorithm = mutation
+    GA.finishActions = finishAction
+    admin: StandardSolver = StandardSolver(ambientes=ambientesPorCurso,
+                                           iteraciones=1000,
+                                           aptitudFinal=0,
+                                           cantidadIndividuos=20,
+                                           geneticAlgorithm=GA,
+                                           classReference=SemanaEscolar)
     admin.runAlgotirmo()
 
 

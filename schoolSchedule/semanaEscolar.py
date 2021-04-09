@@ -5,10 +5,10 @@ from schoolSchedule.mapperToSemana import MapperToSemana
 import copy
 from schoolSchedule.errorSemana import ErrorSemana
 from schoolSchedule.profesor import Profesor
-from frameworkAG.Ambiente import AmbienteEspecificoTiempo
-from frameworkAG.Recurso import Recurso, RecursoTiempo
-from frameworkAG.Entidades import Asignacion
-from frameworkAG.Horarios import TimeTable, TimeSlot
+from frameworkAG.Environments import AmbienteEspecificoTiempo
+from frameworkAG.Resources import Recurso, RecursoTiempo
+from frameworkAG.Entities import Asignacion
+from frameworkAG.ScheduleUtils import TimeTable, TimeSlot
 from schoolSchedule.resourcesSemana import Materia
 
 

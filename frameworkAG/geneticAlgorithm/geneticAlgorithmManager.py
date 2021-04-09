@@ -23,6 +23,13 @@ class GeneticAlgorithmManager():
     def __init__(self):
         pass
 
+    def cleanSolution(self):
+        self.individualReference = None
+        self.environment= None
+        self.mejorFitness=1000
+        self.mejorIndividuo=None
+
+
     def createStartingPopulation(self, populationQuantity: int, individualBase: Individual):
         population = list()
         for i in range(0, populationQuantity):
@@ -37,7 +44,7 @@ class GeneticAlgorithmManager():
             if self.mejorFitness>population[0].fitness:                
                 self.mejorFitness= population[0].fitness    
                 self.mejorIndividuo = copy.deepcopy(population[0])   
-                print(population[0].fitness)                 
+                #print(population[0].fitness)                 
             population=self.crossAlgorithm.crossPopulation(population,populationQuantity,self.environment).copy()
             population=self.mutationAlgorithm.mutationPopulation(population,self.environment).copy()
             self.calcularFitnessPopulation(population)            
