@@ -1,10 +1,10 @@
-from frameworkAG.Environments import AmbienteGeneral, AmbienteEspecificoTiempo
+from frameworkAG.Environments import GeneralEnvironment, AmbienteEspecificoTiempo
 from typing import List, Optional, TypeVar, Dict, Generic
 from frameworkAG.Resources import Recurso, RecursoTiempo
 from frameworkAG.ScheduleUtils import WeekDay, TimeTable
 from schoolSchedule.resourcesSemana import Materia
 
-class EnvironmentSchool(AmbienteGeneral):
+class EnvironmentSchool(GeneralEnvironment):
     
     def __init__(self):
         super(EnvironmentSchool,self).__init__()
@@ -212,7 +212,7 @@ class EnvironmentSchool(AmbienteGeneral):
             ambientes.append(ambienteCurso)
         return ambientes
 
-    def updateEnvironment(self,newEnvironment:AmbienteGeneral):
+    def updateEnvironment(self,newEnvironment:GeneralEnvironment):
         for materia in newEnvironment.recursos["Materia"]:
             profesorNuevo: RecursoTiempo = materia.recursosVinculados["Profesor"][0]
             materiaOld = self.getRecursoPorTipoAndID(

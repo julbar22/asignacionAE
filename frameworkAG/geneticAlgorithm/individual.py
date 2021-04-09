@@ -26,7 +26,7 @@ class Individual(ABC):
     def improvement(self) -> List[ABC]:
         raise NotImplementedError
 
-    def imprimirIndividuo(self):
+    def printIndividual(self):
         raise NotImplementedError
 
     def imprimirErrores(self):
@@ -35,7 +35,7 @@ class Individual(ABC):
 
 class IndividuoTiempo(Individual):
     horario:Schedule=None
-    ambiente:AmbienteEspecificoTiempo=None
+    environment:AmbienteEspecificoTiempo=None
     
-    def __init__(self, ambiente:AmbienteEspecificoTiempo):
-        self.horario:Schedule = Schedule(ambiente.horario)
+    def __init__(self, environment:AmbienteEspecificoTiempo):
+        self.horario:Schedule = Schedule(environment.horario)

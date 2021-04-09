@@ -14,12 +14,12 @@ from schoolSchedule.resourcesSemana import Materia
 
 class SemanaEscolar(IndividuoTiempo):
 
-    def __init__(self, ambiente: AmbienteEspecificoTiempo):
-        self.ambiente: AmbienteEspecificoTiempo = copy.deepcopy(ambiente)
+    def __init__(self, environment: AmbienteEspecificoTiempo):
+        self.environment: AmbienteEspecificoTiempo = copy.deepcopy(environment)
         self.cromosoma = []
         self.fitness = 0
         self.errores = []
-        super(SemanaEscolar, self).__init__(self.ambiente)
+        super(SemanaEscolar, self).__init__(self.environment)
 
     def calculateFitness(self):
         self.fitness = 0
@@ -27,10 +27,10 @@ class SemanaEscolar(IndividuoTiempo):
         self.evaluarHorasCursada()
 
     def evaluarHorasCursada(self):
-        for cursada in self.ambiente.recursos["Materia"]:
+        for cursada in self.environment.recursos["Materia"]:
             asignaciones: List[Asignacion] = self.horario.getAsignacionesByRecurso(
                 cursada.identificador)
-            for dia in self.ambiente.horario.week_days():
+            for dia in self.environment.horario.week_days():
                 asinacionByDia = list(filter(
                     lambda asignacion: asignacion.espacioTiempo.week_day == dia, asignaciones))
                 horasDia = len(asinacionByDia)
@@ -65,9 +65,9 @@ class SemanaEscolar(IndividuoTiempo):
 
     def createRamdomIndividual(self, ambienteNuevo: AmbienteEspecificoTiempo) -> Individual:
         nuevo = SemanaEscolar(ambienteNuevo)
-        nuevo.completarCursadas(nuevo.ambiente.recursos["Materia"])
+        nuevo.completarCursadas(nuevo.environment.recursos["Materia"])
         #nuevo.calculateFitness(individualBase, environment)
-        # nuevo.imprimirIndividuo()
+        # nuevo.printIndividual()
         return nuevo
 
     def mutate(self, index, environment: AmbienteEspecificoTiempo) -> Individual:
@@ -111,7 +111,7 @@ class SemanaEscolar(IndividuoTiempo):
     def agregarAsignacionCross(self, asignacionNueva: Asignacion):
         self.horario.agregarAsignacion(
             asignacionNueva.espacioTiempo, copy.deepcopy(asignacionNueva))
-        materia: Materia = self.ambiente.getRecursoPorTipoAndID(
+        materia: Materia = self.environment.getRecursoPorTipoAndID(
             "Materia", asignacionNueva.listaRecursoId[0])
         profesor: RecursoTiempo = materia.recursosVinculados["Profesor"][0]
         profesor.disponibilidad._open_slots.remove(
@@ -143,7 +143,7 @@ class SemanaEscolar(IndividuoTiempo):
                 else:
                     break
 
-    def imprimirIndividuo(self):
+    def printIndividual(self):
         MapperToSemana.mapperSemana(self.horario.datos)
 
     def imprimirErrores(self):

@@ -17,20 +17,20 @@ def run2():
     cross: CrossAlgorithm = CrossSpecificIndividual()
     mutation: MutationAlgorithm = MutateRandomPoints()
     finishAction: FinishAction = FinishBestIndividualImpl()
-    ambiente: EnvironmentSchool = EnvironmentSchool()
-    ambientesPorCurso = ambiente.getAbientePorCurso()
+    environment: EnvironmentSchool = EnvironmentSchool()
+    ambientesPorCurso = environment.getAbientePorCurso()
     GA = GeneticAlgorithmManager()
     GA.selectionAlgorithm = selection
     GA.crossAlgorithm = cross
     GA.mutationAlgorithm = mutation
     GA.finishActions = finishAction
-    admin: StandardSolver = StandardSolver(ambientes=ambientesPorCurso,
-                                           iteraciones=1000,
-                                           aptitudFinal=0,
-                                           cantidadIndividuos=20,
+    admin: StandardSolver = StandardSolver(environments=ambientesPorCurso,
+                                           iterations=1000,
+                                           finalFitness=0,
+                                           quantityIndividuals=20,
                                            geneticAlgorithm=GA,
                                            classReference=SemanaEscolar)
-    admin.runAlgotirmo()
+    admin.runAlgorithm()
 
 
 if __name__ == '__main__':

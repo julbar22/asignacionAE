@@ -1,35 +1,35 @@
 from typing import List, Optional, TypeVar, Dict, Generic,Type
 from frameworkAG.geneticAlgorithm.geneticAlgorithmManager import GeneticAlgorithmManager
-from frameworkAG.Environments import AmbienteGeneral
+from frameworkAG.Environments import GeneralEnvironment
 
 _T = TypeVar('_T')
 
 class StandardSolver():
-    ambientes: List[AmbienteGeneral]
-    iteraciones: int
-    aptitudFinal: int
-    cantidadIndividuos: int
+    environments: List[GeneralEnvironment]
+    iterations: int
+    finalFitness: int
+    quantityIndividuals: int
     geneticAlgorithm: GeneticAlgorithmManager
     classReference:Type[_T]
     def __init__(self,
-                 ambientes: List[AmbienteGeneral],
-                 iteraciones: int,
-                 aptitudFinal: int,
-                 cantidadIndividuos: int,
+                 environments: List[GeneralEnvironment],
+                 iterations: int,
+                 finalFitness: int,
+                 quantityIndividuals: int,
                  geneticAlgorithm: GeneticAlgorithmManager,
                  classReference: Type[_T]):
-        self.iteraciones = iteraciones
-        self.ambientes = ambientes
-        self.aptitudFinal = aptitudFinal
-        self.cantidadIndividuos = cantidadIndividuos
+        self.iterations = iterations
+        self.environments = environments
+        self.finalFitness = finalFitness
+        self.quantityIndividuals = quantityIndividuals
         self.geneticAlgorithm = geneticAlgorithm
         self.classReference = classReference
 
-    def runAlgotirmo(self):
-        for ambiente in self.ambientes:            
+    def runAlgorithm(self):
+        for environment in self.environments:            
             self.geneticAlgorithm.cleanSolution()
-            self.geneticAlgorithm.environment = ambiente
-            self.geneticAlgorithm.individualReference = self.classReference(ambiente)
-            self.geneticAlgorithm.run(self.cantidadIndividuos, self.iteraciones)
-            ambiente.updateEnvironment(self.geneticAlgorithm.mejorIndividuo.ambiente)
-            #self.updateRecursos(self.geneticAlgorithm.mejorIndividuo.ambiente, ambiente)
+            self.geneticAlgorithm.environment = environment
+            self.geneticAlgorithm.individualReference = self.classReference(environment)
+            self.geneticAlgorithm.run(self.quantityIndividuals, self.iterations)
+            environment.updateEnvironment(self.geneticAlgorithm.bestIndividual.environment)
+            #self.updateRecursos(self.geneticAlgorithm.bestIndividual.environment, environment)

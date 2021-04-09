@@ -5,7 +5,7 @@ from frameworkAG.Entities import Asignacion
 from schoolSchedule.resourcesSemana import Materia
 
 
-class AmbienteGeneral():
+class GeneralEnvironment():
     recursos: Dict[str, List[Recurso]]
     asignaciones: List[Asignacion]
 
@@ -25,7 +25,7 @@ class AmbienteGeneral():
         pass
 
 
-class AmbienteEspecificoTiempo(AmbienteGeneral):
+class AmbienteEspecificoTiempo(GeneralEnvironment):
     horario: TimeTable
     recursos: Dict[str, List[Recurso]]
 

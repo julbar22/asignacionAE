@@ -5,18 +5,18 @@ from typing import List
 
 class FinishBestIndividualImpl(FinishAction):
 
-    mejorFitness: int
+    bestFitness: int
 
     def __init__(self):
         # TODO cambiar ese numero enviarlo por parametro
-        self.mejorFitness = 1000
+        self.bestFitness = 1000
 
-    def runFinishGenerationBlock(self, population: List[Individual], mejorFitness: int, mejorIndividuo: Individual):
-        if self.mejorFitness > mejorFitness:
-            self.mejorFitness = mejorFitness      
-            print(self.mejorFitness)      
-            mejorIndividuo.imprimirErrores()
+    def runFinishGenerationBlock(self, population: List[Individual], bestFitness: int, bestIndividual: Individual):
+        if self.bestFitness > bestFitness:
+            self.bestFitness = bestFitness      
+            print(self.bestFitness)      
+            bestIndividual.imprimirErrores()
             print("---------------------------")
 
-    def runFinishRunBlock(self, population: List[Individual], mejorFitness: int, mejorIndividuo: Individual):
+    def runFinishRunBlock(self, population: List[Individual], bestFitness: int, bestIndividual: Individual):
         pass
