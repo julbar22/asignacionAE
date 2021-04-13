@@ -3,23 +3,23 @@ from dataclasses import dataclass
 from typing import List, Optional, TypeVar, Dict, Generic
 from frameworkAG.ScheduleUtils import TimeTable
 
-class Recurso():
-    recursosVinculados:Dict[str,List[Recurso]]
-    identificador:str
+class Resource():
+    linkedResources:Dict[str,List[Resource]]
+    identifier:str
 
-    def __init__(self, identificador:str):
-        self.identificador=identificador
-        self.recursosVinculados = {}
+    def __init__(self, identifier:str):
+        self.identifier=identifier
+        self.linkedResources = {}
 
-    def addTipoRecursosVinculados(self, tipoRecurso:str):
-        if tipoRecurso not in self.recursosVinculados:
-            self.recursosVinculados[tipoRecurso]=list()
+    def addTypeResourcesLinked(self, typeResource:str):
+        if typeResource not in self.linkedResources:
+            self.linkedResources[typeResource]=list()
     
-    def addRecursoVinculado(self, tipoRecurso:str, recurso: Recurso):
-        self.addTipoRecursosVinculados(tipoRecurso)
-        self.recursosVinculados[tipoRecurso].append(recurso)
+    def addResourceLinked(self, typeResource:str, resource: Resource):
+        self.addTypeResourcesLinked(typeResource)
+        self.linkedResources[typeResource].append(resource)
 
-class RecursoTiempo(Recurso):
-    disponibilidad:TimeTable
+class ResourceTime(Resource):
+    availability:TimeTable
         
 

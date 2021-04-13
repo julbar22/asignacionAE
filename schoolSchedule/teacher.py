@@ -1,7 +1,7 @@
 class Profesor:
 
     materias = list()
-    disponibilidad = None
+    availability = None
     nombre: ""
 
     def __init__(self, nombre):

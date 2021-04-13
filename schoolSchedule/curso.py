@@ -1,8 +1,8 @@
 class Curso:
 
     nombre = ""
-    cursadas = list()
+    subjects = list()
 
     def __init__(self, nombre: str):
         self.nombre = nombre
-        self.cursadas = []
+        self.subjects = []

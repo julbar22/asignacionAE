@@ -9,7 +9,7 @@ from frameworkAG.geneticAlgorithm.stagesGeneticAlgorithmImpl.finishActionImpl.fi
 from frameworkAG.geneticAlgorithm.finishAction import FinishAction
 from schoolSchedule.environmentSchool import EnvironmentSchool
 from frameworkAG.geneticAlgorithm.geneticAlgorithmManager import GeneticAlgorithmManager
-from schoolSchedule.semanaEscolar import SemanaEscolar
+from schoolSchedule.schoolWeek import SchoolWeek
 
 
 def run2():
@@ -29,7 +29,7 @@ def run2():
                                            finalFitness=0,
                                            quantityIndividuals=20,
                                            geneticAlgorithm=GA,
-                                           classReference=SemanaEscolar)
+                                           classReference=SchoolWeek)
     admin.runAlgorithm()
 
 

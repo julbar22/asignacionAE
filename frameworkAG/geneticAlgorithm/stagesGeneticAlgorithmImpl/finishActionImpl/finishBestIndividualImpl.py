@@ -15,7 +15,7 @@ class FinishBestIndividualImpl(FinishAction):
         if self.bestFitness > bestFitness:
             self.bestFitness = bestFitness      
             print(self.bestFitness)      
-            bestIndividual.imprimirErrores()
+            bestIndividual.printErrors()
             print("---------------------------")
 
     def runFinishRunBlock(self, population: List[Individual], bestFitness: int, bestIndividual: Individual):

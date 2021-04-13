@@ -12,13 +12,13 @@ class CrossMultiplePoint(CrossAlgorithm):
             parent2 = random.choice(population)
             child1 =  parent1.createRamdomIndividual(parent1,environment)
             child2 =  parent2.createRamdomIndividual(parent2,environment)
-            for idx in range(0,len(parent1.cromosoma)):
+            for idx in range(0,len(parent1.chromosome)):
                 if random.uniform(0.0, 1.0) <= 0.5:
-                    child1.cromosoma[idx]=parent1.cromosoma[idx]
-                    child2.cromosoma[idx]=parent2.cromosoma[idx]
+                    child1.chromosome[idx]=parent1.chromosome[idx]
+                    child2.chromosome[idx]=parent2.chromosome[idx]
                 else:
-                    child1.cromosoma[idx]=parent2.cromosoma[idx]
-                    child2.cromosoma[idx]=parent1.cromosoma[idx]
+                    child1.chromosome[idx]=parent2.chromosome[idx]
+                    child2.chromosome[idx]=parent1.chromosome[idx]
             offspring.append(child1)
             offspring.append(child2)
 

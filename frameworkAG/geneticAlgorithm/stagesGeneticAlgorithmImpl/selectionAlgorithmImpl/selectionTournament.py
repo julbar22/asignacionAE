@@ -4,16 +4,16 @@ from typing import List
 import random
 
 
-class SelectionTorneo(SelectionAlgorithm):
+class SelectionTournament(SelectionAlgorithm):
 
-    cantidadIndividuos: int=10
+    quantityIndividuals: int=10
 
-    def __init__(self, cantidadIndividuos):
-        self.cantidadIndividuos=cantidadIndividuos
+    def __init__(self, quantityIndividuals):
+        self.quantityIndividuals=quantityIndividuals
 
     def select(self, population: List[Individual])->List[Individual]:
         arraySelect=population.copy()
-        while len(arraySelect)>self.cantidadIndividuos:
+        while len(arraySelect)>self.quantityIndividuals:
             for index in range(0,int(len(population)/2)):
                 if population[index].fitness>population[len(population)-(index+1)].fitness:
                     arraySelect.pop(index)

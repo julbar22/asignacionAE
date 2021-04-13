@@ -1,13 +1,13 @@
 from abc import ABC, abstractmethod
 from typing import List
 from frameworkAG.Entities import Schedule
-from frameworkAG.Environments import AmbienteEspecificoTiempo
+from frameworkAG.Environments import EnvironmentTime
 
 
 class Individual(ABC):
 
-    cromosoma = []
-    errores = []
+    chromosome = []
+    mistakes = []
     fitness: int = 0
 
 
@@ -29,13 +29,13 @@ class Individual(ABC):
     def printIndividual(self):
         raise NotImplementedError
 
-    def imprimirErrores(self):
+    def printErrors(self):
         raise NotImplementedError
 
 
-class IndividuoTiempo(Individual):
-    horario:Schedule=None
-    environment:AmbienteEspecificoTiempo=None
+class IndividualTime(Individual):
+    timetable:Schedule=None
+    environment:EnvironmentTime=None
     
-    def __init__(self, environment:AmbienteEspecificoTiempo):
-        self.horario:Schedule = Schedule(environment.horario)
+    def __init__(self, environment:EnvironmentTime):
+        self.timetable:Schedule = Schedule(environment.timetable)

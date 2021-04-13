@@ -1,33 +1,33 @@
-from frameworkAG.Resources import Recurso, RecursoTiempo
+from frameworkAG.Resources import Resource, ResourceTime
 from frameworkAG.ScheduleUtils import TimeSlot, TimeTable
 from typing import List, Optional, TypeVar, Dict, Generic
 
-class Asignacion:
-    espacioTiempo: TimeSlot
-    listaRecursoId: List[str]
+class Assignment:
+    timeSlot: TimeSlot
+    listResourceId: List[str]
 
     def __init__(self):
-        self.listaRecursoId= list()
+        self.listResourceId= list()
     
-    def containRecurso(self, recursoId:str)-> bool:
-        return True if recursoId in self.listaRecursoId else False
+    def containResource(self, resourceId:str)-> bool:
+        return True if resourceId in self.listResourceId else False
 
 
 class Schedule:
-    datos: List[Asignacion]
-    datosPorEspacio: Dict[TimeSlot, Asignacion]
-    horario: TimeTable
+    data: List[Assignment]
+    dataByTimeSlot: Dict[TimeSlot, Assignment]
+    timetable: TimeTable
 
-    def __init__(self, horario:TimeTable):
+    def __init__(self, timetable:TimeTable):
         #Revisar si necesito un copy
-        self.datos= list()
-        self.datosPorEspacio={}
-        self.horario = TimeTable(horario._open_slots)
+        self.data= list()
+        self.dataByTimeSlot={}
+        self.timetable = TimeTable(timetable._open_slots)
 
-    def agregarAsignacion(self, timeSlot:TimeSlot,asignacion: Asignacion):
-        self.datos.append(asignacion)
-        self.datosPorEspacio[timeSlot]=asignacion
-        self.horario._open_slots.remove(timeSlot)
+    def addAssignment(self, timeSlot:TimeSlot,assignment: Assignment):
+        self.data.append(assignment)
+        self.dataByTimeSlot[timeSlot]=assignment
+        self.timetable._open_slots.remove(timeSlot)
         
-    def getAsignacionesByRecurso(self,recursoId)->List[Asignacion]:
-        return list(filter(lambda asignacion: asignacion.containRecurso(recursoId),self.datos))
+    def getAssignmentsByResource(self,resourceId)->List[Assignment]:
+        return list(filter(lambda assignment: assignment.containResource(resourceId),self.data))

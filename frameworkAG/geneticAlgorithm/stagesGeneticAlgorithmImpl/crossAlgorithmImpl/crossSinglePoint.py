@@ -12,9 +12,9 @@ class CrossSinglePoint(CrossAlgorithm):
             parent2 = random.choice(population)
             child1 =  parent1.createRamdomIndividual(parent1,environment)
             child2 =  parent2.createRamdomIndividual(parent2,environment)
-            split = random.randint(0, len(parent1.cromosoma))
-            child1.cromosoma = parent1.cromosoma[0:split] + parent2.cromosoma[split:len(parent1.cromosoma)]
-            child2.cromosoma = parent2.cromosoma[0:split] + parent1.cromosoma[split:len(parent1.cromosoma)]
+            split = random.randint(0, len(parent1.chromosome))
+            child1.chromosome = parent1.chromosome[0:split] + parent2.chromosome[split:len(parent1.chromosome)]
+            child2.chromosome = parent2.chromosome[0:split] + parent1.chromosome[split:len(parent1.chromosome)]
             offspring.append(child1)
             offspring.append(child2)
 

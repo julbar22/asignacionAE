@@ -1,12 +1,12 @@
-from frameworkAG.Resources import Recurso, RecursoTiempo
+from frameworkAG.Resources import Resource, ResourceTime
 
-class Materia(Recurso):
-    horasSemanales = 0
+class Subject(Resource):
+    weeklyHours = 0
     horasMinimasCons = 0
-    horasMaximasCons = 0
+    maxConsecutiveHours = 0
 
-    def __init__(self, identificador: str, hsSemanales: int, hsMinimasCons: int, hsMaximasCons: int):
-        super(Materia,self).__init__(identificador)
-        self.horasSemanales = hsSemanales
+    def __init__(self, identifier: str, hsSemanales: int, hsMinimasCons: int, hsMaximasCons: int):
+        super(Subject,self).__init__(identifier)
+        self.weeklyHours = hsSemanales
         self.horasMinimasCons = hsMinimasCons
-        self.horasMaximasCons = hsMaximasCons
+        self.maxConsecutiveHours = hsMaximasCons
