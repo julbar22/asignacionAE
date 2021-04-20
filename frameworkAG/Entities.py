@@ -4,7 +4,7 @@ from typing import List, Optional, TypeVar, Dict, Generic
 from frameworkAG.Slots import SlotSpace, TimeSlot, Slot
 
 class Assignment:
-    timeSlot: Slot
+    slot: Slot
     listResourceId: List[str]
 
     def __init__(self):

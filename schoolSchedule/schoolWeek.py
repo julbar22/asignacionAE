@@ -31,7 +31,7 @@ class SchoolWeek(IndividualTime):
                 subject.identifier)
             for day in self.environment.timetable.week_days():
                 assignmentByDay = list(filter(
-                    lambda assignment: assignment.timeSlot.week_day == day, assignments))
+                    lambda assignment: assignment.slot.week_day == day, assignments))
                 hoursDay = len(assignmentByDay)
                 if hoursDay > subject.maxConsecutiveHours:
                     self.fitness += 1
@@ -59,7 +59,7 @@ class SchoolWeek(IndividualTime):
             newAssignment: Assignment = copy.deepcopy(
                 newAux.timetable.data[indexAssignment])
             self.timetable.data[indexAssignment] = newAssignment
-            self.timetable.dataByTimeSlot[newAssignment.timeSlot] = newAssignment
+            self.timetable.dataByTimeSlot[newAssignment.slot] = newAssignment
         return self
 
     def improvement(self, environment) -> Individual:
@@ -92,12 +92,12 @@ class SchoolWeek(IndividualTime):
 
     def addCrossAssignment(self, newAssignment: Assignment):
         self.timetable.addAssignment(
-            newAssignment.timeSlot, copy.deepcopy(newAssignment))
+            newAssignment.slot, copy.deepcopy(newAssignment))
         subject: Subject = self.environment.getResourceByTypeAndID(
             "Subject", newAssignment.listResourceId[0])
         teacher: ResourceTime = subject.linkedResources["Profesor"][0]
         teacher.availability._open_slots.remove(
-            newAssignment.timeSlot)
+            newAssignment.slot)
 
     def completeCourses(self, subjects: List[Subject]):
         subjectCounter = 0
@@ -113,7 +113,7 @@ class SchoolWeek(IndividualTime):
                 time: Optional[TimeSlot] = scheduleAvailable.any_time_slot()
                 if time is not None:
                     newAssignment: Assignment = Assignment()
-                    newAssignment.timeSlot = time
+                    newAssignment.slot = time
                     newAssignment.listResourceId.append(
                         subject.identifier)
                     newAssignment.listResourceId.append(

@@ -7,7 +7,7 @@ class MapperToSemana():
     
     @staticmethod
     def mapperSemana(data):
-        solucion = sorted(data,key=lambda assignment: (assignment.timeSlot.week_day.value, assignment.timeSlot.hour))
+        solucion = sorted(data,key=lambda assignment: (assignment.slot.week_day.value, assignment.slot.hour))
         json_data = json.dumps(solucion, skipkeys=True, check_circular=False,
                                default=lambda o: MapperToSemana.json_default(o), indent=4)
         print("--------------------inicio solucion --------------------------")
@@ -18,8 +18,8 @@ class MapperToSemana():
     @staticmethod
     def json_default(value):
         if isinstance(value, Assignment):
-            return {"day": value.timeSlot.week_day.name,
-                    "hora": value.timeSlot.hour,
+            return {"day": value.slot.week_day.name,
+                    "hora": value.slot.hour,
                     "subject": value.listResourceId[0],
                     "teacher ":value.listResourceId[1]
             }
