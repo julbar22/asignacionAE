@@ -1,9 +1,10 @@
 from frameworkAG.Resources import Resource, ResourceTime
-from frameworkAG.ScheduleUtils import TimeSlot, TimeTable
+from frameworkAG.TimeTable import TimeTable
 from typing import List, Optional, TypeVar, Dict, Generic
+from frameworkAG.Slots import SlotSpace, TimeSlot, Slot
 
 class Assignment:
-    timeSlot: TimeSlot
+    timeSlot: Slot
     listResourceId: List[str]
 
     def __init__(self):
@@ -31,3 +32,14 @@ class Schedule:
         
     def getAssignmentsByResource(self,resourceId)->List[Assignment]:
         return list(filter(lambda assignment: assignment.containResource(resourceId),self.data))
+
+
+class SpaceManager:
+    available: List[SlotSpace]
+    data: List[Assignment]
+    dataBySlot: Dict[SlotSpace, Assignment]
+
+    def __init__(self):
+        self.available = []
+        self.data = []
+        self.dataBySlot = {}

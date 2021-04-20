@@ -4,11 +4,11 @@ from typing import List, Optional, TypeVar, Dict, Generic
 from schoolSchedule.mapperToSemana import MapperToSemana
 import copy
 from schoolSchedule.errorWeek import ErrorWeek
-from schoolSchedule.teacher  import Profesor
 from frameworkAG.Environments import EnvironmentTime
 from frameworkAG.Resources import Resource, ResourceTime
 from frameworkAG.Entities import Assignment
-from frameworkAG.ScheduleUtils import TimeTable, TimeSlot
+from frameworkAG.TimeTable import TimeTable
+from frameworkAG.Slots import TimeSlot
 from schoolSchedule.resourcesSemana import Subject
 
 
@@ -50,8 +50,6 @@ class SchoolWeek(IndividualTime):
     def createRamdomIndividual(self, ambienteNuevo: EnvironmentTime) -> Individual:
         newAux = SchoolWeek(ambienteNuevo)
         newAux.completeCourses(newAux.environment.resources["Subject"])
-        #newAux.calculateFitness(individualBase, environment)
-        # newAux.printIndividual()
         return newAux
 
     def mutate(self, index, environment: EnvironmentTime) -> Individual:
@@ -97,12 +95,11 @@ class SchoolWeek(IndividualTime):
             newAssignment.timeSlot, copy.deepcopy(newAssignment))
         subject: Subject = self.environment.getResourceByTypeAndID(
             "Subject", newAssignment.listResourceId[0])
-        teacher : ResourceTime = subject.linkedResources["Profesor"][0]
+        teacher: ResourceTime = subject.linkedResources["Profesor"][0]
         teacher.availability._open_slots.remove(
             newAssignment.timeSlot)
 
     def completeCourses(self, subjects: List[Subject]):
-        #subjects.sort(key=lambda subject: subject.weeklyHours, reverse=True)
         subjectCounter = 0
         while(subjectCounter < len(subjects)):
             subject: Subject = subjects[subjectCounter]
@@ -110,7 +107,7 @@ class SchoolWeek(IndividualTime):
             weeklyHours = subject.weeklyHours
             assignedHours = 0
             while weeklyHours > assignedHours:
-                teacher : ResourceTime = subject.linkedResources["Profesor"][0]
+                teacher: ResourceTime = subject.linkedResources["Profesor"][0]
                 scheduleAvailable: TimeTable = teacher.availability.intersection(
                     self.timetable.timetable)
                 time: Optional[TimeSlot] = scheduleAvailable.any_time_slot()
@@ -154,13 +151,3 @@ class SchoolWeek(IndividualTime):
 
     def dailyAllowance(self, error: ErrorWeek, environment):
         subject = error.subject
-        #teacher :Profesor = environment.getProfesoresByCursada(subject)[0]
-        # if error.weeklyHours > error.assignedHours:
-        #     day: Dia = self.getDia(error.day)
-        #     day.replaceAleatoriaCursada(subject, environment)
-        #     error.assignedHours += 1
-        # else:
-        #     if error.weeklyHours < error.assignedHours:
-        #         day: Dia = self.getDia(error.day)
-        #         day.removerCursada(subject, environment)
-        #         error.assignedHours -= 1

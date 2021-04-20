@@ -1,8 +1,9 @@
 from frameworkAG.Environments import GeneralEnvironment, EnvironmentTime
 from typing import List, Optional, TypeVar, Dict, Generic
 from frameworkAG.Resources import Resource, ResourceTime
-from frameworkAG.ScheduleUtils import WeekDay, TimeTable
+from frameworkAG.ScheduleUtils import WeekDay
 from schoolSchedule.resourcesSemana import Subject
+from frameworkAG.TimeTable import TimeTable
 
 class EnvironmentSchool(GeneralEnvironment):
     
