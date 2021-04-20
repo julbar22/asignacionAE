@@ -16,7 +16,6 @@ class SchoolWeek(IndividualTime):
 
     def __init__(self, environment: EnvironmentTime):
         self.environment: EnvironmentTime = copy.deepcopy(environment)
-        self.chromosome = []
         self.fitness = 0
         self.mistakes = []
         super(SchoolWeek, self).__init__(self.environment)
@@ -47,21 +46,6 @@ class SchoolWeek(IndividualTime):
                 error.weeklyHours = subject.weeklyHours
                 self.fitness += abs(subject.weeklyHours-len(assignments))
                 self.mistakes.append(error)
-
-    def evaluateAvailabilityTeachers(self, environment):
-        for day in self.chromosome:
-            for timetable in day.schedule:
-                teacher  = timetable.assignment.teacher 
-                availability = teacher .availability[day.fecha.name]
-                if len(availability) > 0:
-                    if not (availability[0] <= timetable.timetable[0] and timetable.timetable[0] <= availability[1]) or not(availability[0] <= timetable.timetable[1] and timetable.timetable[1] <= availability[1]):
-                        self.fitness += 1
-                        self.mistakes.append(
-                            "fuera de availability"+teacher .nombre+","+day.fecha.name)
-                else:
-                    self.fitness += 1
-                    self.mistakes.append(
-                        "fuera de availability"+teacher .nombre+","+day.fecha.name)
 
     def createRamdomIndividual(self, ambienteNuevo: EnvironmentTime) -> Individual:
         newAux = SchoolWeek(ambienteNuevo)

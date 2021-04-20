@@ -6,7 +6,6 @@ from frameworkAG.Environments import EnvironmentTime
 
 class Individual(ABC):
 
-    chromosome = []
     mistakes = []
     fitness: int = 0
 
