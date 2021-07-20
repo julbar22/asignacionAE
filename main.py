@@ -13,12 +13,14 @@ from schoolSchedule.schoolWeek import SchoolWeek
 
 
 def run2():
+    #ranking del 30% de la poblacion
     selection: SelectionAlgorithm = SelectionRanking(0.3)
     cross: CrossAlgorithm = CrossSpecificIndividual()
     mutation: MutationAlgorithm = MutateRandomPoints()
     finishAction: FinishAction = FinishBestIndividualImpl()
     environment: EnvironmentSchool = EnvironmentSchool()
-    ambientesPorCurso = environment.getAbientePorCurso()
+    #Se generan los ambientes separados por curso
+    ambientesPorCurso = environment.getEnvironmentByCourse()
     GA = GeneticAlgorithmManager()
     GA.selectionAlgorithm = selection
     GA.crossAlgorithm = cross

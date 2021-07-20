@@ -203,7 +203,7 @@ class EnvironmentSchool(GeneralEnvironment):
         self.resources["cursos"].append(quinto)
         #self.resources["profesores"] = list()
 
-    def getAbientePorCurso(self) -> List[EnvironmentTime]:
+    def getEnvironmentByCourse(self) -> List[EnvironmentTime]:
         cursos: List[Resource] = self.resources["cursos"]
         ambientes: List[EnvironmentTime] = list()
         for curso in cursos:
