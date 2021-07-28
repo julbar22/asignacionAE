@@ -47,8 +47,8 @@ class SchoolWeek(IndividualTime):
                 self.fitness += abs(subject.weeklyHours-len(assignments))
                 self.mistakes.append(error)
 
-    def createRamdomIndividual(self, ambienteNuevo: EnvironmentTime) -> Individual:
-        newAux = SchoolWeek(ambienteNuevo)
+    def createRamdomIndividual(self, newEnvironment: EnvironmentTime) -> Individual:
+        newAux = SchoolWeek(newEnvironment)
         newAux.completeCourses(newAux.environment.resources["Subject"])
         return newAux
 
@@ -65,9 +65,9 @@ class SchoolWeek(IndividualTime):
     def improvement(self, environment) -> Individual:
         self.fixRandomErrors(environment)
 
-    def cross(self, couple: IndividualTime, ambienteNuevo: EnvironmentTime) -> List[Individual]:
-        newWeek1: SchoolWeek = SchoolWeek(ambienteNuevo)
-        newWeek2: SchoolWeek = SchoolWeek(ambienteNuevo)
+    def cross(self, couple: IndividualTime, newEnvironment: EnvironmentTime) -> List[Individual]:
+        newWeek1: SchoolWeek = SchoolWeek(newEnvironment)
+        newWeek2: SchoolWeek = SchoolWeek(newEnvironment)
 
         for time in self.timetable.dataByTimeSlot:
             if random.uniform(0.0, 1.0) <= 0.5:
@@ -95,7 +95,7 @@ class SchoolWeek(IndividualTime):
             newAssignment.slot, copy.deepcopy(newAssignment))
         subject: Subject = self.environment.getResourceByTypeAndID(
             "Subject", newAssignment.listResourceId[0])
-        teacher: ResourceTime = subject.linkedResources["Profesor"][0]
+        teacher: ResourceTime = subject.linkedResources["Teacher"][0]
         teacher.availability._open_slots.remove(
             newAssignment.slot)
 
@@ -107,7 +107,7 @@ class SchoolWeek(IndividualTime):
             weeklyHours = subject.weeklyHours
             assignedHours = 0
             while weeklyHours > assignedHours:
-                teacher: ResourceTime = subject.linkedResources["Profesor"][0]
+                teacher: ResourceTime = subject.linkedResources["Teacher"][0]
                 scheduleAvailable: TimeTable = teacher.availability.intersection(
                     self.timetable.timetable)
                 time: Optional[TimeSlot] = scheduleAvailable.any_time_slot()
@@ -117,9 +117,9 @@ class SchoolWeek(IndividualTime):
                     newAssignment.listResourceId.append(
                         subject.identifier)
                     newAssignment.listResourceId.append(
-                        teacher .identifier)
+                        teacher.identifier)
                     self.timetable.addAssignment(time, newAssignment)
-                    teacher .availability._open_slots.remove(time)
+                    teacher.availability._open_slots.remove(time)
                     assignedHours += 1
                 else:
                     break

@@ -20,10 +20,10 @@ class ErrorWeek():
        
 
     def printError(self):
-        errorCompleto=" typeError:"+str(self.typeError)
-        errorCompleto+=" subject:"+self.subject.identifier
-        errorCompleto+=" teacher :"+self.teacher 
-        errorCompleto+=" day:"+self.day.name
-        errorCompleto+=" horasMaximas:"+str(self.weeklyHours)
-        errorCompleto+=" assignedHours:"+str(self.assignedHours)
-        print(errorCompleto)
+        completeError=" typeError:"+str(self.typeError)
+        completeError+=" subject:"+self.subject.identifier
+        completeError+=" teacher :"+self.teacher 
+        completeError+=" day:"+self.day.name
+        completeError+=" horasMaximas:"+str(self.weeklyHours)
+        completeError+=" assignedHours:"+str(self.assignedHours)
+        print(completeError)

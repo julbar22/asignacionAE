@@ -19,7 +19,7 @@ class MapperToSemana():
     def json_default(value):
         if isinstance(value, Assignment):
             return {"day": value.slot.week_day.name,
-                    "hora": value.slot.hour,
+                    "hour": value.slot.hour,
                     "subject": value.listResourceId[0],
                     "teacher ":value.listResourceId[1]
             }

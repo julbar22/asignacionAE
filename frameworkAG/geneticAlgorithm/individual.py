@@ -12,13 +12,13 @@ class Individual(ABC):
     def calculateFitness(self):
         raise NotImplementedError
 
-    def createRamdomIndividual(self, ambienteNuevo) -> ABC:
+    def createRamdomIndividual(self, newEnvironment) -> ABC:
         raise NotImplementedError
 
     def mutate(self, index) -> ABC:
         raise NotImplementedError
 
-    def cross(self, couple, ambienteNuevo) -> List[ABC]:
+    def cross(self, couple, newEnvironment) -> List[ABC]:
         raise NotImplementedError
 
     def improvement(self) -> List[ABC]:

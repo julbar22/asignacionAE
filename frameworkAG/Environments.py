@@ -34,3 +34,6 @@ class EnvironmentTime(GeneralEnvironment):
 
 class EnvironmentSpace(GeneralEnvironment):
     initialSpace: str
+
+    def __init__(self):
+        super(EnvironmentTime, self).__init__()

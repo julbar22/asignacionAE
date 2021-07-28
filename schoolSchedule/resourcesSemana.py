@@ -5,8 +5,8 @@ class Subject(Resource):
     minConsecutiveHours = 0
     maxConsecutiveHours = 0
 
-    def __init__(self, identifier: str, hsSemanales: int, hsMinCons: int, hsMaxCons: int):
+    def __init__(self, identifier: str, hsWeekly: int, hsMinCons: int, hsMaxCons: int):
         super(Subject,self).__init__(identifier)
-        self.weeklyHours = hsSemanales
+        self.weeklyHours = hsWeekly
         self.minConsecutiveHours = hsMinCons
         self.maxConsecutiveHours = hsMaxCons

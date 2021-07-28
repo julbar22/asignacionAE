@@ -19,14 +19,14 @@ def run2():
     mutation: MutationAlgorithm = MutateRandomPoints()
     finishAction: FinishAction = FinishBestIndividualImpl()
     environment: EnvironmentSchool = EnvironmentSchool()
-    #Se generan los ambientes separados por curso
-    ambientesPorCurso = environment.getEnvironmentByCourse()
+    #Se generan los environments separados por course
+    environmentsByCourse = environment.getEnvironmentByCourse()
     GA = GeneticAlgorithmManager()
     GA.selectionAlgorithm = selection
     GA.crossAlgorithm = cross
     GA.mutationAlgorithm = mutation
     GA.finishActions = finishAction
-    admin: StandardSolver = StandardSolver(environments=ambientesPorCurso,
+    admin: StandardSolver = StandardSolver(environments=environmentsByCourse,
                                            iterations=1000,
                                            finalFitness=0,
                                            quantityIndividuals=20,
