@@ -1,5 +1,5 @@
-from frameworkAG.geneticAlgorithm.mutationAlgorithm import MutationAlgorithm
-from frameworkAG.geneticAlgorithm.individual import Individual
+from frameworkAG.evolutionaryAlgorithm.mutationAlgorithm import MutationAlgorithm
+from frameworkAG.evolutionaryAlgorithm.individual import Individual
 from typing import List
 import random
 import string

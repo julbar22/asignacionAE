@@ -1,14 +1,14 @@
 from frameworkAG.StandardSolver import StandardSolver
-from frameworkAG.geneticAlgorithm.selectionAlgorithm import SelectionAlgorithm
-from frameworkAG.geneticAlgorithm.stagesGeneticAlgorithmImpl.selectionAlgorithmImpl.selectionRanking import SelectionRanking
-from frameworkAG.geneticAlgorithm.crossAlgorithm import CrossAlgorithm
-from frameworkAG.geneticAlgorithm.stagesGeneticAlgorithmImpl.crossAlgorithmImpl.crossSpecificIndividual import CrossSpecificIndividual
-from frameworkAG.geneticAlgorithm.mutationAlgorithm import MutationAlgorithm
-from frameworkAG.geneticAlgorithm.stagesGeneticAlgorithmImpl.mutateAlgorithmImpl.mutateRandomPoints import MutateRandomPoints
-from frameworkAG.geneticAlgorithm.stagesGeneticAlgorithmImpl.finishActionImpl.finishBestIndividualImpl import FinishBestIndividualImpl
-from frameworkAG.geneticAlgorithm.finishAction import FinishAction
+from frameworkAG.evolutionaryAlgorithm.selectionAlgorithm import SelectionAlgorithm
+from frameworkAG.evolutionaryAlgorithm.stagesEvolutionaryAlgorithmImpl.selectionAlgorithmImpl.selectionRanking import SelectionRanking
+from frameworkAG.evolutionaryAlgorithm.crossAlgorithm import CrossAlgorithm
+from frameworkAG.evolutionaryAlgorithm.stagesEvolutionaryAlgorithmImpl.crossAlgorithmImpl.crossSpecificIndividual import CrossSpecificIndividual
+from frameworkAG.evolutionaryAlgorithm.mutationAlgorithm import MutationAlgorithm
+from frameworkAG.evolutionaryAlgorithm.stagesEvolutionaryAlgorithmImpl.mutateAlgorithmImpl.mutateRandomPoints import MutateRandomPoints
+from frameworkAG.evolutionaryAlgorithm.stagesEvolutionaryAlgorithmImpl.finishActionImpl.finishBestIndividualImpl import FinishBestIndividualImpl
+from frameworkAG.evolutionaryAlgorithm.finishAction import FinishAction
 from schoolSchedule.environmentSchool import EnvironmentSchool
-from frameworkAG.geneticAlgorithm.geneticAlgorithmManager import GeneticAlgorithmManager
+from frameworkAG.evolutionaryAlgorithm.evolutionaryAlgorithmManager import EvolutionaryAlgorithmManager
 from schoolSchedule.schoolWeek import SchoolWeek
 
 
@@ -21,7 +21,7 @@ def run2():
     environment: EnvironmentSchool = EnvironmentSchool()
     #Se generan los environments separados por course
     environmentsByCourse = environment.getEnvironmentByCourse()
-    GA = GeneticAlgorithmManager()
+    GA = EvolutionaryAlgorithmManager()
     GA.selectionAlgorithm = selection
     GA.crossAlgorithm = cross
     GA.mutationAlgorithm = mutation
@@ -30,7 +30,7 @@ def run2():
                                            iterations=1000,
                                            finalFitness=0,
                                            quantityIndividuals=20,
-                                           geneticAlgorithm=GA,
+                                           evolutionaryAlgorithm=GA,
                                            classReference=SchoolWeek)
     admin.runAlgorithm()
 

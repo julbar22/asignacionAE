@@ -1,5 +1,5 @@
-from frameworkAG.geneticAlgorithm.crossAlgorithm import CrossAlgorithm
-from frameworkAG.geneticAlgorithm.individual import Individual
+from frameworkAG.evolutionaryAlgorithm.crossAlgorithm import CrossAlgorithm
+from frameworkAG.evolutionaryAlgorithm.individual import Individual
 from typing import List
 import random
 import copy

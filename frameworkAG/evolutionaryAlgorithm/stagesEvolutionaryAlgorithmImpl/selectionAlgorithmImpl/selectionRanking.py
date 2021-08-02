@@ -1,5 +1,5 @@
-from frameworkAG.geneticAlgorithm.selectionAlgorithm import SelectionAlgorithm
-from frameworkAG.geneticAlgorithm.individual import Individual
+from frameworkAG.evolutionaryAlgorithm.selectionAlgorithm import SelectionAlgorithm
+from frameworkAG.evolutionaryAlgorithm.individual import Individual
 from typing import List
 
 

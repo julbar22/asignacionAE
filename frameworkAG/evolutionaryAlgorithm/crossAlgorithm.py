@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from frameworkAG.geneticAlgorithm.individual import Individual
+from frameworkAG.evolutionaryAlgorithm.individual import Individual
 from typing import List
 
 class CrossAlgorithm(ABC):

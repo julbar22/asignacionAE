@@ -1,4 +1,4 @@
-from frameworkAG.geneticAlgorithm.individual import IndividualTime, Individual
+from frameworkAG.evolutionaryAlgorithm.individual import IndividualTime, Individual
 import random
 from typing import List, Optional, TypeVar, Dict, Generic
 from schoolSchedule.mapperToSemana import MapperToSemana
